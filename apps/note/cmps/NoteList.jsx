@@ -41,11 +41,13 @@ export function NoteList() {
     }
     if (list.length === 0) return
 
-    return <section className="notes-container">
+    return <section >
         <NoteAdd onAdd={onAddNote} />
-        {list.map(note => {
-            return <NotePreview note={note} onDelete={onDeleteNote} onEdit={onEditNote} key={note.id} />
-        })}
+        <section className="notes-container">
+            {list.map(note => {
+                return <NotePreview note={note} onDelete={onDeleteNote} onEdit={onEditNote} key={note.id} />
+            })}
+        </section>
         {editedId !== '' && <NoteEdit editedId={editedId} onEditSubmit={onEditSubmit} />}
 
 

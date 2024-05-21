@@ -5,6 +5,7 @@ const { useState } = React
 export function NoteAdd({ onAdd }) {
     const [input, setInput] = useState('')
     const [color, setColor] = useState('#FFFFFF')
+    const [isPalatteOpen, setIsPalatteOpen] = useState(false)
 
     function handleChange({ target }) {
         const { value } = target
@@ -15,7 +16,7 @@ export function NoteAdd({ onAdd }) {
         setColor(color)
     }
 
-    const note= {
+    const note = {
         txt: input,
         style: color,
     }
@@ -24,10 +25,18 @@ export function NoteAdd({ onAdd }) {
         <div>
             <label htmlFor="text">Enter text</label>
             <input type="text" id="text" placeholder="Enter text here..."
-                onChange={handleChange} value={input}  />
+                onChange={handleChange} value={input} />
         </div>
 
-        <button onClick={() => onAdd(note)}>Add</button>
-        <ColorPallete changeColor={changeColor} />
+
+        <div className="actions">
+            <div className="color-container">
+                <button onClick={() => setIsPalatteOpen(prev => !prev)}>Color</button>
+                {isPalatteOpen && < ColorPallete changeColor={changeColor} />}
+            </div>
+            <button onClick={() => onAdd(note)}>Add</button>
+        </div>
+
+
     </section>
 }

@@ -1,0 +1,30 @@
+.color-container{
+    position: relative;
+}
+.palatte{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    display: flex;
+    width: 40em;
+    justify-content: space-between;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+.palatte div {
+    border-radius: 50%;
+    padding: 1em;
+    margin: 0.5em;
+    border: 1px solid rgb(235, 213, 213);
+}
+
+.palatte div:hover{
+    cursor: pointer;
+    border: 1px solid black;
+}
+
+.palatte div .chosen{
+    border: 1px solid black;
+
+}

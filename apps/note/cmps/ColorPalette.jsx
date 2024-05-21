@@ -2,10 +2,10 @@ import { noteService } from "../services/note.service.js"
 
 export function ColorPallete({ changeColor }) {
     const colors = noteService.getColors()
-    return <section>
+    return <section className="palatte">
         {colors.map(color => {
-            return <div key={color} className="color"
-                style={{ backgroundColor: color }} onClick={() => changeColor(color)}>{color}</div>
+            return <div key={color} 
+                style={{ backgroundColor: color }} onClick={() => changeColor(color)}></div>
         })}
 
     </section>
