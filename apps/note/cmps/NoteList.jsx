@@ -1,10 +1,20 @@
+import { noteService } from "../services/note.service.js"
 import { NotePreview } from "./NotePreview.jsx"
 
+const { useState, useEffect } = React
+
+
 export function NoteList() {
-    const demoData = [{ txt: 'hey' }, { txt: 'hey' }, { txt: 'hey' }, { txt: 'hey' }, { txt: 'hey' }]
+    const [list, setList] = useState([{txt: 'hey'}])
+    useEffect(() => {
+        noteService.query()
+            .then(notes => setList(notes))
+    }, [])
+
+
     return <section className="notes-container">
-        {demoData.map(note => {
-            return <NotePreview note={note}/>
+        {list.map(note => { 
+            return <NotePreview note={note} key={note.txt} />
         })}
 
     </section>
