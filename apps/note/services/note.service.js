@@ -1,17 +1,22 @@
 import { storageService } from "../../../services/async-storage.service.js"
+import { utilService } from "../../../services/util.service.js"
 const LS_NAME = 'NOTES'
 
-export const noteService = { query }
+export const noteService = { query, remove }
 
 function query() {
     return storageService.query(LS_NAME)
         .then(notes => {
             if (notes.length === 0) return _createData()
-                return notes
+            return notes
         })
 }
+
+function remove(noteId) {
+    return storageService.remove(LS_NAME, noteId)
+}
 function _createData() {
-    const notes = [{ txt: 'oooo' }, { txt: 'water' }, { txt: 'fire' }, { txt: 'hey' }, { txt: 'hey' }]
+    const notes = [{ id: utilService.makeId(), txt: 'oooo' }, { id: utilService.makeId(), txt: 'water' }, { id: utilService.makeId(), txt: 'fire' }, { id: utilService.makeId(), txt: 'hey' }, { id: utilService.makeId(), txt: 'hey' }]
     localStorage.setItem(LS_NAME, JSON.stringify(notes))
     return new Promise(resolve => resolve(notes))
 }
