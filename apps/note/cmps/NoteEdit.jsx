@@ -8,20 +8,22 @@ export function NoteEdit({ editedId, onEditSubmit }) {
     useEffect(() => {
         noteService.get(editedId)
             .then(note => {
-                setInput(note.txt)
+                setInput(note.info.title)
                 setColor(note.style)
             })
 
     }, [])
 
     function submit() {
-        const note = {
-            txt: input,
-            id: editedId,
-            style: color,
-        }
-        noteService.update(note)
+        noteService.get(editedId)
+            .then(note => {
+                note.info.title = input
+                note.style = color
+                return note
+            })
+            .then(note => noteService.update(note))
             .then(() => onEditSubmit())
+
     }
 
     function handleChange({ target }) {

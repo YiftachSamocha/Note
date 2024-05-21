@@ -6,14 +6,12 @@ import { NoteEdit } from "./NoteEdit.jsx"
 const { useState, useEffect } = React
 
 export function NoteList() {
-    const [list, setList] = useState([{ txt: 'hey' }])
+    const [list, setList] = useState([])
     const [editedId, setEditedId] = useState('')
     useEffect(() => {
         noteService.query()
             .then(notes => setList(notes))
     }, [])
-
-
 
     function onDeleteNote(noteId) {
         noteService.remove(noteId)
@@ -41,6 +39,7 @@ export function NoteList() {
             })
 
     }
+    if (list.length === 0) return
 
     return <section className="notes-container">
         <NoteAdd onAdd={onAddNote} />
@@ -48,7 +47,7 @@ export function NoteList() {
             return <NotePreview note={note} onDelete={onDeleteNote} onEdit={onEditNote} key={note.id} />
         })}
         {editedId !== '' && <NoteEdit editedId={editedId} onEditSubmit={onEditSubmit} />}
-      
+
 
     </section>
 }

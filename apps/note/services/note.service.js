@@ -43,11 +43,78 @@ function getColors() {
         '#EFEFF1',
     ]
 }
+
+
 function _createData() {
-    const notes = [{ id: utilService.makeId(), txt: 'oooo' }, { id: utilService.makeId(), txt: 'water' }, { id: utilService.makeId(), txt: 'fire' }, { id: utilService.makeId(), txt: 'hey' }, { id: utilService.makeId(), txt: 'hey' }]
+    let notes = []
+    for (var i = 0; i < 12; i++) {
+        const note = {
+            id: utilService.makeId(),
+            createdAt: '',
+            type: _getRandom(['txt', 'img', 'audio', 'video', 'todos']),
+            isPinned: false,
+            style: _getRandom(getColors()),
+            info: {
+                title: _getRandom(['Hello!', 'My New Note', 'How fun', 'I love notes!', 'Note Note Note',])
+            }
+        }
+        if (note.type === 'txt') {
+            note.info.txt = _getRandom(['Hello!', 'My New Note', 'How fun', 'I love notes!', 'Note Note Note',])
+        }
+        else if (note.type === 'img') {
+            note.info.url = _getRandom(['https://i.natgeofe.com/n/4f5aaece-3300-41a4-b2a8-ed2708a0a27c/domestic-dog_thumb_square.jpg',
+                'https://www.alleycat.org/wp-content/uploads/2019/03/FELV-cat.jpg',
+                'https://www.theinsuranceemporium.co.uk/blog/wp-content/uploads/2023/09/image-10.png'])
+        }
+        else if (note.type === 'video') {
+            note.info.url = _getRandom(['https://www.youtube.com/watch?v=K60BWlEhtAA&ab_channel=EurovisionSongContest',
+                'https://www.youtube.com/watch?v=us5eCfExZX8&t=424s&ab_channel=mihaifrancu',
+                'https://www.youtube.com/watch?v=x6SwqkJmWv4&ab_channel=Minecraft'
+            ])
+        } else if (note.type === 'todos') {
+            const todos = [
+                'Go to the gym', 'Buy groceries', 'Visit mom', 'Clean the house',
+                'Write e-mail', 'Call David', 'Cook Pasta', 'Code a site'
+            ]
+            const selectedTodos = []
+            const copyTodos = [...todos]
+
+            for (let i = 0; i < 3; i++) {
+                const randomIndex = Math.floor(Math.random() * copyTodos.length)
+                selectedTodos.push({
+                    txt: copyTodos[randomIndex],
+                    createdAt: null
+                });
+                copyTodos.splice(randomIndex, 1)
+            }
+            note.info.todos = selectedTodos
+        }
+        notes.push(note)
+
+    }
     localStorage.setItem(LS_NAME, JSON.stringify(notes))
     return new Promise(resolve => resolve(notes))
 }
+
+function _getRandom(types) {
+    const randomIndex = Math.floor(Math.random() * types.length)
+    return types[randomIndex]
+}
+
+
+
+//Data element example:
+// const note = {
+//     id: '',
+//     createdAt: '',
+//     type: '',
+//     isPinned: true,
+//     style: { backgroundColor: '#00d' },
+//     info: { txt: 'Fullstack Me Baby!' }
+// }
+
+
+
 
 // [{ type: 'white', value: '#FFFFFF' },
 // { type: 'coral', value: '#FAAFA8' },
