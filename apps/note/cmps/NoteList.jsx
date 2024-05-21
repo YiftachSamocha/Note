@@ -19,8 +19,8 @@ export function NoteList() {
         noteService.remove(noteId)
             .then(setList(prevList => prevList.filter(note => note.id !== noteId)))
     }
-    function onAddNote(txt) {
-        noteService.add(txt)
+    function onAddNote(note) {
+        noteService.add(note)
             .then(() => {
                 return noteService.query()
             })
@@ -48,6 +48,7 @@ export function NoteList() {
             return <NotePreview note={note} onDelete={onDeleteNote} onEdit={onEditNote} key={note.id} />
         })}
         {editedId !== '' && <NoteEdit editedId={editedId} onEditSubmit={onEditSubmit} />}
+      
 
     </section>
 }
