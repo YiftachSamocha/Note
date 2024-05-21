@@ -1,4 +1,7 @@
-
+import { NoteList } from "../cmps/NoteList.jsx"
 export function NoteIndex() {
-    return <div>note app</div>
+    return <section>
+        <NoteList />
+    </section>
+
 }
