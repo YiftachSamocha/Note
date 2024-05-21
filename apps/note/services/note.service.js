@@ -51,7 +51,7 @@ function _createData() {
         const note = {
             id: utilService.makeId(),
             createdAt: '',
-            type: _getRandom(['txt', 'img', 'audio', 'video', 'todos']),
+            type: _getRandom(['txt', 'img', 'video', 'todos']),
             isPinned: false,
             style: _getRandom(getColors()),
             info: {
@@ -67,9 +67,9 @@ function _createData() {
                 'https://www.theinsuranceemporium.co.uk/blog/wp-content/uploads/2023/09/image-10.png'])
         }
         else if (note.type === 'video') {
-            note.info.url = _getRandom(['https://www.youtube.com/watch?v=K60BWlEhtAA&ab_channel=EurovisionSongContest',
-                'https://www.youtube.com/watch?v=us5eCfExZX8&t=424s&ab_channel=mihaifrancu',
-                'https://www.youtube.com/watch?v=x6SwqkJmWv4&ab_channel=Minecraft'
+            note.info.url = _getRandom(['https://www.youtube.com/embed/K60BWlEhtAA',
+                'https://www.youtube.com/embed/us5eCfExZX8',
+                'https://www.youtube.com/embed/x6SwqkJmWv4?si=-LizvFhocsA1wak0'
             ])
         } else if (note.type === 'todos') {
             const todos = [
