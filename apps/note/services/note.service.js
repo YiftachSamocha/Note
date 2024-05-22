@@ -2,7 +2,7 @@ import { storageService } from "../../../services/async-storage.service.js"
 import { utilService } from "../../../services/util.service.js"
 const LS_NAME = 'NOTES'
 
-export const noteService = { query, remove, add, get, update, getColors }
+export const noteService = { query, remove, add, get, update,getEmptyNote, getColors }
 
 function query() {
     return storageService.query(LS_NAME)
@@ -44,13 +44,24 @@ function getColors() {
     ]
 }
 
+function getEmptyNote() {
+    return {
+        id: utilService.makeId(),
+        createdAt: new Date(),
+        type: '',
+        isPinned: false,
+        style: '',
+        info: {},
+    }
+}
+
 
 function _createData() {
     let notes = []
     for (var i = 0; i < 12; i++) {
         const note = {
             id: utilService.makeId(),
-            createdAt: '',
+            createdAt: new Date(),
             type: _getRandom(['txt', 'img', 'video', 'todos']),
             isPinned: false,
             style: _getRandom(getColors()),
@@ -62,7 +73,7 @@ function _createData() {
             note.info.txt = _getRandom(['Hello!', 'My New Note', 'How fun', 'I love notes!', 'Note Note Note',])
         }
         else if (note.type === 'img') {
-            note.info.url =  _getRandom(['https://i.natgeofe.com/n/4f5aaece-3300-41a4-b2a8-ed2708a0a27c/domestic-dog_thumb_square.jpg',
+            note.info.url = _getRandom(['https://i.natgeofe.com/n/4f5aaece-3300-41a4-b2a8-ed2708a0a27c/domestic-dog_thumb_square.jpg',
                 'https://www.alleycat.org/wp-content/uploads/2019/03/FELV-cat.jpg',
                 'https://www.theinsuranceemporium.co.uk/blog/wp-content/uploads/2023/09/image-10.png'])
         }

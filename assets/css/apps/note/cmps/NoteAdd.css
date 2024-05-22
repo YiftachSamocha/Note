@@ -1,0 +1,10 @@
+.types{
+    display: flex;
+}
+.types div{
+border: 1px solid black;
+}
+.types .chosen{
+    font-weight: bold;
+
+}
