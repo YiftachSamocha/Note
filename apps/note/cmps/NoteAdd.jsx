@@ -1,13 +1,12 @@
 import { noteService } from "../services/note.service.js"
 import { ColorPallete } from "./ColorPalette.jsx"
 
-const { useState, useEffect, useRef } = React
+const { useState } = React
 
 export function NoteAdd({ onAdd }) {
     const [title, setTitle] = useState('')
-    const [info, setInfo] = useState('')
+    const [info, setInfo] = useState({ txt: '', ur: '', todos: [{ txt: '', isMarked: false }] })
     const [type, setType] = useState('txt')
-    const [todos, setTodos] = useState('')
     const [color, setColor] = useState('#FFFFFF')
     const [isPalatteOpen, setIsPalatteOpen] = useState(false)
 
@@ -17,42 +16,55 @@ export function NoteAdd({ onAdd }) {
         setTitle(value)
     }
 
-    function handleChangeInfo({ target }) {
+    function handleChangeTxt({ target }) {
         const { value } = target
-        let info = ''
-        switch (type) {
-            case 'txt':
-                info = { txt: value }
-                break
-            case 'video':
-                const embedUrl = convertToEmbedLink(value)
-                info = { url: embedUrl }
-                break
-            case 'todos':
-                handleChangeTodos(target)
-                break
+        setInfo({ txt: value })
+    }
+
+    function handleChangeImg({ target }) {
+        const file = target.files[0]
+        const imageUrl = URL.createObjectURL(file)
+        const img = new Image()
+        img.onload = () => {
+            const canvas = document.createElement('canvas')
+            const ctx = canvas.getContext('2d')
+            canvas.width = img.width
+            canvas.height = img.height
+            ctx.drawImage(img, 0, 0)
+            const dataUrl = canvas.toDataURL('image/png')
+            setType('img')
+            setInfo({ url: dataUrl })
 
         }
-        setInfo(info)
+        img.src = imageUrl
     }
+
+    function handleChangeVideo({ target }) {
+        const { value } = target
+        setInfo({ url: value })
+    }
+
+
+    function handleChangeTodos({ target }) {
+        const { value, name } = target
+        const todoNum = Number(name)
+        setInfo(prevInfo => {
+            const newTodos = [...prevInfo.todos]
+            newTodos[todoNum] = { ...newTodos[todoNum], txt: value }
+            if (todoNum === newTodos.length - 1) {
+                newTodos.push({ txt: '', isMarked: false })
+            }
+            return { ...prevInfo, todos: newTodos };
+        });
+    }
+
 
     function handleChangeColor(color) {
         setColor(color)
         setIsPalatteOpen(false)
     }
 
-    let placeholder = ''
-    switch (type) {
-        case 'txt':
-            placeholder = 'Enter text'
-            break
-        case 'video':
-            placeholder = 'Enter YouTube link'
-            break
-        case 'todos':
-            placeholder = 'Enter item'
-            break
-    }
+
     function isChosen(buttonType) {
         return type === buttonType ? 'chosen' : ''
     }
@@ -66,77 +78,71 @@ export function NoteAdd({ onAdd }) {
         return `https://www.youtube.com/embed/${videoId}`
     }
 
-    function createNote() {
+    function createInput() {
+        let input
+        switch (type) {
+            case 'txt':
+                input = <input type="text" placeholder='Enter text'
+                    onChange={handleChangeTxt} value={info.txt || ''} />
+                break
+            case 'img':
+                input = <input type="file" accept="image/*"
+                    onChange={handleChangeImg} id="image" />
+                break
+            case 'video':
+                input = <input type="text" placeholder='Enter YouTube link'
+                    onChange={handleChangeVideo} value={info.url || ''} />
+                break
+            case 'todos':
+                let todosInputs = []
+                for (var i = 0; i < info.todos.length; i++) {
+                    const todoInput = <input
+                        type="text"
+                        placeholder='Enter Item'
+                        name={i.toString()}
+                        onChange={handleChangeTodos}
+                        value={info.todos[i] && info.todos[i].txt ? info.todos[i].txt : ''}
+                        key={i} />
+                    todosInputs.push(todoInput)
+                }
+
+                input = <div>{todosInputs}</div>
+
+        }
+        return input
+    }
+
+
+
+    function onSubmit() {
         const note = noteService.getEmptyNote()
+        if (type === 'video') info.url = convertToEmbedLink(info.url)
+        if (type === 'todos') info.todos = info.todos.slice(0, -1)
         note.style = color
         note.info = {
             title,
             ...info
         }
         note.type = type
-        return note
+        onAdd(note)
+        setTitle('')
+        setInfo({ txt: '', ur: '' , todos: [{ txt: '', isMarked: false }] })
+
     }
-
-    function getImage({ target }) {
-        const file = target.files[0]
-        const imageUrl = URL.createObjectURL(file)
-        const img = new Image()
-        img.onload = () => {
-            const canvas = document.createElement('canvas')
-            const ctx = canvas.getContext('2d')
-            canvas.width = img.width
-            canvas.height = img.height
-            ctx.drawImage(img, 0, 0)
-            const dataUrl = canvas.toDataURL('image/png')
-            setType('img')
-            setInfo(() => {
-                return { url: dataUrl }
-            })
-
-        }
-        img.src = imageUrl
-    }
-
-
-    // const containerRef = useRef(null)
-
-    // useEffect(() => {
-    //     const inputs = containerRef.current.querySelectorAll('input');
-    // }, [])
-    // function handleChangeTodos(target) {
-
-    //     const lastInput = inputs[inputs.length - 1]
-    //     if (target === lastInput) {
-    //         setTodos(todos => {
-    //             return todos + <input type="text" placeholder={placeholder} />
-    //         })
-    //     }
-    //     setType('todos')
-    //     const todo = { txt: target.value, isMarked: false }
-    //     setInfo(todo)
-    // }
-
-
-
-
-
-
-
 
     return <section style={{ backgroundColor: color }}>
 
         <div className="content">
             <input type="text" placeholder="Enter title"
                 onChange={handleChangeTitle} value={title} />
-            <input type="text" placeholder={placeholder}
-                onChange={handleChangeInfo} value={info.txt} />
+            {createInput()}
         </div>
 
         <div className="types">
             <div onClick={() => setType('txt')} className={isChosen('txt')}>Txt</div>
             <div onClick={() => setType('todos')} className={isChosen('todos')} >Todo</div>
             <div onClick={() => setType('video')} className={isChosen('video')}>Video</div>
-            <input type="file" accept="image/*" onChange={getImage} className={isChosen('image')} />
+            <div onClick={() => setType('img')} className={isChosen('img')} name="image">Image</div>
 
         </div>
 
@@ -146,7 +152,7 @@ export function NoteAdd({ onAdd }) {
                 <button onClick={() => setIsPalatteOpen(prev => !prev)}>Color</button>
                 {isPalatteOpen && < ColorPallete changeColor={handleChangeColor} />}
             </div>
-            <button onClick={() => onAdd(createNote())}>Add</button>
+            <button onClick={onSubmit}>Add</button>
         </div>
 
 
