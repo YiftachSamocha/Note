@@ -1,0 +1,9 @@
+.mail-compose {
+    background-color: blue;
+    display: flex;
+    align-items: center;
+}
+
+.mail-compose button {
+    margin-inline-start: 1em;
+}

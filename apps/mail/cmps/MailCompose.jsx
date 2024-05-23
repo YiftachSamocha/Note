@@ -1,5 +1,7 @@
 export function MailCompose() {
     return (
-        <button>Compose</button>
+        <section className="mail-compose">
+            <button>Compose</button>
+        </section>
     )
 }

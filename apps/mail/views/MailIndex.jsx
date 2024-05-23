@@ -37,22 +37,13 @@ export function MailIndex() {
     return (
         <section className="mail-index grid-content">
             <header className="grid-sections">
-                <div className="mail-compose">
                     <MailCompose />
-                </div>
-                <div className="mail-filter">
                     <MailFilter />
-                </div>
             </header>
             <aside className="grid-sections">
-                <div className="mail-folder-list">
                     <MailFolderList />
-                </div>
-                <div className="mail-list">
-                    <MailList />
-                </div>
+                    <MailList mails={mails} onRemoveMail={removeMail}/>
             </aside>
         </section>
     )
 }
-
