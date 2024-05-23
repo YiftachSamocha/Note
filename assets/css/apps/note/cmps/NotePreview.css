@@ -1,16 +1,37 @@
 .note {
     background-color: #F39F76;
-    border: 1px solid black;
+    border: 1px solid inherit;
+    border-radius: 10px;
     margin: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+}
+.note .content div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.note .buttons{
+    height: 3em;
+}
+.note:hover{
+    box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.5);
 }
 .note h2{
     margin: 1em;
 }
-.note p{
+.note button{
+    background-color: inherit;
+    border: 0;
+    cursor: pointer;
     margin: 1em;
 }
+.note img, .note iframe{
+    width: 8em;
+    height: calc(auto/8em);
+}
 
-/* .note iframe{
-    width: 80%;
-    height: auto;
-} */
+

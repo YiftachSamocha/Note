@@ -24,8 +24,15 @@ function get(noteId) {
     return storageService.get(LS_NAME, noteId)
 }
 
-function update(note) {
-    return storageService.put(LS_NAME, note)
+function update(noteId, property, value) {
+    return storageService.get(LS_NAME, noteId)
+        .then(prevNote => {
+            return {
+                ...prevNote, [property]: value
+            }
+        })
+        .then(note => storageService.put(LS_NAME, note))
+
 }
 
 function getColors() {

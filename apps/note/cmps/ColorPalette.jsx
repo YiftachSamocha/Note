@@ -1,6 +1,6 @@
 import { noteService } from "../services/note.service.js"
 
-export function ColorPallete({ changeColor }) {
+export function ColorPalette({ changeColor }) {
     const colors = noteService.getColors()
     return <section className="palatte">
         {colors.map(color => {

@@ -1,5 +1,5 @@
 import { noteService } from "../services/note.service.js"
-import { ColorPallete } from "./ColorPalette.jsx"
+import { ColorPalette } from "./ColorPalette.jsx"
 
 const { useState } = React
 
@@ -149,11 +149,10 @@ export function NoteAdd({ onAdd }) {
 
             </div>
 
-
             <div className="actions">
                 <div className="color-container">
                     <button onClick={() => setIsPalatteOpen(prev => !prev)}><i className="fa-solid fa-palette"></i></button>
-                    {isPalatteOpen && < ColorPallete changeColor={handleChangeColor} />}
+                    {isPalatteOpen && < ColorPalette changeColor={handleChangeColor} />}
                 </div>
                 <button onClick={onSubmit}>Add</button>
             </div>
