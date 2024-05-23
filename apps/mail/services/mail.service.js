@@ -98,12 +98,12 @@ function _createMails() {
     for (let i = 0; i < 20; i++) {
         const mail = {
             id: utilService.makeId(),
-            subject: utilService.makeLorem(4),
+            subject: utilService.makeLorem(2),
             body: utilService.makeLorem(60),
             isRead: Math.random() > 0.5,
             sentAt: utilService.getRandomIntInclusive(1551133130200, 1551133930700),
             removedAt: null,
-            from: utilService.makeLorem(1) + '@' + utilService.makeLorem(1) + '.com',
+            from: utilService.makeLorem(1).trim() + '@' + utilService.makeLorem(1).trim() + '.com',
             to: 'user@appsus.com'
         } 
         mails.push(mail)

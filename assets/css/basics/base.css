@@ -25,3 +25,8 @@ img {
 li {
     list-style-type: none;
 }
+
+ul {
+    margin-block: 0.25em;
+    padding: 0;
+}

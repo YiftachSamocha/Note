@@ -1,0 +1,28 @@
+.mail-preview {
+    padding: 0.5em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.mail-preview a {
+    display: flex;
+    flex-grow: 2;
+}
+
+.mail-preview p:nth-of-type(1) {
+    flex-grow: 3;
+}
+
+.mail-preview p:nth-of-type(2) {
+    flex-grow: 2;
+    /* padding-inline-end: 7em; */
+}
+
+.unread {
+    font-weight: bold;
+}
+
+.read {
+    background-color: lightsteelblue;
+}
