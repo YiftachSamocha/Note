@@ -61,6 +61,7 @@ function getEmptyNote() {
         info: {},
     }
 }
+
 function isValidLink(link) {
     var youtubeRegExp = /^(https?:\/\/)?(www\.)?(youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/
     return youtubeRegExp.test(link)
@@ -114,7 +115,9 @@ function _createData() {
                 const randomIndex = Math.floor(Math.random() * copyTodos.length)
                 selectedTodos.push({
                     txt: copyTodos[randomIndex],
-                    createdAt: null
+                    createdAt: null,
+                    isMarked: false,
+                    id: utilService.makeId(3)
                 });
                 copyTodos.splice(randomIndex, 1)
             }

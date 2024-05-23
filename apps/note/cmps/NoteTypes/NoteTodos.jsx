@@ -1,9 +1,33 @@
-export function NoteTodos({note}){
+import { noteService } from "../../services/note.service.js"
+const { useState } = React
+
+
+export function NoteTodos({ note }) {
+    const [todos, setTodos] = useState(note.info.todos)
+
+    function toggleMark({ target }) {
+        const { checked, name } = target
+        const updatedTodos = todos.map(todo => {
+            if (todo.id === name) {
+                return { ...todo, isMarked: checked }
+            }
+            return todo
+        })
+        noteService.update(note.id, 'info', { todos: updatedTodos })
+        setTodos(updatedTodos)
+    }
+
+
     return <div>
         <h2>{note.info.title}</h2>
         <ul>
-            {note.info.todos.map(todo=>{
-                return <li key={todo.txt}>{todo.txt}</li>
+            {note.info.todos.map(todo => {
+                const currTodo = todos.find(t => t.id === todo.id);
+                return <li key={currTodo.txt}>
+                    <p className={currTodo.isMarked ? 'marked' : ''}>{currTodo.txt}</p>
+                    <input type="checkbox" name={currTodo.id} checked={currTodo.isMarked} onChange={toggleMark} />
+                </li>
+
             })}
         </ul>
     </div>

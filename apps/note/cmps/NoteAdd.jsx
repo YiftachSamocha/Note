@@ -1,3 +1,4 @@
+import { utilService } from "../../../services/util.service.js"
 import { noteService } from "../services/note.service.js"
 import { ColorPalette } from "./ColorPalette.jsx"
 
@@ -5,7 +6,7 @@ const { useState } = React
 
 export function NoteAdd({ onAdd }) {
     const [title, setTitle] = useState('')
-    const [info, setInfo] = useState({ txt: '', ur: '', todos: [{ txt: '', isMarked: false }] })
+    const [info, setInfo] = useState({ txt: '', ur: '', todos: [{ txt: '', isMarked: false, id: '' }] })
     const [type, setType] = useState('txt')
     const [color, setColor] = useState('#FFFFFF')
     const [isPalatteOpen, setIsPalatteOpen] = useState(false)
@@ -52,7 +53,7 @@ export function NoteAdd({ onAdd }) {
             const newTodos = [...prevInfo.todos]
             newTodos[todoNum] = { ...newTodos[todoNum], txt: value }
             if (todoNum === newTodos.length - 1) {
-                newTodos.push({ txt: '', isMarked: false })
+                newTodos.push({ txt: '', isMarked: false, id: utilService.makeId(3) })
             }
             return { ...prevInfo, todos: newTodos };
         });
@@ -127,7 +128,7 @@ export function NoteAdd({ onAdd }) {
         note.type = type
         onAdd(note)
         setTitle('')
-        setInfo({ txt: '', ur: '', todos: [{ txt: '', isMarked: false }] })
+        setInfo({ txt: '', ur: '', todos: [{ txt: '', isMarked: false, id: '' }] })
         setColor('#FFFFFF')
 
     }

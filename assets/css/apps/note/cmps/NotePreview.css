@@ -33,5 +33,16 @@
     width: 8em;
     height: calc(auto/8em);
 }
+.note li{
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0.5em;
+}
+
+.note .marked{
+    text-decoration: line-through;
+}
 
 
