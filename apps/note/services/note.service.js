@@ -2,7 +2,7 @@ import { storageService } from "../../../services/async-storage.service.js"
 import { utilService } from "../../../services/util.service.js"
 const LS_NAME = 'NOTES'
 
-export const noteService = { query, remove, add, get, update,getEmptyNote, getColors }
+export const noteService = { query, remove, add, get, update, getEmptyNote, getColors, isValidLink, convertToEmbedLink }
 
 function query() {
     return storageService.query(LS_NAME)
@@ -53,6 +53,19 @@ function getEmptyNote() {
         style: '',
         info: {},
     }
+}
+function isValidLink(link) {
+    var youtubeRegExp = /^(https?:\/\/)?(www\.)?(youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/
+    return youtubeRegExp.test(link)
+}
+
+function convertToEmbedLink(youtubeUrl) {
+    let videoId = youtubeUrl.split('v=')[1] || youtubeUrl.split('/')[3]
+    const ampersandPosition = videoId.indexOf('&')
+    if (ampersandPosition !== -1) {
+        videoId = videoId.substring(0, ampersandPosition)
+    }
+    return `https://www.youtube.com/embed/${videoId}`
 }
 
 

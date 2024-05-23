@@ -1,10 +1,54 @@
-.types{
+.note-add{
     display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    margin-block: 2em;
+    border: 1px solid black;
+    box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.5);
+    min-width: 30em;
 }
-.types div{
-border: 1px solid black;
+.note-add input{
+    border: 0;
+    outline: 0;
+    margin: 10px;
+    background-color: inherit;
 }
-.types .chosen{
-    font-weight: bold;
+
+.buttons, .types, .actions{
+    display: flex;
+    justify-content: space-between;
+}
+
+.note-add .input-title{
+    font-size: larger;
+}
+.todos-inputs{
+    display: flex;
+    flex-direction: column;
+}
+
+input[type="file"]{
+    display: none;
+}
+.note-add img{
+    max-height: 15em;
+    max-width: 20em;
+}
+
+.types div  {
+    margin: 0.5em;
+    cursor: pointer;
+    
+}
+
+.actions button{
+    background-color: inherit;
+    border: 0;
+    cursor: pointer;
+    margin: 0.5em;
+}
+
+.types .chosen {
+    font-weight:900
 
 }

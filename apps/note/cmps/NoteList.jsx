@@ -41,7 +41,7 @@ export function NoteList() {
     }
     if (list.length === 0) return
 
-    return <section >
+    return <section className="note-list" >
         <NoteAdd onAdd={onAddNote} />
         <section className="notes-container">
             {list.map(note => {

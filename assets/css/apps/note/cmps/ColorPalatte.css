@@ -4,7 +4,7 @@
 .palatte{
     position: absolute;
     top: 100%;
-    left: 0;
+    right: -150%;
     display: flex;
     width: 40em;
     justify-content: space-between;

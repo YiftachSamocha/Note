@@ -3,6 +3,12 @@
     border: 1px solid black;
     margin: 10px;
 }
+.note h2{
+    margin: 1em;
+}
+.note p{
+    margin: 1em;
+}
 
 /* .note iframe{
     width: 80%;

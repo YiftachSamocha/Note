@@ -69,14 +69,7 @@ export function NoteAdd({ onAdd }) {
         return type === buttonType ? 'chosen' : ''
     }
 
-    function convertToEmbedLink(youtubeUrl) {
-        let videoId = youtubeUrl.split('v=')[1] || youtubeUrl.split('/')[3]
-        const ampersandPosition = videoId.indexOf('&')
-        if (ampersandPosition !== -1) {
-            videoId = videoId.substring(0, ampersandPosition)
-        }
-        return `https://www.youtube.com/embed/${videoId}`
-    }
+
 
     function createInput() {
         let input
@@ -86,8 +79,10 @@ export function NoteAdd({ onAdd }) {
                     onChange={handleChangeTxt} value={info.txt || ''} />
                 break
             case 'img':
-                input = <input type="file" accept="image/*"
-                    onChange={handleChangeImg} id="image" />
+                input = [<input type="file" accept="image/*"
+                    onChange={handleChangeImg} id="image" />]
+                if (info.url) input.push(<img src={info.url} />)
+
                 break
             case 'video':
                 input = <input type="text" placeholder='Enter YouTube link'
@@ -106,7 +101,7 @@ export function NoteAdd({ onAdd }) {
                     todosInputs.push(todoInput)
                 }
 
-                input = <div>{todosInputs}</div>
+                input = <div className="todos-inputs">{todosInputs}</div>
 
         }
         return input
@@ -116,7 +111,13 @@ export function NoteAdd({ onAdd }) {
 
     function onSubmit() {
         const note = noteService.getEmptyNote()
-        if (type === 'video') info.url = convertToEmbedLink(info.url)
+        if (type === 'video') {
+            if (noteService.isValidLink(info.url)) info.url = noteService.convertToEmbedLink(info.url)
+            else {
+                alert('Please enter a valid YouTube link')
+                return
+            }
+        }
         if (type === 'todos') info.todos = info.todos.slice(0, -1)
         note.style = color
         note.info = {
@@ -126,34 +127,39 @@ export function NoteAdd({ onAdd }) {
         note.type = type
         onAdd(note)
         setTitle('')
-        setInfo({ txt: '', ur: '' , todos: [{ txt: '', isMarked: false }] })
+        setInfo({ txt: '', ur: '', todos: [{ txt: '', isMarked: false }] })
+        setColor('#FFFFFF')
 
     }
 
-    return <section style={{ backgroundColor: color }}>
-
-        <div className="content">
-            <input type="text" placeholder="Enter title"
-                onChange={handleChangeTitle} value={title} />
-            {createInput()}
-        </div>
-
-        <div className="types">
-            <div onClick={() => setType('txt')} className={isChosen('txt')}>Txt</div>
-            <div onClick={() => setType('todos')} className={isChosen('todos')} >Todo</div>
-            <div onClick={() => setType('video')} className={isChosen('video')}>Video</div>
-            <div onClick={() => setType('img')} className={isChosen('img')} name="image">Image</div>
-
-        </div>
+    return <section style={{ backgroundColor: color }} className="note-add">
 
 
-        <div className="actions">
-            <div className="color-container">
-                <button onClick={() => setIsPalatteOpen(prev => !prev)}>Color</button>
-                {isPalatteOpen && < ColorPallete changeColor={handleChangeColor} />}
+        <input type="text" placeholder="Enter title"
+            onChange={handleChangeTitle} value={title} className="input-title" />
+        {createInput()}
+
+        <div className="buttons">
+            <div className="types">
+                <div onClick={() => setType('txt')} className={isChosen('txt')}>Text</div>
+                <div onClick={() => setType('todos')} className={isChosen('todos')} ><i className="fa-solid fa-list"></i></div>
+                <div onClick={() => setType('video')} className={isChosen('video')}><i className="fa-brands fa-youtube"></i></div>
+                <label htmlFor="image"><div onClick={() => setType('img')} className={isChosen('img')} ><i className="fa-regular fa-image"></i></div></label>
+
+
             </div>
-            <button onClick={onSubmit}>Add</button>
+
+
+            <div className="actions">
+                <div className="color-container">
+                    <button onClick={() => setIsPalatteOpen(prev => !prev)}><i className="fa-solid fa-palette"></i></button>
+                    {isPalatteOpen && < ColorPallete changeColor={handleChangeColor} />}
+                </div>
+                <button onClick={onSubmit}>Add</button>
+            </div>
         </div>
+
+
 
 
     </section>
