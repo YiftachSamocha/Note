@@ -26,6 +26,7 @@ export const mailService = {
     remove,
     save,
     getDefaultFilter, 
+    changeStarMail,
     getEmptyMail, 
     getFilterFromSearchParams,
 }
@@ -68,6 +69,14 @@ function save(mail) {
     }
 }
 
+function changeStarMail(mailId) {
+    return get(mailId)
+        .then(mail => {
+            mail.isStared = !mail.isStared
+            return storageService.put(MAIL_KEY, mail)
+        })
+}
+
 function getEmptyMail() {
     const mail = {
         id: utilService.makeId(), 
@@ -101,6 +110,7 @@ function _createMails() {
             subject: utilService.makeLorem(2),
             body: utilService.makeLorem(60),
             isRead: Math.random() > 0.5,
+            isStared: Math.random() > 0.5,
             sentAt: utilService.getRandomIntInclusive(1551133130200, 1551133930700),
             removedAt: null,
             from: utilService.makeLorem(1).trim() + '@' + utilService.makeLorem(1).trim() + '.com',

@@ -35,6 +35,21 @@ export function MailIndex() {
             })
     }
 
+    function changeStarMail(mailId) {
+        mailService.changeStarMail(mailId)
+            .then(() => {
+                setMails(prevMails => {
+                    const mailIdx = prevMails.findIndex(mail => mail.id === mailId)
+                    prevMails[mailIdx].isStared = !prevMails[mailIdx].isStared
+                    return [...prevMails]
+                })
+                showSuccessMsg('The mail has been updated successfully!')
+            })
+            .catch(() => {
+                showErrorMsg('The mail could not be updated')
+            })
+    }
+
     return (
         <section className="mail-index grid-content">
             <header className="grid-sections">
@@ -43,7 +58,7 @@ export function MailIndex() {
             </header>
             <aside className="grid-sections">
                     <MailFolderList />
-                    <MailList mails={mails} onRemoveMail={removeMail}/>
+                    <MailList mails={mails} onRemoveMail={removeMail} onChangeStarMail={changeStarMail}/>
             </aside>
         </section>
     )

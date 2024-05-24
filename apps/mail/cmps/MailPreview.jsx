@@ -1,8 +1,8 @@
+const { useState, useEffect } = React
 const { Link } = ReactRouterDOM
 
-export function MailPreview({ mail, onRemoveMail }) {
+export function MailPreview({ mail, onRemoveMail, onChangeStarMail }) {
     const isRead = mail.isRead ? 'read' : 'unread'
-    const isStared = mail.isStared ? 'star' : ''
 
     function getShortSubject(subject) {
         const arrSubject = subject.split(' ')
@@ -10,8 +10,16 @@ export function MailPreview({ mail, onRemoveMail }) {
         return arrSubject.join(' ')
     }
 
+    function onSetStar() {
+        console.log('hello')
+    }
+
     return (
-        <article className={`mail-preview ${isRead} ${isStared}`} >
+        <article className={`mail-preview ${isRead}`} >
+            <span className={`star ${mail.isStared ? 'on' : 'off'}`}
+                onClick={() => onChangeStarMail(mail.id)}>
+                &#9733;
+            </span>
             <Link to={`/mail/${mail.id}`}>
                 <div className="mails-info"></div>
                     <p>{mail.from}</p>

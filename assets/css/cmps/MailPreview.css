@@ -32,3 +32,23 @@
 .read {
     background-color: lightsteelblue;
 }
+
+.mail-preview .star {
+    margin: 0 15px;
+    padding: 0;
+    border: none;
+    outline: none;
+    background-color: transparent;
+
+    font-size: 1.5em;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+.mail-preview .star.on {
+    color: gold;
+}
+
+.mail-preview .star.off {
+    color: #ccc;
+}
