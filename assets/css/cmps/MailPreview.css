@@ -3,6 +3,12 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    transition: 0.3s;
+}
+
+.mail-preview:hover {
+    background-color: steelblue;
 }
 
 .mail-preview a {

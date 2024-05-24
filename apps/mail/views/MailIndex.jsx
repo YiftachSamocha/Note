@@ -6,6 +6,7 @@ import { MailList } from "../cmps/MailList.jsx"
 import { MailCompose } from "../cmps/MailCompose.jsx"
 import { MailFilter } from "../cmps/MailFilter.jsx"
 import { MailFolderList } from "../cmps/MailFolderList.jsx"
+import { showSuccessMsg, showErrorMsg } from "../../../services/event-bus.service.js"
 
 export function MailIndex() {
 
@@ -24,7 +25,7 @@ export function MailIndex() {
     }
 
     function removeMail(mailId) {
-        bookService.remove(mailId)
+        mailService.remove(mailId)
             .then(() => {
                 setMails(prevMails => prevMails.filter(mail => mail.id !== mailId))
                 showSuccessMsg('The mail has been removed successfully!')

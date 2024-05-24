@@ -6,7 +6,7 @@ import { About } from "./views/About.jsx"
 import { Home } from "./views/Home.jsx"
 import { MailIndex } from "./apps/mail/views/MailIndex.jsx"
 import { NoteIndex } from "./apps/note/views/NoteIndex.jsx"
-
+import { UserMsg } from "./cmps/UserMsg.jsx"
 
 
 export function App() {
@@ -19,6 +19,7 @@ export function App() {
                 <Route path="/mail" element={<MailIndex />} />
                 <Route path="/note" element={<NoteIndex />} />
             </Routes>
+            <UserMsg />
         </section>
     </Router>
 }

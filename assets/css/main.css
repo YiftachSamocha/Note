@@ -1,5 +1,4 @@
 /* Setup */
-@import './basics/layout.css';
 @import './setup/variables.css';
 /* @import './setup/fonts.css'; */
 
@@ -7,7 +6,7 @@
 
 @import './basics/base.css';
 @import './basics/helpers.css';
-/* @import './basics/layout.css'; */
+@import './basics/layout.css';
 
 /* Views */
 @import './views/home.css';
@@ -23,6 +22,3 @@
 @import './cmps/MailCompose.css';
 @import './cmps/MailList.css';
 @import './cmps/MailPreview.css';
-
-
-/* @import './apps/mail/cmps/MailList.css'; */

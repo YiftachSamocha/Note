@@ -1,12 +1,12 @@
 import { MailPreview } from "./MailPreview.jsx"
 
-export function MailList({ mails, onRemoveMail }) {
+export function MailList(prop) {
     return (
     <section className="mail-list">
         <ul>
-            { mails.map(mail => 
+            { prop.mails.map(mail => 
             <li key={mail.id}>
-                <MailPreview mail={mail} />
+                <MailPreview mail={mail} onRemoveMail={prop.onRemoveMail}/>
             </li>
             )}
         </ul>
