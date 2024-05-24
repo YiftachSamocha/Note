@@ -90,3 +90,7 @@ input[type="file"] {
     display: flex;
     justify-content: space-between;
 }
+
+.note-modify .unpinned{
+    opacity: 0.5;
+}

@@ -9,9 +9,13 @@ export function NoteList() {
     const [list, setList] = useState([])
     const [editedNote, setEditedNote] = useState('')
     useEffect(() => {
+        renderList()
+    }, [])
+
+    function renderList() {
         noteService.query()
             .then(notes => setList(notes))
-    }, [])
+    }
 
     function onDeleteNote(noteId) {
         noteService.remove(noteId)
@@ -43,16 +47,31 @@ export function NoteList() {
 
     }
 
+    function isPinnedExist(notes) {
+        return notes.some(note => note.isPinned)
+    }
+    const isExist = isPinnedExist(list)
+
 
     if (list.length === 0) return null
 
+
+
     return <section className="note-list" >
         <NoteModify editedNote={'new'} onModify={onAddNote} />
-        <section className="notes-container">
+        {isExist && <p className="pinned-title">Pinned:</p>}
+        <section className="list-pinned">
             {list.map(note => {
-                return <NotePreview note={note} onDelete={onDeleteNote} onEdit={onEditNote} />
+                if (note.isPinned) return <NotePreview note={note} onDelete={onDeleteNote} onEdit={onEditNote} />
             })}
         </section>
-        {editedNote !== '' && <NoteModify editedNote={editedNote} onModify={onEditSubmit} />}
+        {isExist && <p className="pinned-title">Other:</p>}
+        <section className="list-unpinned">
+            {list.map(note => {
+                if (!note.isPinned) return <NotePreview note={note} onDelete={onDeleteNote} onEdit={onEditNote} onChangePinned={renderList} />
+            })}
+        </section>
+
+        {editedNote !== '' && <NoteModify editedNote={editedNote} onModify={onEditSubmit} onChangePinned={renderList} />}
     </section>
 }

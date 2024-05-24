@@ -6,13 +6,15 @@ import { NoteTxt } from "./NoteTypes/NoteTxt.jsx";
 import { NoteVideo } from "./NoteTypes/NoteVideo.jsx";
 const { useState, useEffect } = React
 
-export function NotePreview({ note, onDelete, onEdit }) {
+export function NotePreview({ note, onDelete, onEdit, onChangePinned }) {
     const [hover, setHover] = useState(false)
     const [color, setColor] = useState(note.style)
+    const [isPinned, setIsPinned] = useState(note.isPinned)
     const [isPaletteOpen, setIsPaletteOpen] = useState(false)
 
     useEffect(() => {
         setColor(note.style)
+        setIsPinned(note.isPinned)
     }, [note])
 
     function changeColor(newColor) {
@@ -20,18 +22,30 @@ export function NotePreview({ note, onDelete, onEdit }) {
             .then(() => {
                 setColor(newColor)
                 setIsPaletteOpen(false)
+                onChangePinned()
             })
     }
 
-    const buttons = hover ? <div className="buttons" onClick={(event) =>  event.stopPropagation() }>
-        <button onClick={() =>  onDelete(note.id) }> <i className="fa-solid fa-trash"></i></button>
+    function changeIsPinned() {
+        noteService.updateProperty(note.id, 'isPinned', !isPinned)
+            .then(() => {
+                setIsPinned(!isPinned)
+                onChangePinned()
+            })
+
+    }
+    const isPinnedClass = isPinned ? '' : 'unpinned'
+
+    const buttons = hover ? <div className="buttons" onClick={(event) => event.stopPropagation()}>
+        <button onClick={changeIsPinned}><i class={"fa-solid fa-thumbtack " + isPinnedClass}></i></button>
         <div className="color-container">
-            <button onClick={() =>  setIsPaletteOpen(!isPaletteOpen) }><i className="fa-solid fa-palette"></i></button>
+            <button onClick={() => setIsPaletteOpen(!isPaletteOpen)}><i className="fa-solid fa-palette"></i></button>
             {isPaletteOpen && <ColorPalette changeColor={changeColor} />}
         </div>
+        <button onClick={() => onDelete(note.id)}> <i className="fa-solid fa-trash"></i></button>
 
-
-    </div> : <div className="buttons"></div>
+    </div>
+        : <div className="buttons"></div>
     const blackBorder = color === '#FFFFFF' ? { border: '0.5px solid black' } : {}
 
     return <div className="note"

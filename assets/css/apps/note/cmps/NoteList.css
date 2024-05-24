@@ -4,9 +4,16 @@
     justify-content: center;
 }
 
-.notes-container {
+.list-pinned,
+.list-unpinned {
     display: grid;
     grid-template-columns: repeat(4, minmax(150px, 1fr));
     grid-auto-flow: dense;
     gap: 1em;
+    margin-block: 2em;
+}
+
+.pinned-title{
+    margin-inline: 1em;
+    margin-block: 0;
 }

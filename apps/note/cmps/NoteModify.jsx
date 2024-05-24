@@ -9,6 +9,7 @@ export function NoteModify({ editedNote, onModify }) {
     const [info, setInfo] = useState({ txt: '', ur: '', todos: [{ txt: '', isMarked: false, id: '' }] })
     const [type, setType] = useState('txt')
     const [color, setColor] = useState('#FFFFFF')
+    const [isPinned, setIsPinned]= useState(false)
     const [isPalatteOpen, setIsPalatteOpen] = useState(false)
 
     useEffect(() => {
@@ -17,6 +18,7 @@ export function NoteModify({ editedNote, onModify }) {
             setColor(editedNote.style)
             setTitle(editedNote.info.title)
             setInfo(editedNote.info)
+            setIsPinned(editedNote.isPinned)
         }
     }, [editedNote])
 
@@ -145,17 +147,20 @@ export function NoteModify({ editedNote, onModify }) {
         }
         note.info.title = title
         note.type = type
+        note.isPinned= isPinned
         onModify(note)
         if (editedNote === 'new') {
             setTitle('')
             setInfo({ txt: '', ur: '', todos: [{ txt: '', isMarked: false, id: '' }] })
             setColor('#FFFFFF')
+            setIsPinned(false)
         }
 
 
     }
 
     const classType = editedNote === 'new' ? 'note-add' : 'note-edit'
+    const isPinnedClass = isPinned ? '' : 'unpinned'
 
     return <div>
         {editedNote !== 'new' && <div className="overlay" onClick={onSubmit}></div>}
@@ -174,6 +179,7 @@ export function NoteModify({ editedNote, onModify }) {
                 </div>
 
                 <div className="actions">
+                    <button onClick={()=> setIsPinned(!isPinned)}><i class={"fa-solid fa-thumbtack " + isPinnedClass}></i></button>
                     <div className="color-container">
                         <button onClick={() => setIsPalatteOpen(prev => !prev)}><i className="fa-solid fa-palette"></i></button>
                         {isPalatteOpen && < ColorPalette changeColor={handleChangeColor} />}
