@@ -1,17 +1,13 @@
 const { useState, useEffect } = React
 const { Link } = ReactRouterDOM
 
-export function MailPreview({ mail, onRemoveMail, onChangeStarMail }) {
+export function MailPreview({ mail, onRemoveMail, onChangeStarMail, onChangeMailRead }) {
     const isRead = mail.isRead ? 'read' : 'unread'
 
     function getShortSubject(subject) {
         const arrSubject = subject.split(' ')
         if (arrSubject.length > 5) return arrSubject.join(' ') + '...'
         return arrSubject.join(' ')
-    }
-
-    function onSetStar() {
-        console.log('hello')
     }
 
     return (
@@ -26,9 +22,9 @@ export function MailPreview({ mail, onRemoveMail, onChangeStarMail }) {
                     <p>{getShortSubject(mail.subject)}</p>                
             </Link>
             <div className="actions-btn">
-                {/* <button className="note-mail-btn" onClick={() => onRemoveMail(mail.id)}>note</button>
-                <button className="unread-mail-btn" onClick={() => onRemoveMail(mail.id)}>unread</button> */}
-                <button className="delete-mail-btn" onClick={() => onRemoveMail(mail.id)}>Delete</button>
+                <span className="note-mail" title="Save as a Note" onClick={() => console.log('will developed')}><img src="../../assets/img/paper-plane.png"/></span>
+                <span className="unread-mail" title="Unread/Read Mail" onClick={() => onChangeMailRead(mail.id)}><img src="../../assets/img/envelope.png"/></span>
+                <span className="delete-mail" title="Delete Mail" onClick={() => onRemoveMail(mail.id)}><img src="../../assets/img/delete.png"/></span>
             </div>
         </article>
     )

@@ -27,6 +27,7 @@ export const mailService = {
     save,
     getDefaultFilter, 
     changeStarMail,
+    changeMailRead,
     getEmptyMail, 
     getFilterFromSearchParams,
 }
@@ -73,6 +74,14 @@ function changeStarMail(mailId) {
     return get(mailId)
         .then(mail => {
             mail.isStared = !mail.isStared
+            return storageService.put(MAIL_KEY, mail)
+        })
+}
+
+function changeMailRead(mailId) {
+    return get(mailId)
+        .then(mail => {
+            mail.isRead = !mail.isRead
             return storageService.put(MAIL_KEY, mail)
         })
 }
