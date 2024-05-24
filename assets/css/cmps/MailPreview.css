@@ -12,17 +12,16 @@
 }
 
 .mail-preview a {
-    display: flex;
     flex-grow: 2;
 }
 
-.mail-preview p:nth-of-type(1) {
-    flex-grow: 3;
+.mail-preview .mails-info {
+    display: grid;
+    grid-template-columns: 3fr 4fr;
 }
 
-.mail-preview p:nth-of-type(2) {
-    flex-grow: 2;
-    /* padding-inline-end: 7em; */
+.mail-preview .mails-info p:nth-of-type(2) {
+    grid-column: 2 / 3;
 }
 
 .unread {

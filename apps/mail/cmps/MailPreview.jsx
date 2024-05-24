@@ -17,9 +17,10 @@ export function MailPreview({ mail, onRemoveMail, onChangeStarMail, onChangeMail
                 &#9733;
             </span>
             <Link to={`/mail/${mail.id}`}>
-                <div className="mails-info"></div>
+                <div className="mails-info">
                     <p>{mail.from}</p>
-                    <p>{getShortSubject(mail.subject)}</p>                
+                    <p>{getShortSubject(mail.subject)}</p>
+                </div>                
             </Link>
             <div className="actions-btn">
                 <span className="note-mail" title="Save as a Note" onClick={() => console.log('will developed')}><img src="../../assets/img/paper-plane.png"/></span>
