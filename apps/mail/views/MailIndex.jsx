@@ -69,7 +69,7 @@ export function MailIndex() {
         <section className="mail-index grid-content">
             <header className="grid-sections">
                     <MailCompose />
-                    <MailFilter />
+                    <MailFilter filterBy={filterBy} onFilter={onSetFilterBy}/>
             </header>
             <aside className="grid-sections">
                     <MailFolderList />

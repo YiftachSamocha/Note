@@ -37,15 +37,17 @@ window.ms = mailService
 function query(filterBy = {}) {
     return storageService.query(MAIL_KEY)
         .then(mails => {
-            // if (filterBy.txt) {
-            //     const regExp = new RegExp(filterBy.txt, 'i')
-            //     mails = mails.filter(book => regExp.test(book.title))
-            // }
-
-            // if (filterBy.maxPrice) {
-            //     mails = mails.filter(book => book.listPrice.amount <= filterBy.maxPrice)
-            // }
-
+            if (filterBy.txt) {
+                const regExp = new RegExp(filterBy.txt, 'i')
+                mails = mails.filter(mail => regExp.test(mail.subject))
+            }
+            if (filterBy.readStatus) {
+                if (filterBy.readStatus === 'read') {
+                    mails = mails.filter(mail => mail.isRead === true)
+                } else {
+                    mails = mails.filter(mail => mail.isRead === false)
+                }
+            }
             return mails
         })
 }
@@ -91,7 +93,8 @@ function getEmptyMail() {
         id: utilService.makeId(), 
         subject: '', 
         body: '', 
-        isRead: false, 
+        isRead: false,
+        isStared: false,
         sentAt: null,
         removedAt: null,
         from: null,
@@ -108,6 +111,7 @@ function getFilterFromSearchParams(searchParams) {
     return {
         status: searchParams.get('status') || '',
         txt: searchParams.get('txt') || '',
+        readStatus: searchParams.get('readStatus') || ''
     }
 }
 
