@@ -2,23 +2,23 @@ import { utilService } from "../../../services/util.service.js"
 import { noteService } from "../services/note.service.js"
 import { ColorPalette } from "./ColorPalette.jsx"
 
-const { useState } = React
+const { useState, useEffect } = React
 
-export function NoteModify({ onModify, editedNote }) {
+export function NoteModify({ editedNote, onModify }) {
     const [title, setTitle] = useState('')
     const [info, setInfo] = useState({ txt: '', ur: '', todos: [{ txt: '', isMarked: false, id: '' }] })
     const [type, setType] = useState('txt')
     const [color, setColor] = useState('#FFFFFF')
     const [isPalatteOpen, setIsPalatteOpen] = useState(false)
 
-    useState(() => {
+    useEffect(() => {
         if (editedNote !== 'new') {
             setType(editedNote.type)
             setColor(editedNote.style)
             setTitle(editedNote.info.title)
             setInfo(editedNote.info)
         }
-    }, [])
+    }, [editedNote])
 
 
     function handleChangeTitle({ target }) {

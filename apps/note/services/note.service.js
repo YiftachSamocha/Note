@@ -31,12 +31,13 @@ function update(note) {
 function updateProperty(noteId, property, value) {
     return storageService.get(LS_NAME, noteId)
         .then(prevNote => {
-            return {
-                ...prevNote, [property]: value
+            const updatedNote = {
+                ...prevNote,
+                [property]: value
             }
+            return storageService.put(LS_NAME, updatedNote)
         })
-        .then(note => storageService.put(LS_NAME, note))
-
+        .then(() => value)
 }
 
 function getColors() {
