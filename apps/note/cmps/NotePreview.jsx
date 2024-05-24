@@ -37,7 +37,7 @@ export function NotePreview({ note, onDelete, onEdit, onChangePinned }) {
     const isPinnedClass = isPinned ? '' : 'unpinned'
 
     const buttons = hover ? <div className="buttons" onClick={(event) => event.stopPropagation()}>
-        <button onClick={changeIsPinned}><i class={"fa-solid fa-thumbtack " + isPinnedClass}></i></button>
+        <button onClick={changeIsPinned}><i className={"fa-solid fa-thumbtack " + isPinnedClass}></i></button>
         <div className="color-container">
             <button onClick={() => setIsPaletteOpen(!isPaletteOpen)}><i className="fa-solid fa-palette"></i></button>
             {isPaletteOpen && <ColorPalette changeColor={changeColor} />}

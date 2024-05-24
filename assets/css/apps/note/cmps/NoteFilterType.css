@@ -1,0 +1,33 @@
+.filter-type {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    max-height: 50em;
+    position: sticky;
+    top: 0;
+}
+
+.filter-type div {
+    padding: 8px 12px;
+    border-radius: 0 50px 50px 0;
+    display: flex;
+    cursor: pointer;
+    justify-content: space-between;
+    width: 10em;
+}
+
+.filter-type i{
+    margin: 1em;
+}
+
+.filter-type p{
+    margin-inline-end: 6em;
+}
+
+.filter-type div:hover {
+    background-color: #F1F3F4;
+}
+
+.filter-type div.current {
+    background-color: #FEEFC3;
+}

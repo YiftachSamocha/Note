@@ -9,7 +9,7 @@ export function NoteModify({ editedNote, onModify }) {
     const [info, setInfo] = useState({ txt: '', ur: '', todos: [{ txt: '', isMarked: false, id: '' }] })
     const [type, setType] = useState('txt')
     const [color, setColor] = useState('#FFFFFF')
-    const [isPinned, setIsPinned]= useState(false)
+    const [isPinned, setIsPinned] = useState(false)
     const [isPalatteOpen, setIsPalatteOpen] = useState(false)
 
     useEffect(() => {
@@ -30,8 +30,9 @@ export function NoteModify({ editedNote, onModify }) {
 
     function handleChangeTxt({ target }) {
         const { value } = target
-        setInfo({ txt: value })
+        setInfo({ ...info, txt: value })
     }
+
 
     function handleChangeImg({ target }) {
         const file = target.files[0]
@@ -45,7 +46,7 @@ export function NoteModify({ editedNote, onModify }) {
             ctx.drawImage(img, 0, 0)
             const dataUrl = canvas.toDataURL('image/png')
             setType('img')
-            setInfo({ url: dataUrl })
+            setInfo({ ...info, url: dataUrl })
 
         }
         img.src = imageUrl
@@ -53,7 +54,7 @@ export function NoteModify({ editedNote, onModify }) {
 
     function handleChangeVideo({ target }) {
         const { value } = target
-        setInfo({ url: value })
+        setInfo({ ...info, url: value })
     }
 
 
@@ -147,7 +148,7 @@ export function NoteModify({ editedNote, onModify }) {
         }
         note.info.title = title
         note.type = type
-        note.isPinned= isPinned
+        note.isPinned = isPinned
         onModify(note)
         if (editedNote === 'new') {
             setTitle('')
@@ -172,14 +173,14 @@ export function NoteModify({ editedNote, onModify }) {
 
             <div className="buttons">
                 <div className="types">
-                    <div onClick={() => setType('txt')} className={isChosen('txt')}>Text</div>
+                    <div onClick={() => setType('txt')} className={isChosen('txt')}><i className="fa-solid fa-font"></i></div>
                     <div onClick={() => setType('todos')} className={isChosen('todos')} ><i className="fa-solid fa-list"></i></div>
                     <div onClick={() => setType('video')} className={isChosen('video')}><i className="fa-brands fa-youtube"></i></div>
                     <label htmlFor="image"><div onClick={() => setType('img')} className={isChosen('img')} ><i className="fa-regular fa-image"></i></div></label>
                 </div>
 
                 <div className="actions">
-                    <button onClick={()=> setIsPinned(!isPinned)}><i class={"fa-solid fa-thumbtack " + isPinnedClass}></i></button>
+                    <button onClick={() => setIsPinned(!isPinned)}><i className={"fa-solid fa-thumbtack " + isPinnedClass}></i></button>
                     <div className="color-container">
                         <button onClick={() => setIsPalatteOpen(prev => !prev)}><i className="fa-solid fa-palette"></i></button>
                         {isPalatteOpen && < ColorPalette changeColor={handleChangeColor} />}

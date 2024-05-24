@@ -4,11 +4,13 @@ const LS_NAME = 'NOTES'
 
 export const noteService = { query, remove, add, get, update, updateProperty, getEmptyNote, getColors, isValidLink, convertToEmbedLink }
 
-function query() {
+function query(filterBy) {
     return storageService.query(LS_NAME)
         .then(notes => {
             if (notes.length === 0) return _createData()
-            return notes
+            if (filterBy.type === '') return notes
+            return notes.filter(note => note.type === filterBy.type)
+
         })
 }
 
@@ -39,6 +41,7 @@ function updateProperty(noteId, property, value) {
         })
         .then(() => value)
 }
+
 
 function getColors() {
     return ['#FFFFFF',

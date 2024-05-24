@@ -26,8 +26,8 @@ export function NoteTodos({ note }) {
         <h2>{note.info.title}</h2>
         <ul>
             {note.info.todos.map(todo => {
-                const currTodo = todos.find(t => t.id === todo.id);
-                return <li key={currTodo.txt}>
+                const currTodo = todos.find(t => t.id === todo.id)
+                return <li key={currTodo.id}>
                     <p className={currTodo.isMarked ? 'marked' : ''}>{currTodo.txt}</p>
                     <input type="checkbox" name={currTodo.id}
                         checked={currTodo.isMarked}

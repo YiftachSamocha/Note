@@ -5,15 +5,15 @@ import { NotePreview } from "./NotePreview.jsx"
 
 const { useState, useEffect } = React
 
-export function NoteList() {
+export function NoteList({filterBy}) {
     const [list, setList] = useState([])
     const [editedNote, setEditedNote] = useState('')
     useEffect(() => {
         renderList()
-    }, [])
+    }, [filterBy])
 
     function renderList() {
-        noteService.query()
+        noteService.query(filterBy)
             .then(notes => setList(notes))
     }
 
