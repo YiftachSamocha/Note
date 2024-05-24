@@ -10,10 +10,11 @@ export function NotePreview({ note, onDelete, onEdit }) {
     const [hover, setHover] = useState(false)
     const [color, setColor] = useState(note.style)
     const [isPaletteOpen, setIsPaletteOpen] = useState(false)
-    function changeColor(color) {
-        noteService.update(note.id, 'color', color)
+
+    function changeColor(newColor) {
+        noteService.updateProperty(note.id, 'color', newColor)
             .then(() => {
-                setColor(color)
+                setColor(newColor)
                 setIsPaletteOpen(false)
             })
     }
@@ -27,12 +28,13 @@ export function NotePreview({ note, onDelete, onEdit }) {
 
 
     </div> : <div className="buttons"></div>
-
+    const blackBorder = color === '#FFFFFF' ? { border: '0.5px solid black' } : {}
 
     return <div className="note"
-        style={{ backgroundColor: color }}
+        style={{ ...{ backgroundColor: color }, ...blackBorder }}
         onMouseEnter={() => setHover(true)}
-        onMouseLeave={() => setHover(false)}>
+        onMouseLeave={() => setHover(false)}
+        onClick={() => onEdit(note)}>
         <div className="content">
             {note.type === 'txt' && <NoteTxt note={note} />}
             {note.type === 'img' && <NoteImg note={note} />}

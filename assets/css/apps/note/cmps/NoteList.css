@@ -1,8 +1,9 @@
-.note-list{
+.note-list {
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
+
 .notes-container {
     display: grid;
     grid-template-columns: repeat(4, minmax(150px, 1fr));

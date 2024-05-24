@@ -2,7 +2,7 @@ import { storageService } from "../../../services/async-storage.service.js"
 import { utilService } from "../../../services/util.service.js"
 const LS_NAME = 'NOTES'
 
-export const noteService = { query, remove, add, get, update, getEmptyNote, getColors, isValidLink, convertToEmbedLink }
+export const noteService = { query, remove, add, get, update, updateProperty, getEmptyNote, getColors, isValidLink, convertToEmbedLink }
 
 function query() {
     return storageService.query(LS_NAME)
@@ -24,7 +24,11 @@ function get(noteId) {
     return storageService.get(LS_NAME, noteId)
 }
 
-function update(noteId, property, value) {
+function update(note) {
+    return storageService.put(LS_NAME, note)
+}
+
+function updateProperty(noteId, property, value) {
     return storageService.get(LS_NAME, noteId)
         .then(prevNote => {
             return {

@@ -13,7 +13,7 @@ export function NoteTodos({ note }) {
             }
             return todo
         })
-        noteService.update(note.id, 'info', { todos: updatedTodos })
+        noteService.updateProperty(note.id, 'info', { todos: updatedTodos })
         setTodos(updatedTodos)
     }
 

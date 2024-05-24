@@ -1,13 +1,13 @@
 import { noteService } from "../services/note.service.js"
-import { NoteAdd } from "./NoteAdd.jsx"
+import { NoteAdd, NoteModify } from "./NoteModify.jsx"
 import { NotePreview } from "./NotePreview.jsx"
-import { NoteEdit } from "./NoteEdit.jsx"
+
 
 const { useState, useEffect } = React
 
 export function NoteList() {
     const [list, setList] = useState([])
-    const [editedId, setEditedId] = useState('')
+    const [editedNote, setEditedNote] = useState('')
     useEffect(() => {
         noteService.query()
             .then(notes => setList(notes))
@@ -27,29 +27,32 @@ export function NoteList() {
             })
     }
 
-    function onEditNote(noteId) {
-        setEditedId(noteId)
-
+    function onEditNote(note) {
+        setEditedNote(note)
     }
-    function onEditSubmit() {
-        return noteService.query()
+
+    function onEditSubmit(note) {
+        return noteService.update(note)
+            .then(() => {
+                return noteService.query()
+            })
             .then(notes => {
-                onEditNote('')
+                setEditedNote('')
                 setList(notes)
             })
 
     }
-    if (list.length === 0) return
+
+
+    if (list.length === 0) return null
 
     return <section className="note-list" >
-        <NoteAdd onAdd={onAddNote} />
+        <NoteModify editedNote={'new'} onModify={onAddNote} />
         <section className="notes-container">
             {list.map(note => {
-                return <NotePreview note={note} onDelete={onDeleteNote} onEdit={onEditNote} key={note.id} />
+                return <NotePreview note={note} onDelete={onDeleteNote} onEdit={onEditNote} />
             })}
         </section>
-        {editedId !== '' && <NoteEdit editedId={editedId} onEditSubmit={onEditSubmit} />}
-
-
+        {editedNote !== '' && <NoteModify editedNote={editedNote} onModify={onEditSubmit} />}
     </section>
 }
