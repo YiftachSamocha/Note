@@ -1,0 +1,28 @@
+.mail-filter {
+    display: flex;
+    align-items: center;
+}
+
+.mail-filter .search-box {
+    height: 50px;
+    width: fit-content;
+    background-color: lightsteelblue;
+    border-radius: 0.5em;
+
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.mail-filter .search-box img {
+    height: 1.25em;
+    width: 1.25em;
+    padding: 1em;
+}
+
+.mail-filter .search-box input {
+    background-color: inherit;
+    border: 0px;
+    height: 40px;
+
+}
