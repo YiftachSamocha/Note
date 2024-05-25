@@ -22,7 +22,7 @@ export function NoteModify({ editedNote, onModify }) {
             setType(editedNote.type)
             setColor(editedNote.style)
             setTitle(editedNote.info.title)
-            setInfo(editedNote.info)
+            setInfo({...editedNote.info, audio: LZString.decompressFromUTF16(editedNote.info.audio)})
             setIsPinned(editedNote.isPinned)
         }
     }, [editedNote])
@@ -46,6 +46,7 @@ export function NoteModify({ editedNote, onModify }) {
             }
         }
         if (type === 'todos' && info.todos[info.todos.length - 1].txt === '') info.todos = info.todos.slice(0, -1)
+        if (type === 'audio') info.audio = LZString.compressToUTF16(info.audio)
         note.style = color
         note.info = { ...info }
         note.info.title = title
@@ -54,7 +55,7 @@ export function NoteModify({ editedNote, onModify }) {
         onModify(note)
         if (editedNote === 'new') {
             setTitle('')
-            setInfo({ txt: '', ur: '', todos: [{ txt: '', isMarked: false, id: '' }], audio: '' })
+            setInfo({ txt: '', url: '', todos: [{ txt: '', isMarked: false, id: '' }], audio: '' })
             setColor('#FFFFFF')
             setIsPinned(false)
         }
@@ -62,6 +63,7 @@ export function NoteModify({ editedNote, onModify }) {
 
     const classType = editedNote === 'new' ? 'note-add' : 'note-edit'
     const isPinnedClass = isPinned ? '' : 'unpinned'
+    console.log('NoteModify Rendered with info:', info)
 
     return <div>
         {editedNote !== 'new' && <div className="overlay" onClick={onSubmit}></div>}

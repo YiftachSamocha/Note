@@ -17,11 +17,11 @@ export function NoteModifyImg({ info, setInfo }) {
         img.src = imageUrl
     }
 
-    return <div>
+    return <section className="add-info">
         <input type="file" accept="image/*"
             onChange={handleChange} id="image" />
         {info.url && <img src={info.url} />}
-    </div>
+    </section>
 
 
 }

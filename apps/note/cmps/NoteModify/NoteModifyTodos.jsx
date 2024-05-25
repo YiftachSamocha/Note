@@ -6,17 +6,16 @@ export function NoteModifyTodos({ info, setInfo }) {
         const changedType = type === 'text' ? 'txt' : 'isMarked'
         const changedValue = changedType === 'txt' ? value : checked
         const todoNum = Number(name)
-        setInfo(prevInfo => {
-            const newTodos = [...prevInfo.todos]
-            newTodos[todoNum] = { ...newTodos[todoNum], [changedType]: changedValue }
-            if (todoNum === newTodos.length - 1) {
-                newTodos.push({ txt: '', isMarked: false, id: utilService.makeId(3) })
-            }
-            return { ...prevInfo, todos: newTodos }
-        })
+        const newTodos = [...info.todos]
+        newTodos[todoNum] = { ...newTodos[todoNum], [changedType]: changedValue }
+        if (todoNum === newTodos.length - 1) {
+            newTodos.push({ txt: '', isMarked: false, id: utilService.makeId(3) })
+        }
+        setInfo({ ...info, todos: newTodos })
     }
 
     let todosInputs = []
+    if (!info.todos) setInfo({ ...info, todos: [{ txt: '', isMarked: false, id: '' }] })
     for (var i = 0; i < info.todos.length; i++) {
         const todoInput = <div key={i}>
             <input
@@ -31,8 +30,6 @@ export function NoteModifyTodos({ info, setInfo }) {
                 onChange={handleChange}
                 name={i.toString()} />
         </div>
-
-
         todosInputs.push(todoInput)
     }
 

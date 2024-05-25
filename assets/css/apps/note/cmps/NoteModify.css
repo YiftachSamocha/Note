@@ -20,12 +20,18 @@
     z-index: 1;
 }
 
+.note-add{
+    justify-content: center;
+}
+
 
 .note-edit {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    border: 0;
+    border-radius: 10px;
 
 }
 
@@ -78,8 +84,15 @@ input[type="file"] {
     font-weight: 900
 }
 
+.note-modify .add-info{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
 .note-modify img {
-    margin-inline:  5em;
+    margin: 0 auto;
+    
 }
 
 .note-modify audio{
