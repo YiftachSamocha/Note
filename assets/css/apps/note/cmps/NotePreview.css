@@ -6,36 +6,42 @@
     flex-direction: column;
     justify-content: space-between;
     min-width: 15em;
-
-    
-    
 }
-.note .content div{
+
+.note .content div {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-.note .buttons{
+
+.note .buttons {
     height: 3em;
 }
-.note:hover{
-    box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.5);
+
+.note:hover {
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.5);
+    transition: 0.5s;
 }
-.note h2{
+
+.note h2 {
     margin: 1em;
 }
-.note button{
+
+.note button {
     background-color: inherit;
     border: 0;
     cursor: pointer;
     margin: 1em;
 }
-.note img, .note iframe{
+
+.note img,
+.note iframe {
     width: 8em;
     height: calc(auto/8em);
 }
-.note li{
+
+.note li {
     list-style: none;
     display: flex;
     flex-direction: row;
@@ -43,12 +49,10 @@
     margin: 0.5em;
 }
 
-.note .marked{
+.note .marked {
     text-decoration: line-through;
 }
 
-.note .unpinned{
+.note .unpinned {
     opacity: 0.5;
 }
-
-

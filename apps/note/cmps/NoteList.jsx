@@ -47,6 +47,11 @@ export function NoteList({ filterBy }) {
 
     }
 
+    function onDuplicate(note) {
+        const duplicatedNote= {...note, createdAt: new Date()}
+        onAddNote(duplicatedNote)
+    }
+
     function isPinnedExist(notes) {
         return notes.some(note => note.isPinned)
     }
@@ -63,13 +68,23 @@ export function NoteList({ filterBy }) {
         {isExist && <p className="pinned-title">Pinned:</p>}
         <section className="list-pinned" style={{ display: isExist ? 'flex' : 'none' }}>
             {list.map(note => {
-                if (note.isPinned) return <NotePreview note={note} onDelete={onDeleteNote} onEdit={onEditNote} key={note.id} />
+                if (note.isPinned) return <NotePreview note={note}
+                    onDelete={onDeleteNote}
+                    onEdit={onEditNote}
+                    onChangePinned={renderList}
+                    onDuplicate={onDuplicate}
+                    key={note.id} />
             })}
         </section>
         {isExist && <p className="pinned-title">Other:</p>}
         <section className="list-unpinned">
             {list.map(note => {
-                if (!note.isPinned) return <NotePreview note={note} onDelete={onDeleteNote} onEdit={onEditNote} onChangePinned={renderList} key={note.id} />
+                if (!note.isPinned) return <NotePreview note={note}
+                    onDelete={onDeleteNote}
+                    onEdit={onEditNote}
+                    onChangePinned={renderList}
+                    onDuplicate={onDuplicate}
+                    key={note.id} />
             })}
         </section>
 

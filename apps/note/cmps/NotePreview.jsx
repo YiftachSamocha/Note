@@ -6,7 +6,7 @@ import { NoteTxt } from "./NoteTypes/NoteTxt.jsx";
 import { NoteVideo } from "./NoteTypes/NoteVideo.jsx";
 const { useState, useEffect } = React
 
-export function NotePreview({ note, onDelete, onEdit, onChangePinned }) {
+export function NotePreview({ note, onDelete, onEdit, onDuplicate, onChangePinned }) {
     const [hover, setHover] = useState(false)
     const [color, setColor] = useState(note.style)
     const [isPinned, setIsPinned] = useState(note.isPinned)
@@ -38,6 +38,7 @@ export function NotePreview({ note, onDelete, onEdit, onChangePinned }) {
 
     const buttons = hover ? <div className="buttons" onClick={(event) => event.stopPropagation()}>
         <button onClick={changeIsPinned}><i className={"fa-solid fa-thumbtack " + isPinnedClass}></i></button>
+        <button onClick={() => onDuplicate(note)}><i className="fa-regular fa-copy"></i></button>
         <div className="color-container">
             <button onClick={() => setIsPaletteOpen(!isPaletteOpen)}><i className="fa-solid fa-palette"></i></button>
             {isPaletteOpen && <ColorPalette changeColor={changeColor} />}
