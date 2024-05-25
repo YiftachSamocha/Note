@@ -13,6 +13,10 @@
     margin-block: 2em;
 }
 
+.list-pinned{
+    min-height: 0;
+}
+
 .pinned-title{
     margin-inline: 1em;
     margin-block: 0;

@@ -4,13 +4,13 @@ const LS_NAME = 'NOTES'
 
 export const noteService = { query, remove, add, get, update, updateProperty, getEmptyNote, getColors, isValidLink, convertToEmbedLink }
 
-function query(filterBy) {
+function query(filterBy = { type: '', txt: '' }) {
     return storageService.query(LS_NAME)
         .then(notes => {
             if (notes.length === 0) return _createData()
-            if (filterBy.type === '') return notes
-            return notes.filter(note => note.type === filterBy.type)
-
+            const filteredByType = filterBy.type === '' ? notes : notes.filter(note => note.type === filterBy.type)
+            return filterBy.txt === '' ? filteredByType :
+                filteredByType.filter(note => isTxtInNote(note, filterBy.txt))
         })
 }
 
@@ -40,6 +40,21 @@ function updateProperty(noteId, property, value) {
             return storageService.put(LS_NAME, updatedNote)
         })
         .then(() => value)
+}
+
+function isTxtInNote(note, txt) {
+    if (note.info.title.includes(txt)) return true
+    switch (note.type) {
+        case 'txt':
+            if (note.info.txt.includes(txt)) return true
+            break
+        case 'todos':
+            for (var i = 0; i < note.info.todos.length; i++) {
+                if (note.info.todos[i].txt.includes(txt)) return true
+            }
+            break
+    }
+    return false
 }
 
 

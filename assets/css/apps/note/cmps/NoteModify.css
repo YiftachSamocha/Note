@@ -21,7 +21,7 @@
 }
 
 
-.note-edit{
+.note-edit {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -29,7 +29,7 @@
 
 }
 
-input {
+.note-modify input {
     border: 0;
     outline: 0;
     margin: 10px;
@@ -78,19 +78,19 @@ input[type="file"] {
     font-weight: 900
 }
 
-.note-edit img{
+.note-edit img {
     margin: 0 auto;
 }
 
-.note-modify .marked{
+.note-modify .marked {
     text-decoration: line-through;
 }
 
-.todos-inputs > div{
+.todos-inputs>div {
     display: flex;
     justify-content: space-between;
 }
 
-.note-modify .unpinned{
+.note-modify .unpinned {
     opacity: 0.5;
 }

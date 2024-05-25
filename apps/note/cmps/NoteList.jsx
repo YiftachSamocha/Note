@@ -5,7 +5,7 @@ import { NotePreview } from "./NotePreview.jsx"
 
 const { useState, useEffect } = React
 
-export function NoteList({filterBy}) {
+export function NoteList({ filterBy }) {
     const [list, setList] = useState([])
     const [editedNote, setEditedNote] = useState('')
     useEffect(() => {
@@ -60,15 +60,15 @@ export function NoteList({filterBy}) {
     return <section className="note-list" >
         <NoteModify editedNote={'new'} onModify={onAddNote} />
         {isExist && <p className="pinned-title">Pinned:</p>}
-        <section className="list-pinned">
+        <section className="list-pinned" style={{ display: isExist ? 'grid' : 'none' }}>
             {list.map(note => {
-                if (note.isPinned) return <NotePreview note={note} onDelete={onDeleteNote} onEdit={onEditNote} />
+                if (note.isPinned) return <NotePreview note={note} onDelete={onDeleteNote} onEdit={onEditNote} key={note.id} />
             })}
         </section>
         {isExist && <p className="pinned-title">Other:</p>}
         <section className="list-unpinned">
             {list.map(note => {
-                if (!note.isPinned) return <NotePreview note={note} onDelete={onDeleteNote} onEdit={onEditNote} onChangePinned={renderList} />
+                if (!note.isPinned) return <NotePreview note={note} onDelete={onDeleteNote} onEdit={onEditNote} onChangePinned={renderList} key={note.id} />
             })}
         </section>
 

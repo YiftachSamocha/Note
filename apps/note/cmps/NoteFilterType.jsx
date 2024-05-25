@@ -9,7 +9,7 @@ export function NoteFilterType({ filterBy, onFilter }) {
     return <section className="filter-type">
         <div onClick={() => onSetFilter('')}
             className={currType === '' ? currTypeClass : ''}>
-            <i class="fa-regular fa-note-sticky"></i>
+            <i className="fa-regular fa-note-sticky"></i>
             <p>All</p>
         </div>
         <div onClick={() => onSetFilter('txt')}
