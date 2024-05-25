@@ -14,16 +14,25 @@ export function MailIndex() {
     const params = useParams()
     const [searchParams, setSearchParams] = useSearchParams()
     const [mails, setMails] = useState([])
+    const [folder, setFolder] = useState({ status: 'inbox' })
     const [filterBy, setFilterBy] = useState(mailService.getFilterFromSearchParams(searchParams))
 
     useEffect(() => {
-        setSearchParams(filterBy)
-        mailService.query(filterBy)
-            .then((mails) => setMails(mails))
-    }, [filterBy])
+        setSearchParams({ ...filterBy, ...folder })
+        console.log(filterBy)
+        mailService.query({ ...filterBy, ...folder })
+        .then((mails) => setMails(mails))
+    }, [filterBy, folder])
 
     function onSetFilterBy(newFilter) {
         setFilterBy(newFilter)
+    }
+    
+    function onSetFolder({ target }) {
+        setFolder(prevFolder => {
+            return ({...prevFolder, status: target.value })
+        })
+        setSearchParams({ ...filterBy, status: target.value })
     }
 
     function removeMail(mailId) {
@@ -71,10 +80,10 @@ export function MailIndex() {
         <section className="mail-index grid-content">
             <header className="grid-sections">
                     <MailCompose />
-                    <MailFilter filterBy={filterBy} onFilter={onSetFilterBy}/>
+                    <MailFilter folder={folder} filterBy={filterBy} onFilter={onSetFilterBy}/>
             </header>
             <aside className="grid-sections">
-                    <MailFolderList filterBy={filterBy} onFilter={onSetFilterBy} />
+                    <MailFolderList folder={folder} onSetFolder={onSetFolder} />
                     <DynamicCmp params={params} mails={mails} onRemoveMail={removeMail} onChangeStarMail={changeStarMail} onChangeMailRead={changeMailRead}/>
             </aside>
         </section>

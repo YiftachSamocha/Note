@@ -1,8 +1,8 @@
 const { useState, useEffect, useRef } = React
 
-export function MailFilter({ filterBy, onFilter }) {
-    const [filterByToEdit, setFilterByToEdit] = useState(filterBy)
-    // const readMail = useRef('')
+export function MailFilter({ folder, filterBy, onFilter }) {
+    // console.log(filterBy)
+    const [filterByToEdit, setFilterByToEdit] = useState({...filterBy, ...folder})
 
     useEffect(() => {
         onFilter(filterByToEdit)

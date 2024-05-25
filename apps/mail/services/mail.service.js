@@ -25,7 +25,7 @@ export const mailService = {
     get,
     remove,
     save,
-    getDefaultFilter, 
+    // getDefaultFilter, 
     changeStarMail,
     changeMailRead,
     getEmptyMail, 
@@ -46,6 +46,27 @@ function query(filterBy = {}) {
                     mails = mails.filter(mail => mail.isRead === true)
                 } else {
                     mails = mails.filter(mail => mail.isRead === false)
+                }
+            }
+            if (filterBy.status) {
+                switch (filterBy.status) {
+                    case 'inbox':
+                        mails = mails.filter(mail => mail.to === 'user@appsus.com')
+                        break;
+                    case 'starred':
+                        mails = mails.filter(mail => mail.isStared === true)
+                        break;
+                    case 'sent':
+                        mails = mails.filter(mail => mail.from === 'user@appsus.com')
+                        break;
+                    case 'drafts':
+                        mails = []
+                        break;
+                    case 'trash':
+                        mails = []
+                        break;
+                    default:
+                        break;
                 }
             }
             return mails
@@ -103,9 +124,9 @@ function getEmptyMail() {
     return mail
 }
 
-function getDefaultFilter(filterBy = { status: 'inbox', txt: '', labels: [] }) {
-    return filterBy
-}
+// function getDefaultFilter(filterBy = { status: 'inbox', txt: '', labels: [] }) {
+//     return filterBy
+// }
 
 function getFilterFromSearchParams(searchParams) {
     return {
