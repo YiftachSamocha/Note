@@ -156,8 +156,6 @@ export function NoteModify({ editedNote, onModify }) {
             setColor('#FFFFFF')
             setIsPinned(false)
         }
-
-
     }
 
     const classType = editedNote === 'new' ? 'note-add' : 'note-edit'

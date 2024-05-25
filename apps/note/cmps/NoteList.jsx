@@ -53,14 +53,15 @@ export function NoteList({ filterBy }) {
     const isExist = isPinnedExist(list)
 
 
-    if (list.length === 0) return null
+    if (list.length === 0) return <p className="message-search-fail">We couldn't find any results for your search. Keep trying, and you'll find what you're looking for!</p>
+
 
 
 
     return <section className="note-list" >
         <NoteModify editedNote={'new'} onModify={onAddNote} />
         {isExist && <p className="pinned-title">Pinned:</p>}
-        <section className="list-pinned" style={{ display: isExist ? 'grid' : 'none' }}>
+        <section className="list-pinned" style={{ display: isExist ? 'flex' : 'none' }}>
             {list.map(note => {
                 if (note.isPinned) return <NotePreview note={note} onDelete={onDeleteNote} onEdit={onEditNote} key={note.id} />
             })}

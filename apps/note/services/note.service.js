@@ -6,11 +6,14 @@ export const noteService = { query, remove, add, get, update, updateProperty, ge
 
 function query(filterBy = { type: '', txt: '' }) {
     return storageService.query(LS_NAME)
+        .then(notes => notes.sort((a, b) => {
+            return new Date(b.createdAt) - new Date(a.createdAt);
+        }))
         .then(notes => {
             if (notes.length === 0) return _createData()
             const filteredByType = filterBy.type === '' ? notes : notes.filter(note => note.type === filterBy.type)
             return filterBy.txt === '' ? filteredByType :
-                filteredByType.filter(note => isTxtInNote(note, filterBy.txt))
+                filteredByType.filter(note => _isTxtInNote(note, filterBy.txt))
         })
 }
 
@@ -40,21 +43,6 @@ function updateProperty(noteId, property, value) {
             return storageService.put(LS_NAME, updatedNote)
         })
         .then(() => value)
-}
-
-function isTxtInNote(note, txt) {
-    if (note.info.title.includes(txt)) return true
-    switch (note.type) {
-        case 'txt':
-            if (note.info.txt.includes(txt)) return true
-            break
-        case 'todos':
-            for (var i = 0; i < note.info.todos.length; i++) {
-                if (note.info.todos[i].txt.includes(txt)) return true
-            }
-            break
-    }
-    return false
 }
 
 
@@ -156,6 +144,21 @@ function _createData() {
 function _getRandom(types) {
     const randomIndex = Math.floor(Math.random() * types.length)
     return types[randomIndex]
+}
+
+function _isTxtInNote(note, txt) {
+    if (note.info.title.includes(txt)) return true
+    switch (note.type) {
+        case 'txt':
+            if (note.info.txt.includes(txt)) return true
+            break
+        case 'todos':
+            for (var i = 0; i < note.info.todos.length; i++) {
+                if (note.info.todos[i].txt.includes(txt)) return true
+            }
+            break
+    }
+    return false
 }
 
 
