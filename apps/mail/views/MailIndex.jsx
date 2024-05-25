@@ -28,11 +28,11 @@ export function MailIndex() {
         setFilterBy(newFilter)
     }
     
-    function onSetFolder({ target }) {
+    function onSetFolder(value) {
         setFolder(prevFolder => {
-            return ({...prevFolder, status: target.value })
+            return ({...prevFolder, status: value })
         })
-        setSearchParams({ ...filterBy, status: target.value })
+        setSearchParams({ ...filterBy, status: value })
     }
 
     function removeMail(mailId) {

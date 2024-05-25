@@ -1,0 +1,31 @@
+.mail-folder {
+    margin-block-start: 1em;
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.5em;
+}
+
+.mail-folder span {
+    padding: 0.4em;
+
+    display: flex;
+    align-items: center;
+    
+    border-radius: 1.5em;
+    cursor: pointer;
+}
+
+.mail-folder span:hover {
+    background-color: lightsteelblue;
+}
+
+.mail-folder span img {
+    height: 1.25em;
+    width: 1.25em;
+    padding-inline: 1em;
+}
+
+.mail-folder span.active {
+    background-color: lightblue;
+    font-weight: bold;
+}
