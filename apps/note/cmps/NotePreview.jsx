@@ -1,10 +1,11 @@
 import { noteService } from "../services/note.service.js";
 import { ColorPalette } from "./ColorPalette.jsx";
-import { NoteAudio } from "./NoteTypes/NoteAudio.jsx";
-import { NoteImg } from "./NoteTypes/NoteImg.jsx";
-import { NoteTodos } from "./NoteTypes/NoteTodos.jsx";
-import { NoteTxt } from "./NoteTypes/NoteTxt.jsx";
-import { NoteVideo } from "./NoteTypes/NoteVideo.jsx";
+import { NotePreviewAudio } from "./NotePreview/NotePreviewAudio.jsx";
+import { NotePreviewImg } from "./NotePreview/NotePreviewImg.jsx";
+import { NotePreviewTodos } from "./NotePreview/NotePreviewTodos.jsx";
+import { NotePreviewTxt } from "./NotePreview/NotePreviewTxt.jsx";
+import { NotePreviewVideo } from "./NotePreview/NotePreviewVideo.jsx";
+
 const { useState, useEffect } = React
 
 export function NotePreview({ note, onDelete, onEdit, onDuplicate, onChangePinned }) {
@@ -56,11 +57,11 @@ export function NotePreview({ note, onDelete, onEdit, onDuplicate, onChangePinne
         onMouseLeave={() => setHover(false)}
         onClick={() => onEdit(note)}>
         <div className="content">
-            {note.type === 'txt' && <NoteTxt note={note} />}
-            {note.type === 'img' && <NoteImg note={note} />}
-            {note.type === 'video' && <NoteVideo note={note} />}
-            {note.type === 'todos' && <NoteTodos note={note} />}
-            {note.type === 'audio' && <NoteAudio note={note} />}
+            {note.type === 'txt' && <NotePreviewTxt note={note} />}
+            {note.type === 'img' && <NotePreviewImg note={note} />}
+            {note.type === 'video' && <NotePreviewVideo note={note} />}
+            {note.type === 'todos' && <NotePreviewTodos note={note} />}
+            {note.type === 'audio' && <NotePreviewAudio note={note} />}
         </div>
         {buttons}
 

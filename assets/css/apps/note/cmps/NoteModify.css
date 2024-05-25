@@ -78,8 +78,8 @@ input[type="file"] {
     font-weight: 900
 }
 
-.note-edit img {
-    margin: 0 auto;
+.note-modify img {
+    margin-inline:  5em;
 }
 
 .note-modify audio{

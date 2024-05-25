@@ -1,6 +1,11 @@
-import { utilService } from "../../../services/util.service.js"
 import { noteService } from "../services/note.service.js"
 import { ColorPalette } from "./ColorPalette.jsx"
+import { NoteModifyAudio } from "./NoteModify/NoteModifyAudio.jsx"
+import { NoteModifyImg } from "./NoteModify/NoteModifyImg.jsx"
+import { NoteModifyTitle } from "./NoteModify/NoteModifyTitle.jsx"
+import { NoteModifyTodos } from "./NoteModify/NoteModifyTodos.jsx"
+import { NoteModifyTxt } from "./NoteModify/NoteModifyTxt.jsx"
+import { NoteModifyVideo } from "./NoteModify/NoteModifyVideo.jsx"
 
 const { useState, useEffect } = React
 
@@ -22,135 +27,14 @@ export function NoteModify({ editedNote, onModify }) {
         }
     }, [editedNote])
 
-
-    function handleChangeTitle({ target }) {
-        const { value } = target
-        setTitle(value)
-    }
-
-    function handleChangeTxt({ target }) {
-        const { value } = target
-        setInfo({ ...info, txt: value })
-    }
-
-
-    function handleChangeImg({ target }) {
-        const file = target.files[0]
-        const imageUrl = URL.createObjectURL(file)
-        const img = new Image()
-        img.onload = () => {
-            const canvas = document.createElement('canvas')
-            const ctx = canvas.getContext('2d')
-            canvas.width = img.width
-            canvas.height = img.height
-            ctx.drawImage(img, 0, 0)
-            const dataUrl = canvas.toDataURL('image/png')
-            setType('img')
-            setInfo({ ...info, url: dataUrl })
-
-        }
-        img.src = imageUrl
-    }
-
-    function handleChangeVideo({ target }) {
-        const { value } = target
-        setInfo({ ...info, url: value })
-    }
-
-
-    function handleChangeTodos({ target }) {
-        const { value, name, type, checked } = target
-        const changedType = type === 'text' ? 'txt' : 'isMarked'
-        const changedValue = changedType === 'txt' ? value : checked
-        const todoNum = Number(name)
-        setInfo(prevInfo => {
-            const newTodos = [...prevInfo.todos]
-            newTodos[todoNum] = { ...newTodos[todoNum], [changedType]: changedValue }
-            if (todoNum === newTodos.length - 1) {
-                newTodos.push({ txt: '', isMarked: false, id: utilService.makeId(3) })
-            }
-            return { ...prevInfo, todos: newTodos }
-        })
-    }
-
-    function handleChangeAudio({ target }) {
-        const file = target.files[0]
-        if (file) {
-            const reader = new FileReader()
-            reader.readAsDataURL(file)
-            setInfo(prevInfo => ({ ...prevInfo, audio: '' }))
-            reader.onloadend = () => {
-                const base64String = reader.result
-                setInfo(prevInfo => ({ ...prevInfo, audio: base64String }))
-            }
-        }
-    }
-
-
     function handleChangeColor(newColor) {
         setColor(newColor)
         setIsPalatteOpen(false)
     }
 
-
     function isChosen(buttonType) {
         return type === buttonType ? 'chosen' : ''
     }
-
-
-
-    function createInput() {
-        let input
-        switch (type) {
-            case 'txt':
-                input = <input type="text" placeholder='Enter text'
-                    onChange={handleChangeTxt} value={info.txt || ''} />
-                break
-            case 'img':
-                input = [<input type="file" accept="image/*"
-                    onChange={handleChangeImg} id="image" />]
-                if (info.url) input.push(<img src={info.url} />)
-
-                break
-            case 'video':
-                input = <input type="text" placeholder='Enter YouTube link'
-                    onChange={handleChangeVideo} value={info.url || ''} />
-                break
-            case 'todos':
-                let todosInputs = []
-                for (var i = 0; i < info.todos.length; i++) {
-                    const todoInput = <div key={i}>
-                        <input
-                            type="text"
-                            placeholder='Enter Item'
-                            name={i.toString()}
-                            onChange={handleChangeTodos}
-                            value={info.todos[i] && info.todos[i].txt ? info.todos[i].txt : ''}
-                            className={info.todos[i] && info.todos[i].isMarked ? 'marked' : ''} />
-                        <input type="checkbox"
-                            checked={info.todos[i].isMarked}
-                            onChange={handleChangeTodos}
-                            name={i.toString()} />
-                    </div>
-
-
-                    todosInputs.push(todoInput)
-                }
-
-                input = <div className="todos-inputs">{todosInputs}</div>
-                break
-            case 'audio':
-                input = [<input type="file" accept="audio/*"
-                    onChange={handleChangeAudio} id="audio" key={new Date().toISOString()} />]
-                if (info.audio) input.push(<audio controls> <source src={info.audio} type="audio/mpeg" /> </audio>)
-                break
-
-
-        }
-        return input
-    }
-
-
 
     function onSubmit() {
         const note = editedNote === 'new' ? noteService.getEmptyNote() : editedNote
@@ -182,10 +66,12 @@ export function NoteModify({ editedNote, onModify }) {
     return <div>
         {editedNote !== 'new' && <div className="overlay" onClick={onSubmit}></div>}
         <section style={{ backgroundColor: color }} className={"note-modify " + classType} >
-
-            <input type="text" placeholder="Enter title"
-                onChange={handleChangeTitle} value={title} className="input-title" />
-            {createInput()}
+            <NoteModifyTitle title={title} setTitle={setTitle} />
+            {type === 'txt' && <NoteModifyTxt info={info} setInfo={setInfo} />}
+            {type === 'img' && <NoteModifyImg info={info} setInfo={setInfo} />}
+            {type === 'video' && <NoteModifyVideo info={info} setInfo={setInfo} />}
+            {type === 'todos' && <NoteModifyTodos info={info} setInfo={setInfo} />}
+            {type === 'audio' && <NoteModifyAudio info={info} setInfo={setInfo} />}
 
             <div className="buttons">
                 <div className="types">

@@ -2,7 +2,7 @@ import { noteService } from "../../services/note.service.js"
 const { useState, useEffect } = React
 
 
-export function NoteTodos({ note }) {
+export function NotePreviewTodos({ note }) {
     const [todos, setTodos] = useState(note.info.todos)
 
     useEffect(() => {
