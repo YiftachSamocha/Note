@@ -1,5 +1,6 @@
 import { noteService } from "../services/note.service.js";
 import { ColorPalette } from "./ColorPalette.jsx";
+import { NoteAudio } from "./NoteTypes/NoteAudio.jsx";
 import { NoteImg } from "./NoteTypes/NoteImg.jsx";
 import { NoteTodos } from "./NoteTypes/NoteTodos.jsx";
 import { NoteTxt } from "./NoteTypes/NoteTxt.jsx";
@@ -47,7 +48,7 @@ export function NotePreview({ note, onDelete, onEdit, onDuplicate, onChangePinne
 
     </div>
         : <div className="buttons"></div>
-    const blackBorder = color === '#FFFFFF' ? { border: '0.5px solid black' } : {}
+    const blackBorder = color === '#FFFFFF' ? { border: '0.2px solid black' } : {}
 
     return <div className="note"
         style={{ ...{ backgroundColor: color }, ...blackBorder }}
@@ -59,6 +60,7 @@ export function NotePreview({ note, onDelete, onEdit, onDuplicate, onChangePinne
             {note.type === 'img' && <NoteImg note={note} />}
             {note.type === 'video' && <NoteVideo note={note} />}
             {note.type === 'todos' && <NoteTodos note={note} />}
+            {note.type === 'audio' && <NoteAudio note={note} />}
         </div>
         {buttons}
 

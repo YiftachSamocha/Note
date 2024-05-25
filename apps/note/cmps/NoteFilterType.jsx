@@ -32,6 +32,22 @@ export function NoteFilterType({ filterBy, onFilter }) {
             <i className="fa-regular fa-image"></i>
             <p>Image</p>
         </div>
+        <div onClick={() => onSetFilter('audio')}
+            className={currType === 'audio' ? currTypeClass : ''}>
+            <i className="fa-solid fa-volume-high"></i>
+            <p>Audio</p>
+        </div>
+        <div onClick={() => onSetFilter('canvas')}
+            className={currType === 'canvas' ? currTypeClass : ''}>
+           <i className="fa-solid fa-pencil"></i>
+            <p>Draw</p>
+        </div>
+        <div onClick={() => onSetFilter('map')}
+            className={currType === 'map' ? currTypeClass : ''}>
+            <i className="fa-regular fa-map"></i>
+            <p>Map</p>
+        </div>
+
     </section>
 
 }

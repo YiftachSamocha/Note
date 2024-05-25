@@ -6,7 +6,7 @@ const { useState, useEffect } = React
 
 export function NoteModify({ editedNote, onModify }) {
     const [title, setTitle] = useState('')
-    const [info, setInfo] = useState({ txt: '', ur: '', todos: [{ txt: '', isMarked: false, id: '' }] })
+    const [info, setInfo] = useState({ txt: '', ur: '', todos: [{ txt: '', isMarked: false, id: '' }], audio: '' })
     const [type, setType] = useState('txt')
     const [color, setColor] = useState('#FFFFFF')
     const [isPinned, setIsPinned] = useState(false)
@@ -73,6 +73,19 @@ export function NoteModify({ editedNote, onModify }) {
         })
     }
 
+    function handleChangeAudio({ target }) {
+        const file = target.files[0]
+        if (file) {
+            const reader = new FileReader()
+            reader.readAsDataURL(file)
+            setInfo(prevInfo => ({ ...prevInfo, audio: '' }))
+            reader.onloadend = () => {
+                const base64String = reader.result
+                setInfo(prevInfo => ({ ...prevInfo, audio: base64String }))
+            }
+        }
+    }
+
 
     function handleChangeColor(newColor) {
         setColor(newColor)
@@ -125,6 +138,13 @@ export function NoteModify({ editedNote, onModify }) {
                 }
 
                 input = <div className="todos-inputs">{todosInputs}</div>
+                break
+            case 'audio':
+                input = [<input type="file" accept="audio/*"
+                    onChange={handleChangeAudio} id="audio" key={new Date().toISOString()} />]
+                if (info.audio) input.push(<audio controls> <source src={info.audio} type="audio/mpeg" /> </audio>)
+                break
+
 
         }
         return input
@@ -143,16 +163,14 @@ export function NoteModify({ editedNote, onModify }) {
         }
         if (type === 'todos' && info.todos[info.todos.length - 1].txt === '') info.todos = info.todos.slice(0, -1)
         note.style = color
-        note.info = {
-            ...info
-        }
+        note.info = { ...info }
         note.info.title = title
         note.type = type
         note.isPinned = isPinned
         onModify(note)
         if (editedNote === 'new') {
             setTitle('')
-            setInfo({ txt: '', ur: '', todos: [{ txt: '', isMarked: false, id: '' }] })
+            setInfo({ txt: '', ur: '', todos: [{ txt: '', isMarked: false, id: '' }], audio: '' })
             setColor('#FFFFFF')
             setIsPinned(false)
         }
@@ -175,6 +193,7 @@ export function NoteModify({ editedNote, onModify }) {
                     <div onClick={() => setType('todos')} className={isChosen('todos')} ><i className="fa-solid fa-list"></i></div>
                     <div onClick={() => setType('video')} className={isChosen('video')}><i className="fa-brands fa-youtube"></i></div>
                     <label htmlFor="image"><div onClick={() => setType('img')} className={isChosen('img')} ><i className="fa-regular fa-image"></i></div></label>
+                    <label htmlFor="audio"><div onClick={() => setType('audio')} className={isChosen('audio')} ><i className="fa-solid fa-volume-high"></i></div></label>
                 </div>
 
                 <div className="actions">
