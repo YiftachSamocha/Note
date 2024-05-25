@@ -23,6 +23,7 @@ _createMails()
 export const mailService = {
     query,
     get,
+    // moveMailToTrash,
     remove,
     save,
     // getDefaultFilter, 
@@ -63,7 +64,7 @@ function query(filterBy = {}) {
                         mails = []
                         break;
                     case 'trash':
-                        mails = []
+                        mails = mails.filter(mail => mail.removedAt !== null)
                         break;
                     default:
                         break;
@@ -81,8 +82,24 @@ function get(mailId) {
         })
 }
 
+// function moveMailToTrash(mailId) {
+//     return get(mailId)
+//         .then(mail => {
+//             mail.removedAt = Date.now()
+//             return storageService.put(MAIL_KEY, mail)
+//         })
+// }
+
 function remove(mailId) {
-    return storageService.remove(MAIL_KEY, mailId)
+    return get(mailId)
+        .then(mail => {
+            if (mail.removedAt) {
+                return storageService.remove(MAIL_KEY, mail.id)
+            } else {
+                mail.removedAt = Date.now()
+                return storageService.put(MAIL_KEY, mail)
+            }
+        })
 }
 
 function save(mail) {
