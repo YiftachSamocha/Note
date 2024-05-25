@@ -1,5 +1,6 @@
 const { useState, useEffect } = React
-const { Link, useSearchParams } = ReactRouterDOM
+const { useParams } = ReactRouter
+const { Link, useSearchParams, Outlet } = ReactRouterDOM
 
 import { mailService } from "../services/mail.service.js"
 import { MailList } from "../cmps/MailList.jsx"
@@ -7,9 +8,10 @@ import { MailCompose } from "../cmps/MailCompose.jsx"
 import { MailFilter } from "../cmps/MailFilter.jsx"
 import { MailFolderList } from "../cmps/MailFolderList.jsx"
 import { showSuccessMsg, showErrorMsg } from "../../../services/event-bus.service.js"
+import { MailDetails } from "../pages/MailDetails.jsx"
 
 export function MailIndex() {
-
+    const params = useParams()
     const [searchParams, setSearchParams] = useSearchParams()
     const [mails, setMails] = useState([])
     const [filterBy, setFilterBy] = useState(mailService.getFilterFromSearchParams(searchParams))
@@ -72,9 +74,18 @@ export function MailIndex() {
                     <MailFilter filterBy={filterBy} onFilter={onSetFilterBy}/>
             </header>
             <aside className="grid-sections">
-                    <MailFolderList />
-                    <MailList mails={mails} onRemoveMail={removeMail} onChangeStarMail={changeStarMail} onChangeMailRead={changeMailRead}/>
+                    <MailFolderList filterBy={filterBy} onFilter={onSetFilterBy} />
+                    <DynamicCmp params={params} mails={mails} onRemoveMail={removeMail} onChangeStarMail={changeStarMail} onChangeMailRead={changeMailRead}/>
             </aside>
         </section>
     )
+}
+
+function DynamicCmp(props) {
+
+    if (props.params.mailId) {
+        return <MailDetails {...props}/>
+    } else {
+        return <MailList {...props}/>
+    }
 }

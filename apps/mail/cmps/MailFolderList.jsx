@@ -1,3 +1,5 @@
+const { useState, useEffect, useRef } = React
+
 export function MailFolderList() {
     return (
         <ul>
