@@ -2,6 +2,7 @@ import { noteService } from "../services/note.service.js";
 import { ColorPalette } from "./ColorPalette.jsx";
 import { NotePreviewAudio } from "./NotePreview/NotePreviewAudio.jsx";
 import { NotePreviewImg } from "./NotePreview/NotePreviewImg.jsx";
+import { NotePreviewMap } from "./NotePreview/NotePreviewMap.jsx";
 import { NotePreviewTodos } from "./NotePreview/NotePreviewTodos.jsx";
 import { NotePreviewTxt } from "./NotePreview/NotePreviewTxt.jsx";
 import { NotePreviewVideo } from "./NotePreview/NotePreviewVideo.jsx";
@@ -62,6 +63,7 @@ export function NotePreview({ note, onDelete, onEdit, onDuplicate, onChangePinne
             {note.type === 'video' && <NotePreviewVideo note={note} />}
             {note.type === 'todos' && <NotePreviewTodos note={note} />}
             {note.type === 'audio' && <NotePreviewAudio note={note} />}
+            {note.type=== 'map' && <NotePreviewMap note={note}/>}
         </div>
         {buttons}
 

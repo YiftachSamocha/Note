@@ -37,8 +37,8 @@
 
 .note img,
 .note iframe {
-    width: 8em;
-    height: calc(auto/8em);
+    width: 12em;
+    height: calc(auto/12em);
 }
 
 .note li {
@@ -55,6 +55,7 @@
     border: 1px solid black;
     border-radius: 50px;
 }
+
 
 .note .marked {
     text-decoration: line-through;

@@ -100,8 +100,11 @@ input[type="file"] {
     margin: 0 auto;
     border: 1px solid black;
     border-radius: 50px;
+}
 
-  
+.note-modify .map{
+    margin: 0 auto;
+    display: block;
 }
 
 .note-modify .marked {

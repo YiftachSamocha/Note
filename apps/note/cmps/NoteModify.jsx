@@ -2,16 +2,18 @@ import { noteService } from "../services/note.service.js"
 import { ColorPalette } from "./ColorPalette.jsx"
 import { NoteModifyAudio } from "./NoteModify/NoteModifyAudio.jsx"
 import { NoteModifyImg } from "./NoteModify/NoteModifyImg.jsx"
+import { NoteModifyMap } from "./NoteModify/NoteModifyMap.jsx"
 import { NoteModifyTitle } from "./NoteModify/NoteModifyTitle.jsx"
 import { NoteModifyTodos } from "./NoteModify/NoteModifyTodos.jsx"
 import { NoteModifyTxt } from "./NoteModify/NoteModifyTxt.jsx"
 import { NoteModifyVideo } from "./NoteModify/NoteModifyVideo.jsx"
+import { NotePreviewMap } from "./NotePreview/NotePreviewMap.jsx"
 
 const { useState, useEffect } = React
 
 export function NoteModify({ editedNote, onModify }) {
     const [title, setTitle] = useState('')
-    const [info, setInfo] = useState({ txt: '', ur: '', todos: [{ txt: '', isMarked: false, id: '' }], audio: '' })
+    const [info, setInfo] = useState({ txt: '', ur: '', todos: [{ txt: '', isMarked: false, id: '' }], audio: '', location: { lat: 32.0853, lng: 34.7818 } })
     const [type, setType] = useState('txt')
     const [color, setColor] = useState('#FFFFFF')
     const [isPinned, setIsPinned] = useState(false)
@@ -22,7 +24,7 @@ export function NoteModify({ editedNote, onModify }) {
             setType(editedNote.type)
             setColor(editedNote.style)
             setTitle(editedNote.info.title)
-            setInfo({...editedNote.info, audio: LZString.decompressFromUTF16(editedNote.info.audio)})
+            setInfo({ ...editedNote.info, audio: LZString.decompressFromUTF16(editedNote.info.audio) })
             setIsPinned(editedNote.isPinned)
         }
     }, [editedNote])
@@ -55,7 +57,7 @@ export function NoteModify({ editedNote, onModify }) {
         onModify(note)
         if (editedNote === 'new') {
             setTitle('')
-            setInfo({ txt: '', url: '', todos: [{ txt: '', isMarked: false, id: '' }], audio: '' })
+            setInfo({ txt: '', url: '', todos: [{ txt: '', isMarked: false, id: '' }], audio: '', location: { lat: 32.0853, lng: 34.7818 } })
             setColor('#FFFFFF')
             setIsPinned(false)
         }
@@ -74,6 +76,8 @@ export function NoteModify({ editedNote, onModify }) {
             {type === 'video' && <NoteModifyVideo info={info} setInfo={setInfo} />}
             {type === 'todos' && <NoteModifyTodos info={info} setInfo={setInfo} />}
             {type === 'audio' && <NoteModifyAudio info={info} setInfo={setInfo} />}
+            {type === 'map' && <NoteModifyMap info={info} setInfo={setInfo} />}
+            
 
             <div className="buttons">
                 <div className="types">
@@ -82,6 +86,9 @@ export function NoteModify({ editedNote, onModify }) {
                     <div onClick={() => setType('video')} className={isChosen('video')}><i className="fa-brands fa-youtube"></i></div>
                     <label htmlFor="image"><div onClick={() => setType('img')} className={isChosen('img')} ><i className="fa-regular fa-image"></i></div></label>
                     <label htmlFor="audio"><div onClick={() => setType('audio')} className={isChosen('audio')} ><i className="fa-solid fa-volume-high"></i></div></label>
+                    <div onClick={() => setType('map')} className={isChosen('map')}><i className="fa-regular fa-map"></i></div>
+                    {/* <div onClick={() => setType('txt')} className={isChosen('txt')}><i className="fa-solid fa-font"></i></div> */}
+
                 </div>
 
                 <div className="actions">
