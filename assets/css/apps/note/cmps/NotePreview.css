@@ -61,6 +61,6 @@
     text-decoration: line-through;
 }
 
-.note .unpinned {
-    opacity: 0.5;
+.note .pinned {
+    color: #FFA70F;
 }

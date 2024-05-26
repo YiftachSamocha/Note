@@ -23,7 +23,6 @@ export function NotePreviewTodos({ note }) {
 
 
     return <div>
-        <h2>{note.info.title}</h2>
         <ul>
             {note.info.todos.map(todo => {
                 const currTodo = todos.find(t => t.id === todo.id)

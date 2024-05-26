@@ -38,7 +38,7 @@ export function NotePreview({ note, onDelete, onEdit, onDuplicate, onChangePinne
             })
 
     }
-    const isPinnedClass = isPinned ? '' : 'unpinned'
+    const isPinnedClass = isPinned ? 'pinned' : ''
 
     const buttons = hover ? <div className="buttons" onClick={(event) => event.stopPropagation()}>
         <button onClick={changeIsPinned}><i className={"fa-solid fa-thumbtack " + isPinnedClass}></i></button>
@@ -59,6 +59,7 @@ export function NotePreview({ note, onDelete, onEdit, onDuplicate, onChangePinne
         onMouseLeave={() => setHover(false)}
         onClick={() => onEdit(note)}>
         <div className="content">
+            <h2>{note.info.title}</h2>
             {note.type === 'txt' && <NotePreviewTxt note={note} />}
             {note.type === 'img' && <NotePreviewImg note={note} />}
             {note.type === 'video' && <NotePreviewVideo note={note} />}
