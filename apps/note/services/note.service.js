@@ -2,7 +2,10 @@ import { storageService } from "../../../services/async-storage.service.js"
 import { utilService } from "../../../services/util.service.js"
 const LS_NAME = 'NOTES'
 
-export const noteService = { query, remove, add, get, update, updateProperty, getEmptyNote, getColors, isValidLink, convertToEmbedLink }
+export const noteService = {
+    query, remove, add, get, update, updateProperty,
+    getEmptyNote, getEmptyInfo, getNoteColors, getCanvasColors, getCanvasSizes, isValidLink, convertToEmbedLink
+}
 
 function query(filterBy = { type: '', txt: '' }) {
     return storageService.query(LS_NAME)
@@ -46,7 +49,7 @@ function updateProperty(noteId, property, value) {
 }
 
 
-function getColors() {
+function getNoteColors() {
     return ['#FFFFFF',
         '#FAAFA8',
         '#F39F76',
@@ -62,6 +65,23 @@ function getColors() {
     ]
 }
 
+function getCanvasColors() {
+    return ['#000000',
+        '#FF5252',
+        '#FFBC00',
+        '#00C853',
+        '#00B0FF',
+        '#D500F9',
+        '#FF6E40',
+        '#FF4081',
+        '#8D6E63',
+    ]
+}
+
+function getCanvasSizes() {
+    return [1, 4, 7, 9, 12]
+}
+
 function getEmptyNote() {
     return {
         id: utilService.makeId(),
@@ -70,6 +90,18 @@ function getEmptyNote() {
         isPinned: false,
         style: '',
         info: {},
+    }
+}
+
+function getEmptyInfo() {
+    return {
+        txt: '',
+        img: '',
+        url: '',
+        todos: [{ txt: '', isMarked: false, id: '' }],
+        audio: '',
+        location: { lat: 32.0853, lng: 34.7818 },
+        canvas: '',
     }
 }
 
@@ -96,7 +128,7 @@ function _createData() {
             createdAt: new Date(),
             type: _getRandom(['txt', 'img', 'video', 'todos']),
             isPinned: false,
-            style: _getRandom(getColors()),
+            style: _getRandom(getNoteColors()),
             info: {
                 title: _getRandom(['Hello!', 'My New Note', 'How fun', 'I love notes!', 'Note Note Note',])
             }

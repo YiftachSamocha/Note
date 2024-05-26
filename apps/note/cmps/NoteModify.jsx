@@ -1,23 +1,23 @@
 import { noteService } from "../services/note.service.js"
 import { ColorPalette } from "./ColorPalette.jsx"
 import { NoteModifyAudio } from "./NoteModify/NoteModifyAudio.jsx"
+import { NoteModifyCanvas } from "./NoteModify/NoteModifyCanvas.jsx"
 import { NoteModifyImg } from "./NoteModify/NoteModifyImg.jsx"
 import { NoteModifyMap } from "./NoteModify/NoteModifyMap.jsx"
 import { NoteModifyTitle } from "./NoteModify/NoteModifyTitle.jsx"
 import { NoteModifyTodos } from "./NoteModify/NoteModifyTodos.jsx"
 import { NoteModifyTxt } from "./NoteModify/NoteModifyTxt.jsx"
 import { NoteModifyVideo } from "./NoteModify/NoteModifyVideo.jsx"
-import { NotePreviewMap } from "./NotePreview/NotePreviewMap.jsx"
 
 const { useState, useEffect } = React
 
 export function NoteModify({ editedNote, onModify }) {
     const [title, setTitle] = useState('')
-    const [info, setInfo] = useState({ txt: '', ur: '', todos: [{ txt: '', isMarked: false, id: '' }], audio: '', location: { lat: 32.0853, lng: 34.7818 } })
+    const [info, setInfo] = useState(noteService.getEmptyInfo())
     const [type, setType] = useState('txt')
     const [color, setColor] = useState('#FFFFFF')
     const [isPinned, setIsPinned] = useState(false)
-    const [isPalatteOpen, setIsPalatteOpen] = useState(false)
+    const [isPaletteOpen, setIsPaletteOpen] = useState(false)
 
     useEffect(() => {
         if (editedNote !== 'new') {
@@ -31,7 +31,7 @@ export function NoteModify({ editedNote, onModify }) {
 
     function handleChangeColor(newColor) {
         setColor(newColor)
-        setIsPalatteOpen(false)
+        setIsPaletteOpen(false)
     }
 
     function isChosen(buttonType) {
@@ -57,7 +57,7 @@ export function NoteModify({ editedNote, onModify }) {
         onModify(note)
         if (editedNote === 'new') {
             setTitle('')
-            setInfo({ txt: '', url: '', todos: [{ txt: '', isMarked: false, id: '' }], audio: '', location: { lat: 32.0853, lng: 34.7818 } })
+            setInfo(noteService.getEmptyInfo())
             setColor('#FFFFFF')
             setIsPinned(false)
         }
@@ -77,7 +77,8 @@ export function NoteModify({ editedNote, onModify }) {
             {type === 'todos' && <NoteModifyTodos info={info} setInfo={setInfo} />}
             {type === 'audio' && <NoteModifyAudio info={info} setInfo={setInfo} />}
             {type === 'map' && <NoteModifyMap info={info} setInfo={setInfo} />}
-            
+            {type === 'canvas' && <NoteModifyCanvas info={info} setInfo={setInfo} />}
+
 
             <div className="buttons">
                 <div className="types">
@@ -87,15 +88,15 @@ export function NoteModify({ editedNote, onModify }) {
                     <label htmlFor="image"><div onClick={() => setType('img')} className={isChosen('img')} ><i className="fa-regular fa-image"></i></div></label>
                     <label htmlFor="audio"><div onClick={() => setType('audio')} className={isChosen('audio')} ><i className="fa-solid fa-volume-high"></i></div></label>
                     <div onClick={() => setType('map')} className={isChosen('map')}><i className="fa-regular fa-map"></i></div>
-                    {/* <div onClick={() => setType('txt')} className={isChosen('txt')}><i className="fa-solid fa-font"></i></div> */}
+                    <div onClick={() => setType('canvas')} className={isChosen('canvas')}><i className="fa-solid fa-paintbrush"></i></div>
 
                 </div>
 
                 <div className="actions">
                     <button onClick={() => setIsPinned(!isPinned)}><i className={"fa-solid fa-thumbtack " + isPinnedClass}></i></button>
                     <div className="color-container">
-                        <button onClick={() => setIsPalatteOpen(prev => !prev)}><i className="fa-solid fa-palette"></i></button>
-                        {isPalatteOpen && < ColorPalette changeColor={handleChangeColor} />}
+                        <button onClick={() => setIsPaletteOpen(prev => !prev)}><i className="fa-solid fa-palette"></i></button>
+                        {isPaletteOpen && < ColorPalette changeColor={handleChangeColor} colors={noteService.getNoteColors()} />}
                     </div>
                     <button onClick={onSubmit}>{editedNote === 'new' ? 'Add' : 'Edit'}</button>
                 </div>

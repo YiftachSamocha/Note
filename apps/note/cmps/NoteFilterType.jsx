@@ -39,7 +39,7 @@ export function NoteFilterType({ filterBy, onFilter }) {
         </div>
         <div onClick={() => onSetFilter('canvas')}
             className={currType === 'canvas' ? currTypeClass : ''}>
-           <i className="fa-solid fa-pencil"></i>
+            <i className="fa-solid fa-paintbrush"></i>
             <p>Draw</p>
         </div>
         <div onClick={() => onSetFilter('map')}

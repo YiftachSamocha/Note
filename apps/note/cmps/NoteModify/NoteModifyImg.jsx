@@ -11,7 +11,7 @@ export function NoteModifyImg({ info, setInfo }) {
             canvas.height = img.height
             ctx.drawImage(img, 0, 0)
             const dataUrl = canvas.toDataURL('image/png')
-            setInfo({ ...info, url: dataUrl })
+            setInfo({ ...info, img: dataUrl })
 
         }
         img.src = imageUrl
@@ -20,7 +20,7 @@ export function NoteModifyImg({ info, setInfo }) {
     return <section className="add-info">
         <input type="file" accept="image/*"
             onChange={handleChange} id="image" />
-        {info.url && <img src={info.url} />}
+        {info.img && <img src={info.img} />}
     </section>
 
 

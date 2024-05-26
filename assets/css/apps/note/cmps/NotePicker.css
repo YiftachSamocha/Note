@@ -1,0 +1,74 @@
+.color-container,
+.size-container {
+    position: relative;
+}
+
+.picker {
+    position: absolute;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.palette {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 10em;
+    top: 100%;
+}
+
+.picker div {
+    border-radius: 50%;
+    padding: 1em;
+    margin: 0.5em;
+    border: 1px solid rgb(235, 213, 213);
+}
+
+.picker div:hover {
+    cursor: pointer;
+}
+
+.palette div:hover,
+.palette div .chosen {
+    border: 1px solid black;
+}
+
+.size-editor > div {
+    background-color: inherit;
+    padding: 1em;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0;
+    
+
+}
+
+.size-editor div div{
+    background-color: black;
+    margin: 0;
+    padding: 0;
+    border-radius: 50%;
+}
+
+
+.size-editor {
+    display: flex;
+    bottom: 100%;
+    left: 50%;
+    align-items: center;
+    height: 80px;
+
+}
+
+.canvas .palette {
+    left: -100%;
+    top: -800%;
+}
+
+
+.size-editor div:hover,
+.size-editor div .chosen {
+    border: 1px solid gray;
+}

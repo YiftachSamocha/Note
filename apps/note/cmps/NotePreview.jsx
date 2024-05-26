@@ -1,6 +1,7 @@
 import { noteService } from "../services/note.service.js";
 import { ColorPalette } from "./ColorPalette.jsx";
 import { NotePreviewAudio } from "./NotePreview/NotePreviewAudio.jsx";
+import { NotePreviewCanvas } from "./NotePreview/NotePreviewCanvas.jsx";
 import { NotePreviewImg } from "./NotePreview/NotePreviewImg.jsx";
 import { NotePreviewMap } from "./NotePreview/NotePreviewMap.jsx";
 import { NotePreviewTodos } from "./NotePreview/NotePreviewTodos.jsx";
@@ -44,7 +45,7 @@ export function NotePreview({ note, onDelete, onEdit, onDuplicate, onChangePinne
         <button onClick={() => onDuplicate(note)}><i className="fa-regular fa-copy"></i></button>
         <div className="color-container">
             <button onClick={() => setIsPaletteOpen(!isPaletteOpen)}><i className="fa-solid fa-palette"></i></button>
-            {isPaletteOpen && <ColorPalette changeColor={changeColor} />}
+            {isPaletteOpen && <ColorPalette changeColor={changeColor} colors={noteService.getNoteColors()} />}
         </div>
         <button onClick={() => onDelete(note.id)}> <i className="fa-solid fa-trash"></i></button>
 
@@ -64,6 +65,7 @@ export function NotePreview({ note, onDelete, onEdit, onDuplicate, onChangePinne
             {note.type === 'todos' && <NotePreviewTodos note={note} />}
             {note.type === 'audio' && <NotePreviewAudio note={note} />}
             {note.type=== 'map' && <NotePreviewMap note={note}/>}
+            {note.type=== 'canvas' && <NotePreviewCanvas note={note}/> }
         </div>
         {buttons}
 

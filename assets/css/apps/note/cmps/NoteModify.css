@@ -119,3 +119,28 @@ input[type="file"] {
 .note-modify .unpinned {
     opacity: 0.5;
 }
+
+.canvas{
+    border: 1px solid black;
+    margin: 1em;
+    border-radius: 10px;
+    background-color: white;
+    
+}
+
+
+
+
+.canvas-buttons{
+    display: flex;
+    justify-content: space-evenly;
+    border-bottom: 1px solid gray;
+    padding-block: 1em;
+}
+
+.canvas-buttons button{
+    background-color: inherit;
+    border: 0;
+    cursor: pointer;
+    margin-inline: 1em;
+}
