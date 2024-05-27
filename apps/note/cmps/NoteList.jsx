@@ -65,7 +65,7 @@ export function NoteList({ filterBy }) {
     return <section className="note-list" >
         <NoteModify editedNote={'new'} onModify={onAddNote} />
         {isExist && <p className="pinned-title">Pinned:</p>}
-        <section className="list-pinned" style={{ display: isExist ? 'grid' : 'none' }}>
+        <section className="list-pinned" style={{ display: isExist ? 'block' : 'none' }}>
             {list.map(note => {
                 if (note.isPinned) return <NotePreview note={note}
                     onDelete={onDeleteNote}

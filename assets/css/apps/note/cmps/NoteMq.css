@@ -1,4 +1,4 @@
-@media (max-width: 450px) {
+@media (max-width: 400px) {
 
     /* LIST*/
     .note-list {
@@ -7,7 +7,8 @@
 
     .list-pinned,
     .list-unpinned {
-        grid-template-columns: 1fr 1fr;
+        columns: 2 8em;
+        column-gap: 0.7em;
     }
 
     /* FILTERS*/
@@ -27,7 +28,7 @@
 
     .note {
         margin: 3px;
-        min-width: 10em;
+        min-width: 8em;
     }
 
     .note p{
