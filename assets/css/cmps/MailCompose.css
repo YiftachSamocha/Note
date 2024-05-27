@@ -1,26 +1,54 @@
-/* .mail-compose {
-    display: flex;
-    align-items: center;
+.mail-compose {
+    position: fixed;
+    inset: auto 0 0 auto;
+
+    width: 500px;
+    height: 600px;
+
+    background-color: white;
+    box-shadow: -8px -8px 15px 0px gray;
+
 }
 
-.mail-compose span {
+.mail-compose .header-container {
+    height: 1em;
+    background-color: whitesmoke;
+    display: flex;
+    justify-content: space-between;
     padding-block: 1em;
-    padding-inline: 1.5em;
-
-    display: flex;
-    align-items: center;
-    
-    border-radius: 1em;
-    background-color: steelblue;
-    cursor: pointer;
+    padding-inline: 1em;
 }
 
-.mail-compose span:hover {
-    background-color: lightsteelblue;
+.mail-compose .header-container button {
+    height: 1em;
+    border: none;
+    background-color: inherit;
+    font-weight: bold;
 }
 
-.mail-compose span img {
-    height: 1.25em;
-    width: 1.25em;
-    padding-inline-end: 0.8em;
-} */
+.mail-compose .from-container h2 {
+    height: 1em;
+    padding-block: 0.75em;
+    padding-inline: 0.75em;
+}
+
+form {
+    display: grid;
+    grid-template-rows: repeat(2, 20px) calc(600px - 60px - 2em) 20px;
+}
+
+.mail-compose form .to-container {
+    grid-row: 1 / 2;   
+}
+
+.mail-compose .subject-container {
+    grid-row: 2 / 3;   
+}
+
+.mail-compose .body-container {
+    grid-row: 3 / 4;   
+}
+
+.mail-compose button {
+    grid-row: 4 / 5;
+}

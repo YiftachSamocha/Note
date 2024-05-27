@@ -155,7 +155,8 @@ function getFilterFromSearchParams(searchParams) {
     return {
         status: searchParams.get('status') || '',
         txt: searchParams.get('txt') || '',
-        readStatus: searchParams.get('readStatus') || ''
+        readStatus: searchParams.get('readStatus') || '',
+        note: searchParams.get('note') || ''
     }
 }
 
