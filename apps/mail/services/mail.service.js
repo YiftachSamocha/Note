@@ -25,6 +25,7 @@ export const mailService = {
     get,
     // moveMailToTrash,
     remove,
+    send,
     save,
     // getDefaultFilter, 
     changeStarMail,
@@ -102,6 +103,11 @@ function remove(mailId) {
         })
 }
 
+function send(mail) {
+    mail.sentAt = Date.now()
+    return storageService.post(MAIL_KEY, mail)
+}
+
 function save(mail) {
     if (mail.id) {
         return storageService.put(MAIL_KEY, mail)
@@ -131,12 +137,12 @@ function getEmptyMail() {
         id: utilService.makeId(), 
         subject: '', 
         body: '', 
-        isRead: false,
+        isRead: true,
         isStared: false,
         sentAt: null,
         removedAt: null,
-        from: null,
-        to: null
+        from: 'user@appsus.com',
+        to: ''
     }
     return mail
 }

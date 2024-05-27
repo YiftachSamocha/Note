@@ -23,7 +23,7 @@ export function MailPreview({ mail, onRemoveMail, onChangeStarMail, onChangeMail
                 </div>                
             </Link>
             <div className="actions-btn">
-                <span className="note-mail" title="Save as a Note" onClick={() => console.log('will developed')}><img src="../../assets/img/paper-plane.png"/></span>
+                <span className="note-mail" title="Save as a Note" onClick={() => console.log('will be developed')}><img src="../../assets/img/paper-plane.png"/></span>
                 <span className="unread-mail" title="Unread/Read Mail" onClick={() => onChangeMailRead(mail.id)}><img src="../../assets/img/envelope.png"/></span>
                 <span className="delete-mail" title="Delete Mail" onClick={() => onRemoveMail(mail.id)}><img src="../../assets/img/delete.png"/></span>
             </div>

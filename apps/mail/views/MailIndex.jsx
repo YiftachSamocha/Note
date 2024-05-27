@@ -12,6 +12,7 @@ import { MailDetails } from "../pages/MailDetails.jsx"
 
 export function MailIndex() {
     const params = useParams()
+    const [isMailCompose, setIsMailCompose] = useState(false)
     const [searchParams, setSearchParams] = useSearchParams()
     const [mails, setMails] = useState([])
     const [folder, setFolder] = useState({ status: 'inbox' })
@@ -33,6 +34,20 @@ export function MailIndex() {
             return ({...prevFolder, status: value })
         })
         setSearchParams({ ...filterBy, status: value })
+    }
+
+    function onSetIsMailCompose() {
+        setIsMailCompose(false)
+    }
+
+    function sendMail(mail) {
+        mailService.send(mail)
+            .then(() => {
+                showSuccessMsg('The mail has been send successfully!')
+            })
+            .catch(() => {
+                showErrorMsg('The mail could not be send')
+            })
     }
 
     function removeMail(mailId) {
@@ -90,12 +105,16 @@ export function MailIndex() {
     return (
         <section className="mail-index grid-content">
             <header className="grid-sections">
-                    <MailCompose />
+                    <div className="mail-compose-btn">
+                        <span onClick={() => setIsMailCompose(true)}><img src="../../assets/img/pencil.png"/>Compose</span>
+                    </div>
                     <MailFilter folder={folder} filterBy={filterBy} onFilter={onSetFilterBy}/>
             </header>
             <aside className="grid-sections">
                     <MailFolderList folder={folder} onSetFolder={onSetFolder} />
-                    <DynamicCmp params={params} mails={mails} onRemoveMail={removeMail} onChangeStarMail={changeStarMail} onChangeMailRead={changeMailRead}/>
+                    <DynamicCmp isMailCompose={isMailCompose} onSetIsMailCompose={onSetIsMailCompose} 
+                    sendMail={sendMail} params={params} mails={mails} onRemoveMail={removeMail} 
+                    onChangeStarMail={changeStarMail} onChangeMailRead={changeMailRead}/>
             </aside>
         </section>
     )

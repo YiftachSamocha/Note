@@ -1,6 +1,7 @@
 const { useParams } = ReactRouter
 const { Outlet } = ReactRouterDOM
 
+import { MailCompose } from "./MailCompose.jsx"
 import { MailPreview } from "./MailPreview.jsx"
 
 export function MailList(props) {
@@ -18,6 +19,7 @@ export function MailList(props) {
             </li>
             )}
         </ul>}
+        {props.isMailCompose && <MailCompose {...props}/>}
     </section>
     ) 
 }

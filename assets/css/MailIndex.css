@@ -5,3 +5,30 @@
 .mail-index aside {
     grid-row: 2;
 }
+
+.mail-compose-btn {
+    display: flex;
+    align-items: center;
+}
+
+.mail-compose-btn span {
+    padding-block: 1em;
+    padding-inline: 1.5em;
+
+    display: flex;
+    align-items: center;
+    
+    border-radius: 1em;
+    background-color: steelblue;
+    cursor: pointer;
+}
+
+.mail-compose-btn span:hover {
+    background-color: lightsteelblue;
+}
+
+.mail-compose-btn span img {
+    height: 1.25em;
+    width: 1.25em;
+    padding-inline-end: 0.8em;
+}

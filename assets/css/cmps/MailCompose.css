@@ -1,9 +1,26 @@
-.mail-compose {
-    background-color: blue;
+/* .mail-compose {
     display: flex;
     align-items: center;
 }
 
-.mail-compose button {
-    margin-inline-start: 1em;
+.mail-compose span {
+    padding-block: 1em;
+    padding-inline: 1.5em;
+
+    display: flex;
+    align-items: center;
+    
+    border-radius: 1em;
+    background-color: steelblue;
+    cursor: pointer;
 }
+
+.mail-compose span:hover {
+    background-color: lightsteelblue;
+}
+
+.mail-compose span img {
+    height: 1.25em;
+    width: 1.25em;
+    padding-inline-end: 0.8em;
+} */
