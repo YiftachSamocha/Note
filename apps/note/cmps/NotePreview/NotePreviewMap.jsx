@@ -3,7 +3,7 @@ export function NotePreviewMap({ note }) {
     const mapRef = useRef(null)
     let marker
     useEffect(() => {
-        if(!mapRef.current) return
+        if (!mapRef.current) return
         const map = new google.maps.Map(mapRef.current, {
             zoom: 10,
             center: note.info.location,
@@ -17,6 +17,6 @@ export function NotePreviewMap({ note }) {
     }, [note])
 
     return <div>
-        <div ref={mapRef}className="map" />
+        <div ref={mapRef} className="map"/>
     </div>
 }

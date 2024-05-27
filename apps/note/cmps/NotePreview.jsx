@@ -8,40 +8,40 @@ import { NotePreviewTodos } from "./NotePreview/NotePreviewTodos.jsx";
 import { NotePreviewTxt } from "./NotePreview/NotePreviewTxt.jsx";
 import { NotePreviewVideo } from "./NotePreview/NotePreviewVideo.jsx";
 
-const { useState, useEffect } = React
+const { useState } = React
 
 export function NotePreview({ note, onDelete, onEdit, onDuplicate, onChangePinned }) {
+    const [currNote, setCurrNote] = useState(note)
     const [hover, setHover] = useState(false)
-    const [color, setColor] = useState(note.style)
     const [isPinned, setIsPinned] = useState(note.isPinned)
     const [isPaletteOpen, setIsPaletteOpen] = useState(false)
 
-    useEffect(() => {
-        setColor(note.style)
-        setIsPinned(note.isPinned)
-    }, [note])
-
-    function changeColor(newColor) {
-        noteService.updateProperty(note.id, 'color', newColor)
-            .then(() => {
-                setColor(newColor)
-                setIsPaletteOpen(false)
+    function changeIsPinned() {
+        noteService.updateProperty(note.id, 'isPinned', !isPinned)
+            .then(updatedNote => {
+                setIsPinned(!isPinned)
+                setCurrNote(updatedNote)
                 onChangePinned()
+
             })
     }
 
-    function changeIsPinned() {
-        noteService.updateProperty(note.id, 'isPinned', !isPinned)
-            .then(() => {
-                setIsPinned(!isPinned)
-                onChangePinned()
-            })
+    function changeColor(color) {
+        setIsPaletteOpen(false)
+        noteService.updateProperty(currNote.id, 'style', color)
+            .then(updatedNote => setCurrNote(updatedNote))
+
+    }
+
+    function mailNote(note) {
+        
 
     }
     const isPinnedClass = isPinned ? 'pinned' : ''
 
     const buttons = hover ? <div className="buttons" onClick={(event) => event.stopPropagation()}>
         <button onClick={changeIsPinned}><i className={"fa-solid fa-thumbtack " + isPinnedClass}></i></button>
+        <button onClick={() => mailNote(note)}><i className="fa-regular fa-envelope"></i></button>
         <button onClick={() => onDuplicate(note)}><i className="fa-regular fa-copy"></i></button>
         <div className="color-container">
             <button onClick={() => setIsPaletteOpen(!isPaletteOpen)}><i className="fa-solid fa-palette"></i></button>
@@ -51,22 +51,22 @@ export function NotePreview({ note, onDelete, onEdit, onDuplicate, onChangePinne
 
     </div>
         : <div className="buttons"></div>
-    const blackBorder = color === '#FFFFFF' ? { border: '0.2px solid black' } : {}
+    const blackBorder = currNote.style === '#FFFFFF' ? { border: '0.2px solid black' } : {}
 
     return <div className="note"
-        style={{ ...{ backgroundColor: color }, ...blackBorder }}
+        style={{ ...{ backgroundColor: currNote.style }, ...blackBorder }}
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
-        onClick={() => onEdit(note)}>
+        onClick={() => onEdit(currNote)}>
         <div className="content">
-            <h2>{note.info.title}</h2>
-            {note.type === 'txt' && <NotePreviewTxt note={note} />}
-            {note.type === 'img' && <NotePreviewImg note={note} />}
-            {note.type === 'video' && <NotePreviewVideo note={note} />}
-            {note.type === 'todos' && <NotePreviewTodos note={note} />}
-            {note.type === 'audio' && <NotePreviewAudio note={note} />}
-            {note.type=== 'map' && <NotePreviewMap note={note}/>}
-            {note.type=== 'canvas' && <NotePreviewCanvas note={note}/> }
+            <h2>{currNote.info.title}</h2>
+            {currNote.type === 'txt' && <NotePreviewTxt note={currNote} />}
+            {currNote.type === 'img' && <NotePreviewImg note={currNote} />}
+            {currNote.type === 'video' && <NotePreviewVideo note={currNote} />}
+            {currNote.type === 'todos' && <NotePreviewTodos note={currNote} setNote={setCurrNote} />}
+            {currNote.type === 'audio' && <NotePreviewAudio note={currNote} />}
+            {currNote.type === 'map' && <NotePreviewMap note={currNote} />}
+            {currNote.type === 'canvas' && <NotePreviewCanvas note={currNote} />}
         </div>
         {buttons}
 

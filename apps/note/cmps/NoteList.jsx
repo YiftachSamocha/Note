@@ -1,7 +1,6 @@
 import { noteService } from "../services/note.service.js"
-import { NoteAdd, NoteModify } from "./NoteModify.jsx"
+import { NoteModify } from "./NoteModify.jsx"
 import { NotePreview } from "./NotePreview.jsx"
-
 
 const { useState, useEffect } = React
 
@@ -48,7 +47,7 @@ export function NoteList({ filterBy }) {
     }
 
     function onDuplicate(note) {
-        const duplicatedNote= {...note, createdAt: new Date()}
+        const duplicatedNote = { ...note, createdAt: new Date() }
         onAddNote(duplicatedNote)
     }
 
@@ -66,13 +65,13 @@ export function NoteList({ filterBy }) {
     return <section className="note-list" >
         <NoteModify editedNote={'new'} onModify={onAddNote} />
         {isExist && <p className="pinned-title">Pinned:</p>}
-        <section className="list-pinned" style={{ display: isExist ? 'flex' : 'none' }}>
+        <section className="list-pinned" style={{ display: isExist ? 'grid' : 'none' }}>
             {list.map(note => {
                 if (note.isPinned) return <NotePreview note={note}
                     onDelete={onDeleteNote}
                     onEdit={onEditNote}
-                    onChangePinned={renderList}
                     onDuplicate={onDuplicate}
+                    onChangePinned={renderList}
                     key={note.id} />
             })}
         </section>
@@ -82,12 +81,11 @@ export function NoteList({ filterBy }) {
                 if (!note.isPinned) return <NotePreview note={note}
                     onDelete={onDeleteNote}
                     onEdit={onEditNote}
-                    onChangePinned={renderList}
                     onDuplicate={onDuplicate}
+                    onChangePinned={renderList}
                     key={note.id} />
             })}
         </section>
-
-        {editedNote !== '' && <NoteModify editedNote={editedNote} onModify={onEditSubmit} onChangePinned={renderList} />}
+        {editedNote !== '' && <NoteModify editedNote={editedNote} onModify={onEditSubmit} />}
     </section>
 }

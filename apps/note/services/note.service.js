@@ -45,7 +45,7 @@ function updateProperty(noteId, property, value) {
             }
             return storageService.put(LS_NAME, updatedNote)
         })
-        .then(() => value)
+        
 }
 
 

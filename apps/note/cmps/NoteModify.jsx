@@ -24,8 +24,8 @@ export function NoteModify({ editedNote, onModify }) {
             setType(editedNote.type)
             setColor(editedNote.style)
             setTitle(editedNote.info.title)
-            setInfo({ ...editedNote.info, audio: LZString.decompressFromUTF16(editedNote.info.audio) })
             setIsPinned(editedNote.isPinned)
+            setInfo({ ...editedNote.info, audio: LZString.decompressFromUTF16(editedNote.info.audio) })
         }
     }, [editedNote])
 
