@@ -12,7 +12,6 @@ export function NoteModifyAudio({ info, setInfo }) {
             }
         }
     }
-    console.log('NoteModifyAudio Rendered with info:', info)
     return <section className="add-info">
         <input type="file" accept="audio/*"
             onChange={handleChange} id="audio" />

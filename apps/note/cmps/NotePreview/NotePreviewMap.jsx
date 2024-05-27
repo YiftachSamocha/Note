@@ -17,6 +17,6 @@ export function NotePreviewMap({ note }) {
     }, [note])
 
     return <div>
-        <div ref={mapRef} style={{ width: '12em', height: '12em' }} className="map" />
+        <div ref={mapRef}className="map" />
     </div>
 }

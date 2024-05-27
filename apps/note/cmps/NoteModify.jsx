@@ -65,7 +65,6 @@ export function NoteModify({ editedNote, onModify }) {
 
     const classType = editedNote === 'new' ? 'note-add' : 'note-edit'
     const isPinnedClass = isPinned ? 'pinned' : ''
-    console.log('NoteModify Rendered with info:', info)
 
     return <div>
         {editedNote !== 'new' && <div className="overlay" onClick={onSubmit}></div>}

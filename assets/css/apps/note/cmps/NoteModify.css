@@ -20,7 +20,7 @@
     z-index: 1;
 }
 
-.note-add{
+.note-add {
     justify-content: center;
 }
 
@@ -84,7 +84,7 @@ input[type="file"] {
     font-weight: 900
 }
 
-.note-modify .add-info{
+.note-modify .add-info {
     width: 100%;
     display: flex;
     justify-content: center;
@@ -92,19 +92,21 @@ input[type="file"] {
 
 .note-modify img {
     margin: 0 auto;
-    
+
 }
 
-.note-modify audio{
+.note-modify audio {
     background-color: inherit;
     margin: 0 auto;
     border: 1px solid black;
     border-radius: 50px;
 }
 
-.note-modify .map{
+.note-modify .map {
     margin: 0 auto;
     display: block;
+    width: 25em;
+    height: 25em;
 }
 
 .note-modify .marked {
@@ -120,25 +122,23 @@ input[type="file"] {
     color: #FFA70F;
 }
 
-.canvas{
+.canvas {
     border: 1px solid black;
     margin: 1em;
     border-radius: 10px;
     background-color: white;
-    
+
 }
 
 
-
-
-.canvas-buttons{
+.canvas-buttons {
     display: flex;
     justify-content: space-evenly;
     border-bottom: 1px solid gray;
     padding-block: 1em;
 }
 
-.canvas-buttons button{
+.canvas-buttons button {
     background-color: inherit;
     border: 0;
     cursor: pointer;

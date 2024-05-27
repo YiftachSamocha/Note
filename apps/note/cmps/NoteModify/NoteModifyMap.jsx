@@ -33,5 +33,5 @@ export function NoteModifyMap({ info, setInfo }) {
     if (!info.location) setInfo({ ...info, location: { lat: 32.0853, lng: 34.7818 } })
 
 
-    return <div ref={mapRef} style={{ width: '25em', height: '25em' }} onClick={handleChange} className="map" />
+    return <div ref={mapRef}  onClick={handleChange} className="map" />
 }

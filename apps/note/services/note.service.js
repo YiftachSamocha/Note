@@ -179,7 +179,7 @@ function _getRandom(types) {
 }
 
 function _isTxtInNote(note, txt) {
-    if (note.info.title.includes(txt)) return true
+    if (note.info.title && note.info.title.includes(txt)) return true
     switch (note.type) {
         case 'txt':
             if (note.info.txt.includes(txt)) return true
