@@ -17,6 +17,7 @@ const loggedInUser = {
     fullname: 'Mahatma Appsus' 
 }
 
+const NOTE_KEY = 'notesDB'
 const MAIL_KEY = 'mailsDB'
 _createMails()
 
@@ -32,6 +33,8 @@ export const mailService = {
     changeMailRead,
     getEmptyMail, 
     getFilterFromSearchParams,
+    convertToNote,
+    addNoteFromMail
 }
 // For Debug (easy access from console):
 window.ms = mailService
@@ -188,4 +191,19 @@ function _setNextPrevMailId(mail) {
         mail.prevMailId = prevMail.id
         return mail
     })
+}
+
+function convertToNote(mail) {
+    return {
+        id: utilService.makeId(),
+        createdAt: new Date(),
+        type: 'txt',
+        isPinned: false,
+        style: '#FFFFFF',
+        info: {txt: mail.body, title: mail.subject},
+    }
+}
+
+function addNoteFromMail(note) {
+    return storageService.post(NOTE_KEY, note)
 }

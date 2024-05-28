@@ -40,7 +40,7 @@ export function MailCompose({ isMailCompose, onSetIsMailCompose, sendMail }) {
 
                 <div className="body-container">
                     <label htmlFor="body"></label>
-                    <input onChange={handleChange} value={mailCompose.body} type="text" id="body" name="body"/>
+                    <input onChange={handleChange} value={mailCompose.body} type="textbox" id="body" name="body"/>
                 </div>
                 <button>Send</button>
             </form>
