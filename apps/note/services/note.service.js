@@ -125,8 +125,8 @@ function convertToEmbedLink(youtubeUrl) {
 function convertToMail(note) {
     return {
         id: utilService.makeId(),
-        subject: note.info.txt,
-        body: note.info.title,
+        subject: note.info.title,
+        body: note.info.txt,
         isRead: false,
         sentAt: Date.now(),
         removedAt: null,
