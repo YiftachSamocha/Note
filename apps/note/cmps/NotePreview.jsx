@@ -7,14 +7,17 @@ import { NotePreviewMap } from "./NotePreview/NotePreviewMap.jsx";
 import { NotePreviewTodos } from "./NotePreview/NotePreviewTodos.jsx";
 import { NotePreviewTxt } from "./NotePreview/NotePreviewTxt.jsx";
 import { NotePreviewVideo } from "./NotePreview/NotePreviewVideo.jsx";
+import { showErrorMsg } from "../../../services/event-bus.service.js"
 
 const { useState } = React
+const { useNavigate } = ReactRouterDOM
 
 export function NotePreview({ note, onDelete, onEdit, onDuplicate, onChangePinned }) {
     const [currNote, setCurrNote] = useState(note)
     const [hover, setHover] = useState(false)
     const [isPinned, setIsPinned] = useState(note.isPinned)
     const [isPaletteOpen, setIsPaletteOpen] = useState(false)
+    const navigate = useNavigate()
 
     function changeIsPinned() {
         noteService.updateProperty(note.id, 'isPinned', !isPinned)
@@ -34,7 +37,14 @@ export function NotePreview({ note, onDelete, onEdit, onDuplicate, onChangePinne
     }
 
     function mailNote(note) {
-        
+        if (note.type !== 'txt') {
+            showErrorMsg('Please send text notes only!')
+            return
+        }
+        const mail = noteService.convertToMail(note)
+        noteService.addMailFromNotes(mail)
+            .then(() => navigate('/mail'))
+
 
     }
     const isPinnedClass = isPinned ? 'pinned' : ''
