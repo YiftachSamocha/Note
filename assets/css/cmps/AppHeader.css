@@ -1,25 +1,28 @@
-header {
-
-    background: lightcyan;
-    border-bottom: 2px solid white;
-}
-
 .app-header {
+    background-color: #202020;
+    color: white;
+    padding: 2rem;
     display: flex;
     justify-content: space-between;
-    padding: 20px 0;
+    align-items: center;
 }
 
-nav a {
-    margin: .5em;
+.app-header h3 {
+    margin: 0;
 }
 
-nav a:active {
-    color: purple;
+.app-header nav {
+    display: flex;
+    gap: 1rem;
 }
 
-nav a.active {
-    color: darkblue;
-    font-weight: bold;
-    text-decoration: overline;
+.app-header a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s;
+    font-size: 1.2rem;
+}
+
+.app-header a:hover {
+    color: #bbb;
 }

@@ -1,0 +1,55 @@
+.app {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+}
+.home{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  
+}
+
+.home h1{
+    color: #202020;
+    font-size: 4em;
+    margin: 0.5em auto;
+}
+.app-links {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: auto 0;
+}
+
+.app-links a {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    text-align: center;
+
+    align-items: center;
+    border: 2px solid ;
+    text-decoration: none;
+    color: #202020;
+    border-radius: 10px;
+    height: 15em;
+    width: 15em;
+   
+    transition: transform 0.3s, color 0.3s;
+    
+}
+
+.app-links p,
+.app-links i {
+    font-size: 4em;
+    margin: 0;
+}
+
+.app-links a:hover {
+    transform: scale(1.1);
+
+}
+
