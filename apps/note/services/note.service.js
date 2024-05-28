@@ -1,14 +1,17 @@
 import { storageService } from "../../../services/async-storage.service.js"
 import { utilService } from "../../../services/util.service.js"
-const LS_NAME = 'NOTES'
+
+const NOTE_DB = 'notesDB'
+const MAIL_DB = 'mailsDB'
 
 export const noteService = {
     query, remove, add, get, update, updateProperty,
-    getEmptyNote, getEmptyInfo, getNoteColors, getCanvasColors, getCanvasSizes, isValidLink, convertToEmbedLink
+    getEmptyNote, getEmptyInfo, getNoteColors, getCanvasColors,
+    getCanvasSizes, isValidLink, convertToEmbedLink, convertToMail, addMailFromNotes,
 }
 
 function query(filterBy = { type: '', txt: '' }) {
-    return storageService.query(LS_NAME)
+    return storageService.query(NOTE_DB)
         .then(notes => notes.sort((a, b) => {
             return new Date(b.createdAt) - new Date(a.createdAt);
         }))
@@ -21,31 +24,31 @@ function query(filterBy = { type: '', txt: '' }) {
 }
 
 function remove(noteId) {
-    return storageService.remove(LS_NAME, noteId)
+    return storageService.remove(NOTE_DB, noteId)
 }
 
 function add(note) {
-    return storageService.post(LS_NAME, note)
+    return storageService.post(NOTE_DB, note)
 }
 
 function get(noteId) {
-    return storageService.get(LS_NAME, noteId)
+    return storageService.get(NOTE_DB, noteId)
 }
 
 function update(note) {
-    return storageService.put(LS_NAME, note)
+    return storageService.put(NOTE_DB, note)
 }
 
 function updateProperty(noteId, property, value) {
-    return storageService.get(LS_NAME, noteId)
+    return storageService.get(NOTE_DB, noteId)
         .then(prevNote => {
             const updatedNote = {
                 ...prevNote,
                 [property]: value
             }
-            return storageService.put(LS_NAME, updatedNote)
+            return storageService.put(NOTE_DB, updatedNote)
         })
-        
+
 }
 
 
@@ -119,6 +122,23 @@ function convertToEmbedLink(youtubeUrl) {
     return `https://www.youtube.com/embed/${videoId}`
 }
 
+function convertToMail(note) {
+    return {
+        id: utilService.makeId(),
+        subject: note.info.txt,
+        body: note.info.title,
+        isRead: false,
+        sentAt: Date.now(),
+        removedAt: null,
+        from: 'momo@momo.com',
+        to: 'user@appsus.com'
+    }
+}
+
+function addMailFromNotes(mail) {
+    return storageService.post(MAIL_DB, mail)
+}
+
 
 function _createData() {
     let notes = []
@@ -169,7 +189,7 @@ function _createData() {
         notes.push(note)
 
     }
-    localStorage.setItem(LS_NAME, JSON.stringify(notes))
+    localStorage.setItem(NOTE_DB, JSON.stringify(notes))
     return new Promise(resolve => resolve(notes))
 }
 
