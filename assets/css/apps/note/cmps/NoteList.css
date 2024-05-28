@@ -24,3 +24,9 @@
     margin: 4em;
     font-size: 1em;
 }
+
+.user-msg{
+    position: fixed;
+    top: 0;
+    right: -10px;
+}

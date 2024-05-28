@@ -1,3 +1,4 @@
+import { showSuccessMsg } from "../../../services/event-bus.service.js"
 import { noteService } from "../services/note.service.js"
 import { NoteModify } from "./NoteModify.jsx"
 import { NotePreview } from "./NotePreview.jsx"
@@ -18,7 +19,10 @@ export function NoteList({ filterBy }) {
 
     function onDeleteNote(noteId) {
         noteService.remove(noteId)
-            .then(setList(prevList => prevList.filter(note => note.id !== noteId)))
+            .then(() => {
+                setList(prevList => prevList.filter(note => note.id !== noteId))
+                showSuccessMsg('Note removed successfully!')
+            })
     }
     function onAddNote(note) {
         noteService.add(note)
@@ -27,6 +31,7 @@ export function NoteList({ filterBy }) {
             })
             .then(notes => {
                 setList(notes)
+                showSuccessMsg('Note added successfully!')
             })
     }
 
@@ -42,6 +47,7 @@ export function NoteList({ filterBy }) {
             .then(notes => {
                 setEditedNote('')
                 setList(notes)
+                showSuccessMsg('Note edited successfully!')
             })
 
     }
