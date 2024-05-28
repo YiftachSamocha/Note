@@ -16,6 +16,12 @@
     align-items: center;
 }
 
+.note div p,
+.note h2,
+.note li {
+    overflow: hidden
+}
+
 .note .buttons {
     height: 3em;
 }
@@ -33,17 +39,23 @@
     background-color: inherit;
     border: 0;
     cursor: pointer;
-    margin: 0.6em; 
+    margin: 0.6em;
 }
-.note .color-container{
+
+.note .color-container {
     height: 3em;
     width: 3em;
 }
-.note .color-container button{
+
+.note .color-container button {
     width: 100%;
     height: 100%;
     margin: 0;
-    
+
+}
+
+.note p {
+    margin-inline: 0.8em;
 }
 
 .note img,
@@ -52,7 +64,7 @@
     height: calc(auto/12em);
 }
 
-.note ul{
+.note ul {
     margin: 0;
     padding: 0;
 }
@@ -64,17 +76,17 @@
     justify-content: space-between;
     margin: 0.5em;
     width: 100%;
-    
+
 }
 
-.note audio{
+.note audio {
     width: 80%;
     background-color: inherit;
     border: 1px solid black;
     border-radius: 50px;
 }
 
-.note .map{
+.note .map {
     width: 12em;
     height: 12em;
 }

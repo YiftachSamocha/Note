@@ -43,7 +43,7 @@
         height: 2em;
     }
     .note button{
-        margin: 0.3em;
+        margin: 0.1em;
     }
     .note li{
         margin: 0.25em;
@@ -52,8 +52,8 @@
 
     .note img,
     .note iframe {
-        width: 10em;
-        height: calc(auto/10em);
+        width: 8em;
+        height: calc(auto/8em);
     }
 
     .note .map{
@@ -63,7 +63,7 @@
     }
 
 
-    /* MODIFY*/
+    /* MODIFY-ADD*/
     .note-modify {
         margin-block: 1.5em;
         width: 15em;
@@ -90,7 +90,7 @@
         left: -200px;
     }
 
-    /* EDITOR*/
+    /*MODIFY- EDITOR*/
     .note-edit{
         height: 25em;
         width: 20em;
