@@ -7,7 +7,7 @@ import { MailPreview } from "./MailPreview.jsx"
 export function MailList(props) {
     const params = useParams()
 
-    if (props.mails.length === 0) return 'No mails to show...'
+    if (props.mails.length === 0 && !props.isMailCompose) return 'No mails to show...'
 
     return (
     <section className="mail-list">

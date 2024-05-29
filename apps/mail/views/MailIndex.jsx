@@ -23,7 +23,7 @@ export function MailIndex() {
         console.log(filterBy)
         mailService.query({ ...filterBy, ...folder })
         .then((mails) => setMails(mails))
-    }, [filterBy, folder])
+    }, [filterBy, folder, isMailCompose])
 
     function onSetFilterBy(newFilter) {
         setFilterBy(newFilter)
@@ -43,7 +43,7 @@ export function MailIndex() {
     function sendMail(mail) {
         mailService.send(mail)
             .then(() => {
-                showSuccessMsg('The mail has been send successfully!')
+                showSuccessMsg('The mail has been sent successfully!')
             })
             .catch(() => {
                 showErrorMsg('The mail could not be send')
