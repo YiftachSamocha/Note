@@ -12,11 +12,13 @@
 
 .mail-compose .header-container {
     height: 1em;
-    background-color: whitesmoke;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    
     padding-block: 1em;
     padding-inline: 1em;
+    background-color: whitesmoke;
 }
 
 .mail-compose .header-container button {
@@ -24,40 +26,74 @@
     border: none;
     background-color: inherit;
     font-weight: bold;
+
+    cursor: pointer;
 }
 
 .mail-compose .from-container h2 {
     height: 1em;
     padding-block: 0.75em;
-    padding-inline: 0.75em;
+    padding-inline-start: 0.75em;
+    font-size: 1.2em;
 }
 
-form {
+.mail-compose .from-container span {
+    padding-inline-start: 1em;
+    font-size: 0.75em;
+    color: gray;
+}
+
+/* .mail-compose form {
     height: 100%;
     display: grid;
-    grid-template-rows: repeat(2, 20px) calc(600px - 140px - 2em) 20px;
+    grid-template-rows: repeat(2, 2em) calc(600px - 180px - 2em) 20px;
+} */
+
+.mail-compose form input {
+    border: 0;
+    outline: 0;
 }
 
-.mail-compose form .to-container {
-    grid-row: 1 / 2;   
-    border: 1px solid gray;
-
+.mail-compose form .to-container, .subject-container {
     display: flex;
     gap: 2em;
+
+    padding-block: 1em;
+    margin-inline: 1em;
+    border-bottom: 1px solid lightgrey;
+
 }
 
-form input {
+.mail-compose form .to-container, .subject-container > label {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.mail-compose form .body-container {
+    height: 300px;
+    padding: 1em;
+}
+
+.mail-compose form .body-container textarea {
+    height: 100%;
+    width: 100%;
     border: 0;
+    outline: 0;
 }
 
-.mail-compose .subject-container {
-    grid-row: 2 / 3;   
+.mail-compose form button {
+    margin-inline: 1.5em;
+    padding-block: 0.5em;
+    padding-inline: 1em;
+    border-radius: 1.5em;
+    border: 0;
+
+    background-color:royalblue;
+    color: white;
+    font-size: 1em;
 }
 
-.mail-compose .body-container {
-    grid-row: 3 / 4;   
-}
-
-.mail-compose button {
-    grid-row: 4 / 5;
+.mail-compose form button:hover {
+    cursor: pointer;
+    background-color: dodgerblue;
 }
