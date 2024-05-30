@@ -41,6 +41,9 @@ window.ms = mailService
 
 function query(filterBy = {}) {
     return storageService.query(MAIL_KEY)
+        .then(mails => mails.sort((a, b) => {
+            return new Date(b.sentAt) - new Date(a.sentAt);
+        }))
         .then(mails => {
             if (filterBy.txt) {
                 const regExp = new RegExp(filterBy.txt, 'i')

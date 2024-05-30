@@ -1,14 +1,19 @@
 .mail-preview {
+    height: 32px;
+
     padding-inline: 0.5em;
     display: flex;
     align-items: center;
     justify-content: space-between;
 
+    line-height: normal;
+
     transition: 0.3s;
 }
 
 .mail-preview:hover {
-    box-shadow: 0px 5px 3px 3px gray;
+    box-shadow: inset 1px 0 0 #dadce0,inset -1px 0 0 #dadce0,0 1px 2px 0 rgba(60,64,67,.3),0 1px 3px 1px rgba(60,64,67,.15);
+    z-index: 2;
 }
 
 .mail-preview a {
@@ -25,11 +30,13 @@
 }
 
 .unread {
+    color: #202124;
     font-weight: bold;
+    background-color: #ffffff;
 }
 
 .read {
-    background-color: lightsteelblue;
+    background-color: #F2F6FC;
 }
 
 .mail-preview .star {
@@ -64,7 +71,6 @@
     width: 8em;
     margin-inline-end: 1em;
     text-align: end;
-    /* margin-inline-start: 5em; */
 }
 
 .mail-preview .actions-btn {
@@ -85,7 +91,5 @@
 }
 
 .mail-preview .actions-btn img {
-    /* height: 1em;
-    width: 1em; */
     scale: 0.5;
 }

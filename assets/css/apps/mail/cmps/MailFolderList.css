@@ -1,8 +1,10 @@
 .mail-folder {
-    margin-block-start: 1em;
     display: flex;
     flex-direction: column;
     row-gap: 0.5em;
+
+    background-color: #f6f8fc;
+    color: #202124;
 }
 
 .mail-folder p {
@@ -17,7 +19,7 @@
 }
 
 .mail-folder p:hover {
-    background-color: lightsteelblue;
+    background-color: rgb(32, 33, 36, 0.06);
 }
 
 .mail-folder p img {
@@ -27,7 +29,7 @@
 }
 
 .mail-folder p.active {
-    background-color: lightblue;
+    background-color: #d3e3fd;
     font-weight: bold;
 }
 
