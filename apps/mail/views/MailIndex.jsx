@@ -17,13 +17,15 @@ export function MailIndex() {
     const [mails, setMails] = useState([])
     const [folder, setFolder] = useState({ status: 'inbox' })
     const [filterBy, setFilterBy] = useState(mailService.getFilterFromSearchParams(searchParams))
+    const [UnreadMailsCount, setUnreadMailsCount] = useState(null)
 
     useEffect(() => {
         setSearchParams({ ...filterBy, ...folder })
-        console.log(filterBy)
+        onSetUnreadMailsCount()
+        // console.log(filterBy)
         mailService.query({ ...filterBy, ...folder })
         .then((mails) => setMails(mails))
-    }, [filterBy, folder, isMailCompose])
+    }, [filterBy, folder, isMailCompose, mails])
 
     function onSetFilterBy(newFilter) {
         setFilterBy(newFilter)
@@ -102,6 +104,11 @@ export function MailIndex() {
             })
     }
 
+    function onSetUnreadMailsCount() {
+        mailService.query({ txt: '', readStatus: 'unread', status: 'inbox' })
+            .then((mails) => setUnreadMailsCount(mails.length))
+    }
+
     return (
         <section className="mail-index grid-content">
             <header className="grid-sections">
@@ -111,7 +118,7 @@ export function MailIndex() {
                     <MailFilter folder={folder} filterBy={filterBy} onFilter={onSetFilterBy}/>
             </header>
             <aside className="grid-sections">
-                    <MailFolderList folder={folder} onSetFolder={onSetFolder} />
+                    <MailFolderList folder={folder} onSetFolder={onSetFolder} UnreadMailsCount={UnreadMailsCount}/>
                     <DynamicCmp isMailCompose={isMailCompose} onSetIsMailCompose={onSetIsMailCompose} 
                     sendMail={sendMail} params={params} mails={mails} onRemoveMail={removeMail} 
                     onChangeStarMail={changeStarMail} onChangeMailRead={changeMailRead}/>
