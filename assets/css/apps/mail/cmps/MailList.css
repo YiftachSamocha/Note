@@ -1,5 +1,6 @@
 .mail-list {
     position: relative;
+    scroll-behavior: smooth;
 }
 
 .mail-list li {

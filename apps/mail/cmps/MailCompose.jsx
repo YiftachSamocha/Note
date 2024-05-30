@@ -40,7 +40,7 @@ export function MailCompose({ isMailCompose, onSetIsMailCompose, sendMail }) {
 
                 <div className="body-container">
                     <label htmlFor="body"></label>
-                    <textarea onChange={handleChange} value={mailCompose.body} type="textarea" MaxLength="500" id="body" name="body"></textarea>
+                    <textarea onChange={handleChange} value={mailCompose.body} type="textarea" maxLength="500" id="body" name="body"></textarea>
                 </div>
                 <button>Send</button>
             </form>

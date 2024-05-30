@@ -52,9 +52,24 @@
     color: #ccc;
 }
 
-.mail-preview .actions-btn {
-    margin-inline-end: 1em;
+.mail-preview:hover .actions-btn {
     display: flex;
+}
+
+.mail-preview:hover .date {
+    display: none;
+}
+
+.mail-preview .date {
+    width: 8em;
+    margin-inline-end: 1em;
+    text-align: end;
+    /* margin-inline-start: 5em; */
+}
+
+.mail-preview .actions-btn {
+    display: none;
+    margin-inline-end: 1em;
     gap: 1em;
 }
 

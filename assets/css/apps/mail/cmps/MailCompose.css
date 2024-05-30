@@ -85,9 +85,9 @@
     background-color:royalblue;
     color: white;
     font-size: 1em;
+    cursor: pointer;
 }
 
 .mail-compose form button:hover {
-    cursor: pointer;
     background-color: dodgerblue;
 }
