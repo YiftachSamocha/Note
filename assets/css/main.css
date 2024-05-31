@@ -6,7 +6,7 @@
 
 @import './basics/base.css';
 @import './basics/helpers.css';
-@import './basics/layout.css';
+@import './basics/mailLayout.css';
 
 /* Views */
 @import './views/home.css';
