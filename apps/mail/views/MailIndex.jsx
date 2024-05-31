@@ -110,14 +110,14 @@ export function MailIndex() {
     }
 
     return (
-        <section className="mail-index grid-content">
-            <header className="grid-sections">
+        <section className="mail-index mail-grid-content">
+            <header className="mail-grid-sections">
                     <div className="mail-compose-btn">
                         <span onClick={() => setIsMailCompose(true)}><img src="./assets/img/pencil.png"/>Compose</span>
                     </div>
                     <MailFilter folder={folder} filterBy={filterBy} onFilter={onSetFilterBy}/>
             </header>
-            <aside className="grid-sections">
+            <aside className="mail-grid-sections">
                     <MailFolderList folder={folder} onSetFolder={onSetFolder} UnreadMailsCount={UnreadMailsCount}/>
                     <DynamicCmp isMailCompose={isMailCompose} onSetIsMailCompose={onSetIsMailCompose} 
                     sendMail={sendMail} params={params} mails={mails} onRemoveMail={removeMail} 
