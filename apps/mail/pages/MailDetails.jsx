@@ -4,7 +4,7 @@ const { Link } = ReactRouterDOM
 
 import { mailService } from "../services/mail.service.js"
 
-export function MailDetails({ onRemoveMail }) {
+export function MailDetails({ onRemoveMail, onChangeMailRead }) {
     const [mail, setMail] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
 
@@ -16,7 +16,9 @@ export function MailDetails({ onRemoveMail }) {
         mailService.get(params.mailId)
             .then(mail => {
                 setMail(mail)
-                mailService.changeMailRead(mail.id)
+                if (mail.isRead === false) {
+                    onChangeMailRead(mail.id)
+                }
             })
             .catch(() => {
                 alert('Something went wrong')
@@ -39,7 +41,6 @@ export function MailDetails({ onRemoveMail }) {
             <span className="delete-mail" title="Delete Mail" onClick={() => onSetRemoveMail(mail.id)}><img src="./assets/img/delete.png"/></span>
             <h2>{mail.subject}</h2>
             <h3>from: {mail.from}</h3>
-            {/* <p>{mail.body}</p> */}
             <textarea defaultValue={mail.body}></textarea>
 
             <nav className="actions">
