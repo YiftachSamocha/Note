@@ -59,10 +59,10 @@ function query(filterBy = {}) {
             if (filterBy.status) {
                 switch (filterBy.status) {
                     case 'inbox':
-                        mails = mails.filter(mail => mail.to === 'user@appsus.com')
+                        mails = mails.filter(mail => (mail.to === 'user@appsus.com' && mail.removedAt === null))
                         break;
                     case 'starred':
-                        mails = mails.filter(mail => mail.isStared === true)
+                        mails = mails.filter(mail => (mail.isStared === true && mail.removedAt === null))
                         break;
                     case 'sent':
                         mails = mails.filter(mail => mail.from === 'user@appsus.com')
@@ -161,8 +161,7 @@ function getFilterFromSearchParams(searchParams) {
     return {
         status: searchParams.get('status') || '',
         txt: searchParams.get('txt') || '',
-        readStatus: searchParams.get('readStatus') || '',
-        note: searchParams.get('note') || ''
+        readStatus: searchParams.get('readStatus') || ''
     }
 }
 

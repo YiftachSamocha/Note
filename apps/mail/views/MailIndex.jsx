@@ -1,6 +1,6 @@
 const { useState, useEffect } = React
 const { useParams } = ReactRouter
-const { Link, useSearchParams, Outlet } = ReactRouterDOM
+const { Link, useSearchParams } = ReactRouterDOM
 
 import { mailService } from "../services/mail.service.js"
 import { MailList } from "../cmps/MailList.jsx"
@@ -17,15 +17,15 @@ export function MailIndex() {
     const [mails, setMails] = useState([])
     const [folder, setFolder] = useState({ status: 'inbox' })
     const [filterBy, setFilterBy] = useState(mailService.getFilterFromSearchParams(searchParams))
-    const [UnreadMailsCount, setUnreadMailsCount] = useState(null)
+    const [unreadMailsCount, setUnreadMailsCount] = useState(null)
 
     useEffect(() => {
         setSearchParams({ ...filterBy, ...folder })
         onSetUnreadMailsCount()
-        // console.log(filterBy)
+        console.log('test')
         mailService.query({ ...filterBy, ...folder })
         .then((mails) => setMails(mails))
-    }, [filterBy, folder, isMailCompose, mails])
+    }, [filterBy, folder, isMailCompose])
 
     function onSetFilterBy(newFilter) {
         setFilterBy(newFilter)
@@ -56,6 +56,7 @@ export function MailIndex() {
         mailService.remove(mailId)
             .then(() => {
                 setMails(prevMails => prevMails.filter(mail => mail.id !== mailId))
+                onSetUnreadMailsCount()
                 showSuccessMsg('The mail has been removed successfully!')
             })
             .catch(() => {
@@ -97,10 +98,7 @@ export function MailIndex() {
                     prevMails[mailIdx].isRead = !prevMails[mailIdx].isRead
                     return [...prevMails]
                 })
-                showSuccessMsg('The mail has been updated successfully!')
-            })
-            .catch(() => {
-                showErrorMsg('The mail could not be updated')
+                onSetUnreadMailsCount()
             })
     }
 
@@ -118,7 +116,7 @@ export function MailIndex() {
                     <MailFilter folder={folder} filterBy={filterBy} onFilter={onSetFilterBy}/>
             </header>
             <aside className="mail-grid-sections">
-                    <MailFolderList folder={folder} onSetFolder={onSetFolder} UnreadMailsCount={UnreadMailsCount}/>
+                    <MailFolderList folder={folder} onSetFolder={onSetFolder} unreadMailsCount={unreadMailsCount}/>
                     <DynamicCmp isMailCompose={isMailCompose} onSetIsMailCompose={onSetIsMailCompose} 
                     sendMail={sendMail} params={params} mails={mails} onRemoveMail={removeMail} 
                     onChangeStarMail={changeStarMail} onChangeMailRead={changeMailRead}/>
