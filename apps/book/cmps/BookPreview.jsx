@@ -1,13 +1,22 @@
+const { Link } = ReactRouterDOM
+export function BookPreview({ book, onRemove }) {
+    function handleDelete(event) {
+        event.preventDefault()
+        event.stopPropagation()
+        onRemove(book.id)
+    }
 
-export function BookPreview({ book }) {
-    const { listPrice } = book
+    return <Link to={`/book/${book.id}`}>
+        <section className="book" >
+            <h2>{book.title}</h2>
+            <p>{book.price}₪</p>
+            <img src={book.thumbnail} />
+            <div>
+                <button onClick={handleDelete} className="delete-button"><i className="fa-solid fa-trash"></i></button>
+                <Link to={`/book/edit/${book.id}`}><button className="edit-button"><i className="fa-regular fa-pen-to-square"></i></button></Link>
+            </div>
+        </section>
+    </Link>
 
-    return <article className='book-prev'>
-        <h3>{book.title}</h3>
-        <img src={book.thumbnail} alt="" />
-        <p><span className='bold-txt'>Price:</span> {listPrice.amount}</p>
-        <p><span className='bold-txt'>Currency:</span> {listPrice.currencyCode}</p>
-        {listPrice.isOnSale && <img className="on-sale-icon" src="./assets/img/BookImages/onSale.png.png" alt="" />}
-    </article>
 
 }

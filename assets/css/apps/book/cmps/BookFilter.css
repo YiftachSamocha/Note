@@ -1,8 +1,12 @@
-.books-filter {
+.filter{
     display: flex;
-    justify-content: center;
-    gap: 10px;
-    padding: 10px;
-    background: #a7ffd6;
-    border-radius: 5px;
+    justify-content: space-between;
+    flex-direction: row;
+    margin: 1em 10em 0 10em;
+}
+.filter div{
+    margin: 1em;
+}
+.filter label{
+    margin: 10px;
 }
