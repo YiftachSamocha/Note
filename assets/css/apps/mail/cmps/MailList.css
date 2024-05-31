@@ -5,6 +5,6 @@
 
 .mail-list li {
     line-height: normal;
-    border: 1px solid #BABFC3;
+    border-bottom: 1px solid rgb(128, 128, 128);
     background-color: #ffffff;
 }
