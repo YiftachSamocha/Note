@@ -1,8 +1,10 @@
 .mail-list {
     position: relative;
+    scroll-behavior: smooth;
 }
 
 .mail-list li {
-    border: 1px solid lightgrey;
-    background-color: whitesmoke;
+    line-height: normal;
+    border-bottom: 1px solid rgb(128, 128, 128);
+    background-color: #ffffff;
 }

@@ -21,7 +21,7 @@ export function MailCompose({ isMailCompose, onSetIsMailCompose, sendMail }) {
         <section className="mail-compose">
             <div className="header-container">
                 <h2>New Message</h2>
-                <button onClick={() => onSetIsMailCompose()}><img src="../../assets/img/close.png"/></button>
+                <button onClick={() => onSetIsMailCompose()}><img src="./assets/img/close.png"/></button>
             </div>
             <div className="from-container">
                 <h2>From <span>Your-Mail</span></h2>
@@ -30,7 +30,7 @@ export function MailCompose({ isMailCompose, onSetIsMailCompose, sendMail }) {
             <form onSubmit={onSave}>
                 <div className="to-container">
                     <label htmlFor="to">To</label>
-                    <input onChange={handleChange} value={mailCompose.to} type="email" placeholder="name@mail.com" id="to" name="to" required/>
+                    <input onChange={handleChange} value={mailCompose.to} type="email" id="to" name="to" required/>
                 </div>
 
                 <div className="subject-container">
@@ -40,7 +40,7 @@ export function MailCompose({ isMailCompose, onSetIsMailCompose, sendMail }) {
 
                 <div className="body-container">
                     <label htmlFor="body"></label>
-                    <input onChange={handleChange} value={mailCompose.body} type="textbox" id="body" name="body"/>
+                    <textarea onChange={handleChange} value={mailCompose.body} type="textarea" maxLength="500" id="body" name="body"></textarea>
                 </div>
                 <button>Send</button>
             </form>

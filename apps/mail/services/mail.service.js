@@ -41,6 +41,9 @@ window.ms = mailService
 
 function query(filterBy = {}) {
     return storageService.query(MAIL_KEY)
+        .then(mails => mails.sort((a, b) => {
+            return new Date(b.sentAt) - new Date(a.sentAt);
+        }))
         .then(mails => {
             if (filterBy.txt) {
                 const regExp = new RegExp(filterBy.txt, 'i')
@@ -172,7 +175,7 @@ function _createMails() {
             body: utilService.makeLorem(60),
             isRead: Math.random() > 0.5,
             isStared: Math.random() > 0.5,
-            sentAt: utilService.getRandomIntInclusive(1551133130200, 1551133930700),
+            sentAt: utilService.getRandomIntInclusive(1551133130200, 1717072976494),
             removedAt: null,
             from: utilService.makeLorem(1).trim() + '@' + utilService.makeLorem(1).trim() + '.com',
             to: 'user@appsus.com'

@@ -17,13 +17,15 @@ export function MailIndex() {
     const [mails, setMails] = useState([])
     const [folder, setFolder] = useState({ status: 'inbox' })
     const [filterBy, setFilterBy] = useState(mailService.getFilterFromSearchParams(searchParams))
+    const [UnreadMailsCount, setUnreadMailsCount] = useState(null)
 
     useEffect(() => {
         setSearchParams({ ...filterBy, ...folder })
-        console.log(filterBy)
+        onSetUnreadMailsCount()
+        // console.log(filterBy)
         mailService.query({ ...filterBy, ...folder })
         .then((mails) => setMails(mails))
-    }, [filterBy, folder])
+    }, [filterBy, folder, isMailCompose, mails])
 
     function onSetFilterBy(newFilter) {
         setFilterBy(newFilter)
@@ -43,7 +45,7 @@ export function MailIndex() {
     function sendMail(mail) {
         mailService.send(mail)
             .then(() => {
-                showSuccessMsg('The mail has been send successfully!')
+                showSuccessMsg('The mail has been sent successfully!')
             })
             .catch(() => {
                 showErrorMsg('The mail could not be send')
@@ -102,16 +104,21 @@ export function MailIndex() {
             })
     }
 
+    function onSetUnreadMailsCount() {
+        mailService.query({ txt: '', readStatus: 'unread', status: 'inbox' })
+            .then((mails) => setUnreadMailsCount(mails.length))
+    }
+
     return (
         <section className="mail-index grid-content">
             <header className="grid-sections">
                     <div className="mail-compose-btn">
-                        <span onClick={() => setIsMailCompose(true)}><img src="../../assets/img/pencil.png"/>Compose</span>
+                        <span onClick={() => setIsMailCompose(true)}><img src="./assets/img/pencil.png"/>Compose</span>
                     </div>
                     <MailFilter folder={folder} filterBy={filterBy} onFilter={onSetFilterBy}/>
             </header>
             <aside className="grid-sections">
-                    <MailFolderList folder={folder} onSetFolder={onSetFolder} />
+                    <MailFolderList folder={folder} onSetFolder={onSetFolder} UnreadMailsCount={UnreadMailsCount}/>
                     <DynamicCmp isMailCompose={isMailCompose} onSetIsMailCompose={onSetIsMailCompose} 
                     sendMail={sendMail} params={params} mails={mails} onRemoveMail={removeMail} 
                     onChangeStarMail={changeStarMail} onChangeMailRead={changeMailRead}/>

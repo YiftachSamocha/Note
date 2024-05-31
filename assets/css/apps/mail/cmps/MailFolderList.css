@@ -1,11 +1,14 @@
 .mail-folder {
-    margin-block-start: 1em;
     display: flex;
     flex-direction: column;
     row-gap: 0.5em;
+
+    background-color: #f6f8fc;
+    color: #202124;
 }
 
-.mail-folder span {
+.mail-folder p {
+    margin-block: 0;
     padding: 0.4em;
 
     display: flex;
@@ -15,17 +18,22 @@
     cursor: pointer;
 }
 
-.mail-folder span:hover {
-    background-color: lightsteelblue;
+.mail-folder p:hover {
+    background-color: rgb(32, 33, 36, 0.06);
 }
 
-.mail-folder span img {
+.mail-folder p img {
     height: 1.25em;
     width: 1.25em;
     padding-inline: 1em;
 }
 
-.mail-folder span.active {
-    background-color: lightblue;
+.mail-folder p.active {
+    background-color: #d3e3fd;
     font-weight: bold;
+}
+
+.mail-folder p span {
+    margin-inline-start: auto;
+    margin-inline-end: 2em;
 }
