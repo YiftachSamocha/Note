@@ -21,7 +21,7 @@ export function MailCompose({ isMailCompose, onSetIsMailCompose, sendMail }) {
         <section className="mail-compose">
             <div className="header-container">
                 <h2>New Message</h2>
-                <button onClick={() => onSetIsMailCompose()}><img src="../../assets/img/close.png"/></button>
+                <button onClick={() => onSetIsMailCompose()}><img src="./assets/img/close.png"/></button>
             </div>
             <div className="from-container">
                 <h2>From <span>Your-Mail</span></h2>

@@ -36,7 +36,7 @@ export function MailDetails({ onRemoveMail }) {
 
     return (
         <section className="mail-details">
-            <span className="delete-mail" title="Delete Mail" onClick={() => onSetRemoveMail(mail.id)}><img src="../../assets/img/delete.png"/></span>
+            <span className="delete-mail" title="Delete Mail" onClick={() => onSetRemoveMail(mail.id)}><img src="./assets/img/delete.png"/></span>
             <h2>{mail.subject}</h2>
             <h3>from: {mail.from}</h3>
             {/* <p>{mail.body}</p> */}

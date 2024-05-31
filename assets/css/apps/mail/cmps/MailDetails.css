@@ -20,11 +20,6 @@
     padding-inline: 2em;
 }
 
-/* .mail-details p {
-    padding-inline: 2em;
-    margin-block-end: 5em;
-} */
-
 .mail-details textarea {
     width: 100%;
     height: 30%;
@@ -64,7 +59,7 @@
 }
 
 .mail-details > span:hover {
-    background-color: lightgray;
+    background-color: rgb(32, 33, 36, 0.06);
     cursor: pointer;
 }
 

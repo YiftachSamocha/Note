@@ -113,7 +113,7 @@ export function MailIndex() {
         <section className="mail-index grid-content">
             <header className="grid-sections">
                     <div className="mail-compose-btn">
-                        <span onClick={() => setIsMailCompose(true)}><img src="../../assets/img/pencil.png"/>Compose</span>
+                        <span onClick={() => setIsMailCompose(true)}><img src="./assets/img/pencil.png"/>Compose</span>
                     </div>
                     <MailFilter folder={folder} filterBy={filterBy} onFilter={onSetFilterBy}/>
             </header>

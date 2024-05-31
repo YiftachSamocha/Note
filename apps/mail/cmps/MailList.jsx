@@ -11,7 +11,6 @@ export function MailList(props) {
 
     return (
     <section className="mail-list">
-        {/* <Outlet /> */}
         { <ul>
             { props.mails.map(mail => 
             <li key={mail.id}>
