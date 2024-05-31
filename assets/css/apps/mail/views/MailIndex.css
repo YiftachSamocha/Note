@@ -14,6 +14,9 @@
 }
 
 .mail-compose-btn span {
+    height: 28px;
+    min-width: 96px;
+
     padding-block: 1em;
     padding-inline: 1.5em;
 
