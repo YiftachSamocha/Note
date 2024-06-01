@@ -42,16 +42,15 @@
 @import './apps/note/cmps/NoteMq.css';
 
 /* BOOK*/
-@import './apps/book/cmps/AddBook.css';
-@import './apps/book/cmps/AddReview.css';
+@import './apps/book/cmps/BookAdd.css';
+@import './apps/book/cmps/BookCategory.css';
 @import './apps/book/cmps/BookDetails.css';
 @import './apps/book/cmps/BookEdit.css';
 @import './apps/book/cmps/BookFilter.css';
+@import './apps/book/cmps/BookList.css';
+@import './apps/book/cmps/BookReviews.css';
 @import './apps/book/cmps/BookPreview.css';
-@import './apps/book/cmps/BooksList.css';
-@import './apps/book/cmps/StarRating.css';
+@import './apps/book/cmps/Loader.css';
 
-@import './apps/book/variables/vars.css';
-@import './apps/book/base/button.css';
-@import './apps/book/base/layout.css';
-@import './apps/book/base/loader.css';
+@import './apps/book/setup/vars.css';
+

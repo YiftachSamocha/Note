@@ -1,28 +1,67 @@
-.book-edit {
-    justify-self: center;
-    margin-block-start: 30px;
+.edit {
+    background-color: #fff;
     padding: 20px;
-    background-color: rgba(180, 188, 204, 0.514);
+    border-radius: 8px;
+    border: 3px solid rgb(0, 0, 0);
+    margin-inline: 8em;
+}
+.edit header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: transparent;
+    margin-bottom: 10px;
 }
 
-.book-edit form {
+.edit .close-button {
+    border: none;
+    background-color: transparent;
+    font-size: 12px;
+    cursor: pointer;
+    color: #333;
+}
+
+
+.edit h1 {
+    margin-bottom: 15px;
+}
+
+.edit form {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    padding: 20px;
-    width: 400px;
-    gap: 10px;
-    margin-block-start: 20px;
 }
 
-.book-edit form input {
-    width: 200px;
+.edit label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    margin-right: 2em;
 }
 
-.book-edit form button {
-    justify-self: center;
-    grid-column: 1/-1;
+.edit input {
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
-.book-edit h2 {
-    margin-block-end: 20px;
+.edit #title,
+.edit #price {
+    font-weight: bold;
+    font-size: 16px;
 }
+
+.hidden {
+    display: none;
+}
+
+.edit form button {
+    background-color: inherit;
+    border-radius: 10px;
+    padding: 10px;
+
+    cursor: pointer;
+    border: 1px solid black;
+    width: 6em;
+    
+}
+
