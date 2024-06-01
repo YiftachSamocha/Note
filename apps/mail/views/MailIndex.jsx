@@ -1,10 +1,9 @@
 const { useState, useEffect } = React
 const { useParams } = ReactRouter
-const { Link, useSearchParams } = ReactRouterDOM
+const { useSearchParams } = ReactRouterDOM
 
 import { mailService } from "../services/mail.service.js"
 import { MailList } from "../cmps/MailList.jsx"
-import { MailCompose } from "../cmps/MailCompose.jsx"
 import { MailFilter } from "../cmps/MailFilter.jsx"
 import { MailFolderList } from "../cmps/MailFolderList.jsx"
 import { showSuccessMsg, showErrorMsg } from "../../../services/event-bus.service.js"

@@ -2,7 +2,7 @@ const { useState } = React
 
 import { mailService } from "../services/mail.service.js"
 
-export function MailCompose({ isMailCompose, onSetIsMailCompose, sendMail }) {
+export function MailCompose({ onSetIsMailCompose, sendMail }) {
     const [mailCompose, setMailCompose] = useState(mailService.getEmptyMail())
 
     function onSave(ev) {

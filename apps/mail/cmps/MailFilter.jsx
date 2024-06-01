@@ -1,4 +1,4 @@
-const { useState, useEffect, useRef } = React
+const { useState, useEffect } = React
 
 export function MailFilter({ folder, filterBy, onFilter }) {
     const [filterByToEdit, setFilterByToEdit] = useState({...filterBy, ...folder})
@@ -9,15 +9,6 @@ export function MailFilter({ folder, filterBy, onFilter }) {
 
     function handleChange({ target}) {
         const { name, value } = target
-
-        // switch (name) {
-        //     case 'readStatus':
-        //         readMail.current = (readMail.current === 'read' || readMail.current === '') ? 'unread' : 'read'
-        //         value = readMail.current
-        //         break;
-        //     case 'txt':
-        //         value = target.value
-        // }
 
         setFilterByToEdit(prevFilterBy => ({ ...prevFilterBy, [name]: value}))
     }
