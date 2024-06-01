@@ -64,17 +64,6 @@ export function MailIndex() {
             })
     }
 
-    // function removeMailFromTrash(mailId) {
-    //     mailService.remove(mailId)
-    //         .then(() => {
-    //             setMails(prevMails => prevMails.filter(mail => mail.id !== mailId))
-    //             showSuccessMsg('The mail has been removed successfully!')
-    //         })
-    //         .catch(() => {
-    //             showErrorMsg('The mail could not be removed')
-    //         })
-    // }
-
     function changeStarMail(mailId) {
         mailService.changeStarMail(mailId)
             .then(() => {
