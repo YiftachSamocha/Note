@@ -1,5 +1,5 @@
-import { utilService } from "../book.service.js"
-import axios from "../services/"
+import { utilService } from './util.service.js'
+import axios from "./axios.js"
 export const googleBookService = { query, createGoogleBookList }
 
 const BOOKS_KEY = 'BOOKS'

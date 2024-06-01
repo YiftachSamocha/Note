@@ -6,7 +6,7 @@ export const bookService = {
     query, remove, add, get, save, addReview, getReviews, deleteReview,
     getEmptyReview, getEmptyBook, getDeafultFilter, getCategories, getFilterFromSearchParams,
 }
-const BOOKS_KEY = 'BOOKS'
+const BOOKS_KEY = 'booksDB'
 
 function query(filterBy) {
     return storageService.query(BOOKS_KEY)
@@ -57,7 +57,7 @@ function save(book) {
 function getEmptyBook() {
     const ctgs = ['Love', 'Fiction', 'Poetry', 'Computers', 'Religion']
     const book = {
-        id: utilService.makeId(),
+        id: '',
         title: '',
         price: 0,
         subtitle: utilService.makeLorem(4),

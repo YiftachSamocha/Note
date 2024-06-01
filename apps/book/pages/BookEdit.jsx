@@ -1,3 +1,4 @@
+import { showSuccessMsg } from "../../../services/event-bus.service.js"
 import { bookService } from "../services/book.service.js"
 const { useParams, useNavigate } = ReactRouter
 const { useState, useEffect } = React
@@ -26,18 +27,28 @@ export function BookEdit() {
 
     function submit(event) {
         event.preventDefault()
-        bookService.save(book)
-            .then(() => navigate('/book'))
-            .catch(() => {
-                alert('Couldnt save')
-                navigate('/book')
-            })
+        if (book.id === '') {
+            bookService.add(book)
+                .then(() => {
+                    navigate('/book')
+                    showSuccessMsg('Book added successfully')
+                })
+        }
+        else {
+            bookService.save(book)
+                .then(() => {
+                    navigate('/book')
+                    showSuccessMsg('Book edited successfully')
+                })
+        }
+
     }
     const authorsStr = book.authors[0] === 'anonymous' ? '' : book.authors[0]
+    const buttonTxt = book.id === '' ? 'Add' : 'Edit'
 
     return <div className="edit" >
         <header>
-            <h2>Edit Book!</h2>
+            <h2>{buttonTxt + ' Book!'}</h2>
             <button onClick={() => navigate('/book')} className="close-button" >X</button>
         </header>
 
@@ -73,7 +84,7 @@ export function BookEdit() {
                 <input type="number" id="price" name="price"
                     value={book.price} max="250" min="10" onChange={handleChange} />
             </div>
-            <button>Edit</button>
+            <button>{buttonTxt}</button>
         </form>
     </div>
 }

@@ -54,7 +54,7 @@
     display: none;
 }
 
-form button {
+.edit form button {
     background-color: inherit;
     border-radius: 10px;
     padding: 10px;

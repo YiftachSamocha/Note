@@ -1,7 +1,7 @@
 .reviews {
     display: flex;
     background-color: inherit;
-    border: 2px solid black;
+    border-left:  1px solid gray;
 }
 
 .reviews-input,

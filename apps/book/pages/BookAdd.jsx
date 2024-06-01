@@ -38,10 +38,10 @@ export function BookAdd() {
         </section>
 
         {addingType === 'google' &&
-            <section >
+            <section className="google">
                 <div>
                     <label htmlFor="title">Add Book</label>
-                    <input type="text" id="title" onChange={searchBooks} />
+                    <input type="text" id="title" onChange={searchBooks} placeholder="Enter book title..." />
                 </div>
                 {bookList && <ul>
                     {bookList.map(book => {
