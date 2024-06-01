@@ -1,24 +1,7 @@
 const { useState, useEffect } = React
 
 export function MailFolderList({ folder, onSetFolder, unreadMailsCount }) {
-    // console.log(filterBy)
-    // const [filterByToEdit, setFilterByToEdit] = useState(filterBy)
-
-    // useEffect(() => {
-    //     onFilter(filterByToEdit)
-    // }, [filterByToEdit])
-
-    // function handleChange({ target}) {
-    //     const { name, value } = target
-
-    //     setFilterByToEdit(prevFilterBy => ({ ...prevFilterBy, [name]: value}))
-    // }
     
-
-    // function onSetFolder({ target }) {
-    //     setFolder(target.value)
-    // }
-
     unreadMailsCount = unreadMailsCount ? unreadMailsCount : ''
 
     return (

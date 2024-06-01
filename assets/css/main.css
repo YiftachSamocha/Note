@@ -30,6 +30,7 @@
 @import './apps/mail/cmps/MailFilter.css';
 @import './apps/mail/cmps/MailDetails.css';
 @import './apps/mail/cmps/MailFolderList.css';
+@import './apps/mail/cmps/MailMq.css';
 
 /* NOTE*/
 @import './apps/note/cmps/NoteList.css';

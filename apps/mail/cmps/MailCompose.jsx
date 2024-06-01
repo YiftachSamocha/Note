@@ -20,8 +20,9 @@ export function MailCompose({ isMailCompose, onSetIsMailCompose, sendMail }) {
     return (
         <section className="mail-compose">
             <div className="header-container">
+                <button className="mobile-back-btn" onClick={() => onSetIsMailCompose()}><img src="./assets/img/arrow-back.png"/></button>
                 <h2>New Message</h2>
-                <button onClick={() => onSetIsMailCompose()}><img src="./assets/img/close.png"/></button>
+                <button className="close-btn" onClick={() => onSetIsMailCompose()}><img src="./assets/img/close.png"/></button>
             </div>
             <div className="from-container">
                 <h2>From <span>Your-Mail</span></h2>
@@ -42,7 +43,8 @@ export function MailCompose({ isMailCompose, onSetIsMailCompose, sendMail }) {
                     <label htmlFor="body"></label>
                     <textarea onChange={handleChange} value={mailCompose.body} type="textarea" maxLength="500" id="body" name="body"></textarea>
                 </div>
-                <button>Send</button>
+                <button className="send-btn">Send</button>
+                <button className="mobile-send-btn"><img src="./assets/img/send.png"/></button>
             </form>
         </section>
     )

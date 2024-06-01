@@ -45,3 +45,13 @@
     text-align: center;
     cursor: pointer;
 }
+
+.mail-filter .search-box .toggle-menu-btn {
+    display: none;
+    padding: 1em;
+    border: 0;
+    background-color: transparent;
+  
+    font-size: 1.25em;
+    cursor: pointer;
+}

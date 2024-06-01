@@ -11,6 +11,7 @@
 }
 
 .mail-compose .header-container {
+    position: relative;
     height: 1em;
     display: flex;
     justify-content: space-between;
@@ -23,12 +24,16 @@
     background-color: #f2f6fc;
 }
 
+.mail-compose .header-container .mobile-back-btn {
+    display: none;
+}
+
 .mail-compose .header-container h2 {
     font-size: 14px;
     line-height: 20px;
 }
 
-.mail-compose .header-container button {
+.mail-compose .header-container .close-btn {
     height: 1em;
     border: none;
     background-color: inherit;
@@ -36,6 +41,8 @@
 
     cursor: pointer;
 }
+
+
 
 .mail-compose .from-container h2 {
     height: 1em;
@@ -94,7 +101,7 @@
     line-height: 19.5px;
 }
 
-.mail-compose form button {
+.mail-compose form .send-btn {
     margin-inline: 1.5em;
     padding-block: 0.5em;
     padding-inline: 1em;
@@ -109,7 +116,20 @@
     cursor: pointer;
 }
 
-.mail-compose form button:hover {
+.mail-compose form .send-btn:hover {
     background-color: #1b61d1;
     box-shadow: 0 1px 2px 0 rgba(26,115,232,0.451),0 1px 3px 1px rgba(26,115,232,0.302);
+}
+
+.mail-compose form .mobile-send-btn {
+    display: none;
+    position: absolute;
+    inset: 12px 8px auto auto;
+
+    height: 1.8em;
+    border: none;
+    background-color: inherit;
+    font-weight: bold;
+
+    cursor: pointer;
 }
