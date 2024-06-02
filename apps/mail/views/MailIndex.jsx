@@ -18,6 +18,7 @@ export function MailIndex() {
     const [folder, setFolder] = useState({ status: 'inbox' })
     const [filterBy, setFilterBy] = useState(mailService.getFilterFromSearchParams(searchParams))
     const [unreadMailsCount, setUnreadMailsCount] = useState(null)
+    const [toggleMenu, setToggleMenu] = useState('')
 
     useEffect(() => {
         setSearchParams({ ...filterBy, ...folder })
@@ -96,19 +97,24 @@ export function MailIndex() {
             .then((mails) => setUnreadMailsCount(mails.length))
     }
 
+    function onSetToggleMenu(ev, status) {
+        ev.stopPropagation()
+        status ? setToggleMenu('menu-open') : setToggleMenu('')
+    }
+
     return (
-        <section className="mail-index mail-grid-content">
+        <section className={`mail-index mail-grid-content ${toggleMenu}`}>
             <header className="mail-grid-sections">
                     <div className="mail-compose-btn">
                         <span onClick={() => setIsMailCompose(true)}><img src="./assets/img/pencil.png"/>Compose</span>
                     </div>
-                    <MailFilter folder={folder} filterBy={filterBy} onFilter={onSetFilterBy}/>
+                    <MailFilter folder={folder} filterBy={filterBy} onFilter={onSetFilterBy} onSetToggleMenu={onSetToggleMenu} />
             </header>
-            <aside className="mail-grid-sections">
+            <aside className="mail-grid-sections" onClick={(ev) => onSetToggleMenu(ev, false)}>
                     <MailFolderList folder={folder} onSetFolder={onSetFolder} unreadMailsCount={unreadMailsCount}/>
                     <DynamicCmp isMailCompose={isMailCompose} onSetIsMailCompose={onSetIsMailCompose} 
                     sendMail={sendMail} params={params} mails={mails} onRemoveMail={removeMail} 
-                    onChangeStarMail={changeStarMail} onChangeMailRead={changeMailRead}/>
+                    onChangeStarMail={changeStarMail} onChangeMailRead={changeMailRead} onSetToggleMenu={onSetToggleMenu}/>
             </aside>
         </section>
     )
