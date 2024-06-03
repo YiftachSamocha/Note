@@ -40,7 +40,7 @@ function makeSenderName(size = 100) {
     var txt = ''
     while (size > 0) {
         size--
-        txt += words[Math.floor(Math.random() * words.length)] + ' '
+        txt += words[Math.floor(Math.random() * words.length)]
     }
     return txt
 }
@@ -50,7 +50,7 @@ function makeDomainName(size = 100) {
     var txt = ''
     while (size > 0) {
         size--
-        txt += words[Math.floor(Math.random() * words.length)] + ' '
+        txt += words[Math.floor(Math.random() * words.length)]
     }
     return txt
 }
