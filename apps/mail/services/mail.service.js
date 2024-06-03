@@ -176,7 +176,7 @@ function _createMails() {
             isStared: Math.random() > 0.5,
             sentAt: utilService.getRandomIntInclusive(1551133130200, 1717072976494),
             removedAt: null,
-            from: utilService.makeLorem(1).trim() + '@' + utilService.makeLorem(1).trim() + '.com',
+            from: utilService.makeSenderName(1) + '@' + utilService.makeDomainName(1) + '.com',
             to: 'user@appsus.com'
         } 
         mails.push(mail)

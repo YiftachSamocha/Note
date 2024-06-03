@@ -10,6 +10,8 @@ export const utilService = {
     loadFromStorage,
     animateCSS,
     debounce,
+    makeSenderName,
+    makeDomainName
 }
 
 function makeId(length = 6) {
@@ -25,6 +27,26 @@ function makeId(length = 6) {
 
 function makeLorem(size = 100) {
     var words = ['The sky', 'above', 'the port', 'was', 'the color of television', 'tuned', 'to', 'a dead channel', '.', 'All', 'this happened', 'more or less', '.', 'I', 'had', 'the story', 'bit by bit', 'from various people', 'and', 'as generally', 'happens', 'in such cases', 'each time', 'it', 'was', 'a different story', '.', 'It', 'was', 'a pleasure', 'to', 'burn']
+    var txt = ''
+    while (size > 0) {
+        size--
+        txt += words[Math.floor(Math.random() * words.length)] + ' '
+    }
+    return txt
+}
+
+function makeSenderName(size = 100) {
+    var words = ['yossi', 'dor', 'tomer', 'keren', 'ron', 'gabi', 'sivan', 'noa', 'amir', 'tali', 'shiran', 'kobi', 'doron', 'limor', 'hadar', 'niv', 'ronan', 'omer', 'avi', 'jerbi', 'nirit', 'irit', 'sigal', 'momi', 'oded', 'ben', 'yotam', 'miri']
+    var txt = ''
+    while (size > 0) {
+        size--
+        txt += words[Math.floor(Math.random() * words.length)] + ' '
+    }
+    return txt
+}
+
+function makeDomainName(size = 100) {
+    var words = ['gmail', 'yahoo', 'walla', 'hotmail', 'outlook']
     var txt = ''
     while (size > 0) {
         size--
