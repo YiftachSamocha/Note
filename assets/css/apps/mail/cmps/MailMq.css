@@ -139,6 +139,7 @@
     .mail-compose {
         height: 100vh;
         width: 100dvw;
+        z-index: 6;
     }
 
     .mail-compose .header-container {
@@ -181,6 +182,10 @@
     }
 
     /* MAIL-DETAILS */
+    .mail-details {
+        z-index: 4;
+    }
+
     .mail-details textarea {
         height: 30vh;
         margin-block-end: 0;
