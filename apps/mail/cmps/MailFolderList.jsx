@@ -1,5 +1,3 @@
-const { useState, useEffect } = React
-
 export function MailFolderList({ folder, onSetFolder, unreadMailsCount }) {
     
     unreadMailsCount = unreadMailsCount ? unreadMailsCount : ''

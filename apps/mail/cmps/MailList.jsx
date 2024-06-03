@@ -1,5 +1,4 @@
 const { useParams } = ReactRouter
-const { Outlet } = ReactRouterDOM
 
 import { MailCompose } from "./MailCompose.jsx"
 import { MailPreview } from "./MailPreview.jsx"

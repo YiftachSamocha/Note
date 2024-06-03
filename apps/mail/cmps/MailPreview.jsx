@@ -1,7 +1,6 @@
-import { mailService } from "../services/mail.service.js"
-
-const { useState, useEffect } = React
 const { Link, useNavigate } = ReactRouterDOM
+
+import { mailService } from "../services/mail.service.js"
 
 export function MailPreview({ mail, onRemoveMail, onChangeStarMail, onChangeMailRead }) {
     const navigate = useNavigate()
